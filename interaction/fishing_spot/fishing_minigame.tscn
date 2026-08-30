@@ -1,21 +1,66 @@
 [gd_scene format=3 uid="uid://dw3oaq6r2xfk8"]
 
 [ext_resource type="Script" uid="uid://b2j6vw4h8rzq1" path="res://interaction/fishing_spot/fishing_minigame.gd" id="1_fmg"]
+[ext_resource type="Theme" uid="uid://hcpk06kxu6sq" path="res://dialogue/default_dialog_theme.tres" id="2_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmgpanel"]
+bg_color = Color(0.92941177, 0.7647059, 0.5882353, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8509804, 0.53333336, 0.29803923, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 5
 
 [node name="FishingMinigame" type="CanvasLayer"]
 script = ExtResource("1_fmg")
 
-[node name="Label" type="Label" parent="."]
+[node name="Panel" type="PanelContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -300.0
-offset_right = 60.0
-offset_bottom = -180.0
+offset_left = -140.0
+offset_top = -335.0
+offset_right = 140.0
+offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 96
+theme = ExtResource("2_theme")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fmgpanel")
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(252, 22)
+theme_override_colors/font_color = Color(0.36078432, 0.20392157, 0.05490196, 1)
+theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
+text = "FISHING!"
+
+[node name="MainLabel" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(252, 96)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text = ""
