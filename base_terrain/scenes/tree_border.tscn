@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cjv2qoon2uq34"]
 
 [ext_resource type="PackedScene" uid="uid://yayo4t5ledsq" path="res://objects/pine_tree_large.tscn" id="2_6jvlf"]
+[ext_resource type="PackedScene" uid="uid://dugw7qjqmfrdc" path="res://objects/mahogany_tree_unhittable_dark.tscn" id="3_dyq2f"]
 [ext_resource type="PackedScene" uid="uid://c47vpfnpe1k1i" path="res://objects/maple_tree_hittable_light.tscn" id="3_mj0j0"]
 
 [node name="TreeBorder" type="Node2D" unique_id=1449392446]
@@ -88,9 +89,6 @@ position = Vector2(-17, -410)
 [node name="Sprite2D44" parent="." unique_id=1160699633 instance=ExtResource("2_6jvlf")]
 position = Vector2(-10.5, -371.02084)
 scale = Vector2(1.09375, 1.1458334)
-
-[node name="Sprite2D44" parent="Sprite2D44" unique_id=1488782070 instance=ExtResource("2_6jvlf")]
-position = Vector2(-12, -370)
 
 [node name="Sprite2D46" parent="." unique_id=1946053523 instance=ExtResource("2_6jvlf")]
 position = Vector2(-53, -387)
@@ -190,10 +188,6 @@ position = Vector2(-30, -90)
 
 [node name="Sprite2D63" parent="." unique_id=1558660004 instance=ExtResource("2_6jvlf")]
 position = Vector2(-86, -59)
-
-[node name="Sprite2D63" parent="Sprite2D63" unique_id=1080324235 instance=ExtResource("2_6jvlf")]
-position = Vector2(-27.5, 21.125)
-scale = Vector2(1.15625, 1.125)
 
 [node name="Sprite2D64" parent="." unique_id=2101094415 instance=ExtResource("2_6jvlf")]
 position = Vector2(-63, -59)
@@ -665,14 +659,8 @@ scale = Vector2(0.65625, 0.65407896)
 [node name="Sprite2D168" parent="." unique_id=918103402 instance=ExtResource("2_6jvlf")]
 position = Vector2(-19, -355)
 
-[node name="Sprite2D44" parent="Sprite2D168" unique_id=376511684 instance=ExtResource("2_6jvlf")]
-position = Vector2(-12, -370)
-
 [node name="Sprite2D169" parent="." unique_id=1346911183 instance=ExtResource("2_6jvlf")]
 position = Vector2(2, -340)
-
-[node name="Sprite2D44" parent="Sprite2D169" unique_id=591952535 instance=ExtResource("2_6jvlf")]
-position = Vector2(-12, -370)
 
 [node name="Sprite2D170" parent="." unique_id=655705816 instance=ExtResource("2_6jvlf")]
 position = Vector2(-751.99994, -6)
@@ -693,3 +681,66 @@ scale = Vector2(0.6562502, 0.67180264)
 [node name="Sprite2D174" parent="." unique_id=459139059 instance=ExtResource("2_6jvlf")]
 position = Vector2(-858.99994, 7)
 scale = Vector2(0.6562502, 0.67180264)
+
+[node name="TreeUnhittable" parent="." unique_id=46041949 instance=ExtResource("3_dyq2f")]
+z_index = -2
+position = Vector2(-136, -92.104164)
+scale = Vector2(0.8125, 0.8541667)
+
+[node name="TreeUnhittable2" parent="." unique_id=650927163 instance=ExtResource("3_dyq2f")]
+z_index = -2
+position = Vector2(-46.000015, -175)
+scale = Vector2(0.8125, 0.8541667)
+
+[node name="TreeUnhittable3" parent="." unique_id=122993870 instance=ExtResource("3_dyq2f")]
+position = Vector2(-73, -419.67404)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable4" parent="." unique_id=1646637180 instance=ExtResource("3_dyq2f")]
+position = Vector2(-51, -353.99997)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable5" parent="." unique_id=1022219893 instance=ExtResource("3_dyq2f")]
+position = Vector2(-42, -648)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable6" parent="." unique_id=236566724 instance=ExtResource("3_dyq2f")]
+position = Vector2(-49, -777)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable7" parent="." unique_id=1109497141 instance=ExtResource("3_dyq2f")]
+position = Vector2(-63, -769)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable8" parent="." unique_id=472457434 instance=ExtResource("3_dyq2f")]
+position = Vector2(-40.5, -763.20337)
+scale = Vector2(0.59374994, 0.53704506)
+
+[node name="TreeUnhittable9" parent="." unique_id=1119626980 instance=ExtResource("3_dyq2f")]
+position = Vector2(-42, -850)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable10" parent="." unique_id=295378468 instance=ExtResource("3_dyq2f")]
+z_index = -2
+position = Vector2(-916.00006, -29)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable11" parent="." unique_id=1383708697 instance=ExtResource("3_dyq2f")]
+z_index = -2
+position = Vector2(-1018.00006, -46)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable12" parent="." unique_id=312745198 instance=ExtResource("3_dyq2f")]
+z_index = -2
+position = Vector2(-722.0001, -54)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable13" parent="." unique_id=783676549 instance=ExtResource("3_dyq2f")]
+z_index = -2
+position = Vector2(-1171, -32)
+scale = Vector2(0.74999994, 0.75216997)
+
+[node name="TreeUnhittable14" parent="." unique_id=569663641 instance=ExtResource("3_dyq2f")]
+z_index = -2
+position = Vector2(-1244, -23)
+scale = Vector2(0.74999994, 0.75216997)
