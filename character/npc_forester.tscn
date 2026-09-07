@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dygja1kdcercy"]
+
+[ext_resource type="Script" path="res://character/npc_forester.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bgf2r5vxf7qlr" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Character and Portrait/Character/Others/NPC'S/Pirate/Idle.png" id="2_idle"]
+[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="3_iarea"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0"]
+atlas = ExtResource("2_idle")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1"]
+atlas = ExtResource("2_idle")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2"]
+atlas = ExtResource("2_idle")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3"]
+atlas = ExtResource("2_idle")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_forester"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(9, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interact"]
+radius = 29.0
+
+[node name="NpcForester" type="CharacterBody2D"]
+script = ExtResource("1_script")
+
+[node name="Movement" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_forester")
+animation = &"idle_down"
+autoplay = "idle_down"
+
+[node name="Physics" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 5)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="InteractionArea" parent="." instance=ExtResource("3_iarea")]
+action_name = "talk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_interact")
+
+[node name="BalloonAnchor2D" type="Node2D" parent="."]
+position = Vector2(0, -16)

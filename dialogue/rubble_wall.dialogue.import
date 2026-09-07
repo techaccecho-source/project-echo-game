@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cnlk0nxbf44lo"
+path="res://.godot/imported/rubble_wall.dialogue-be0499f959220afd1f669e79d1b86408.tres"
+
+[deps]
+
+source_file="res://dialogue/rubble_wall.dialogue"
+dest_files=["res://.godot/imported/rubble_wall.dialogue-be0499f959220afd1f669e79d1b86408.tres"]
+
+[params]
+
+defaults=true

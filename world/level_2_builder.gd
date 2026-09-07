@@ -42,6 +42,34 @@ const PATH_TILES := {
 	12: Vector2i(3, 0), 13: Vector2i(3, 1), 14: Vector2i(2, 0), 15: Vector2i(2, 1),
 }
 
+## Scatter stamps from rock_flower_tree_grass.tres. Several are multi-tile
+## pieces, declared row-major as [source, atlas_x, atlas_y] and stamped whole --
+## placing a single cell of one of these gives you half a rock.
+##   source 1 = Stones Summer (mossy stones, 2x1 pairs; these carry collision,
+##              which is why the Scatter layer runs with collision disabled)
+##   source 4 = Stones 2 (boulder clusters, 2x2 and 3x2)
+##   source 3 = ALL props seasons (row 0 bushes, row 5 tufts -- single tiles)
+const ROCK_PAIRS := [
+	[[[1, 0, 0], [1, 1, 0]]],
+	[[[1, 2, 0], [1, 3, 0]]],
+]
+const BOULDER_SMALL := [
+	[
+		[[4, 0, 0], [4, 1, 0]],
+		[[4, 0, 1], [4, 1, 1]]],
+]
+const BOULDER_LARGE := [
+	[
+		[[4, 0, 2], [4, 1, 2], [4, 2, 2]],
+		[[4, 0, 3], [4, 1, 3], [4, 2, 3]]],
+]
+const BUSH_ROW := 0
+const TUFT_ROW := 5
+const SRC_FENCE := 0
+const FENCE_L := Vector2i(0, 2)
+const FENCE_M := Vector2i(1, 2)
+const FENCE_R := Vector2i(2, 2)
+
 @export_group("Actions")
 ## Tick to repaint everything from the profile below.
 @export var build_terrain: bool = false:
@@ -104,7 +132,7 @@ const PATH_TILES := {
 @export var place_props: bool = true
 @export var pine_scene: PackedScene = preload("res://objects/pine_tree_large.tscn")
 ## Columns between pines along the base of the mountain wall.
-@export var pine_spacing: int = 6
+@export var pine_spacing: int = 3
 ## Columns to leave bare (the collapsed span), as [from, to] inclusive.
 @export var pine_skip_from: int = 24
 @export var pine_skip_to: int = 34
@@ -174,7 +202,7 @@ func _layer(n: String) -> TileMapLayer:
 
 
 func _clear() -> void:
-	for n in ["Water", "Cliffs", "Ground", "Path", "Waterfall"]:
+	for n in ["Water", "Cliffs", "Ground", "Path", "Waterfall", "Scatter", "Fences"]:
 		var l := _layer(n)
 		if l:
 			l.clear()
@@ -218,9 +246,15 @@ func _build() -> void:
 
 	if build_cave:
 		_build_cave(cliffs)
-	_build_path(_layer("Path"))
+	var reserved := _build_path(_layer("Path"))
 	if build_waterfall:
-		_build_waterfall(_layer("Waterfall"))
+		for k in _build_waterfall(_layer("Waterfall")):
+			reserved[k] = true
+	# keep the entities' own tiles clear
+	for rc in [Vector2i(50, 10), Vector2i(cave_column, 8), Vector2i(cave_column, 7)]:
+		reserved[rc] = true
+	var used := _build_scatter(_layer("Scatter"), reserved)
+	_build_fences(_layer("Fences"), reserved, used)
 
 	_build_collision(parent)
 	if place_props:
@@ -239,9 +273,10 @@ func _build_cave(cliffs: TileMapLayer) -> void:
 	cliffs.set_cell(Vector2i(cave_column, _top[cave_column] - 1), SRC_CLIFF, T_CAVE_BOT)
 
 
-func _build_path(path: TileMapLayer) -> void:
+func _build_path(path: TileMapLayer) -> Dictionary:
+	var cells := {}
 	if path == null or path_waypoints.size() < 2:
-		return
+		return cells
 	# Centre row per column, interpolated along the waypoints.
 	var centre := {}
 	for i in path_waypoints.size() - 1:
@@ -255,7 +290,6 @@ func _build_path(path: TileMapLayer) -> void:
 		centre[lastp.x] = lastp.y
 
 	# Two rows wide, clamped to walkable ground and kept clear of the lip.
-	var cells := {}
 	for x in centre.keys():
 		if x < 0 or x >= level_width:
 			continue
@@ -275,13 +309,15 @@ func _build_path(path: TileMapLayer) -> void:
 		if cells.has(c + Vector2i(0, 1)): mask |= 4
 		if cells.has(c + Vector2i(-1, 0)): mask |= 8
 		path.set_cell(c, SRC_SOIL, PATH_TILES[mask])
+	return cells
 
 
 ## 4x4 stamp straddling the lip: row 0 on the grass, rows 1-2 down the rock
 ## face, row 3 landing in the sea.
-func _build_waterfall(fall: TileMapLayer) -> void:
+func _build_waterfall(fall: TileMapLayer) -> Dictionary:
+	var cells := {}
 	if fall == null or waterfall_column < 0 or waterfall_column >= level_width:
-		return
+		return cells
 	var y0 := _bot[waterfall_column]
 	for dx in 4:
 		for dy in 4:
@@ -289,6 +325,8 @@ func _build_waterfall(fall: TileMapLayer) -> void:
 			var y := y0 + dy
 			if x < level_width and y < level_height:
 				fall.set_cell(Vector2i(x, y), SRC_FALL, Vector2i(dx, dy))
+				cells[Vector2i(x, y)] = true
+	return cells
 
 
 ## One rectangle per run of columns that share a height, for the mountain above
@@ -346,11 +384,144 @@ func _build_props(parent: Node) -> void:
 	for x in range(2, level_width - 2, max(1, pine_spacing)):
 		if x >= pine_skip_from and x <= pine_skip_to:
 			continue
-		var pine := pine_scene.instantiate() as Node2D
-		pine.name = "Pine%d" % i
-		pine.position = Vector2(x * 16 + 8, _top[x] * 16 + 14)
-		pine.z_index = 5
-		props.add_child(pine)
-		if owner_node:
-			pine.owner = owner_node
-		i += 1
+		var jitter := int(_rnd(x, 5) * 9) - 4
+		i = _add_pine(props, owner_node, i,
+			Vector2(x * 16 + 8 + jitter, _top[x] * 16 + 12 + int(_rnd(x, 11) * 6)))
+	# a few standing out on the ledge itself
+	for x in range(6, level_width - 6, 11):
+		if x >= pine_skip_from and x <= pine_skip_to:
+			continue
+		if x >= waterfall_column - 1 and x <= waterfall_column + 4:
+			continue
+		var y := _bot[x] - 2
+		if y - _top[x] < 3:
+			continue
+		i = _add_pine(props, owner_node, i, Vector2(x * 16 + 10, y * 16 + 8))
+
+
+func _add_pine(props: Node2D, owner_node: Node, i: int, pos: Vector2) -> int:
+	var pine := pine_scene.instantiate() as Node2D
+	pine.name = "Pine%d" % i
+	pine.position = pos
+	pine.z_index = 5
+	props.add_child(pine)
+	if owner_node:
+		pine.owner = owner_node
+	return i + 1
+
+
+## Deterministic 0..1, matching the bake script so both produce the same scatter.
+func _rnd(a: int, b: int) -> float:
+	var t := (a * 374761393 + b * 668265263) & 0xFFFFFFFF
+	t = (t ^ (t >> 13)) & 0xFFFFFFFF
+	t = (t * 1274126177) & 0xFFFFFFFF
+	return float((t ^ (t >> 16)) & 0xFFFFFFFF) / 4294967296.0
+
+
+## Rocks, boulders and greenery. Runs with collision disabled on the layer --
+## the Stones Summer tiles carry collision polygons, and 150-odd solid cells on
+## a ledge this narrow would need playtesting before anyone turns them on.
+func _build_scatter(scatter: TileMapLayer, reserved: Dictionary) -> Dictionary:
+	var used := {}
+	if scatter == null:
+		return used
+	_scatter_group(scatter, reserved, used, BOULDER_LARGE, 40, 101, 1)
+	_scatter_group(scatter, reserved, used, BOULDER_SMALL, 90, 211, 1)
+	_scatter_group(scatter, reserved, used, ROCK_PAIRS, 420, 307, 0)
+	for x in level_width:
+		for y in range(_top[x], _bot[x] + 1):
+			var c := Vector2i(x, y)
+			if reserved.has(c) or used.has(c):
+				continue
+			var n := _rnd(x, y + 613)
+			var edge: bool = (y == _bot[x] or y == _top[x])
+			if not edge and n > 0.80:
+				scatter.set_cell(c, 3, Vector2i(int(_rnd(x, y + 57) * 8) % 8, BUSH_ROW))
+				used[c] = true
+			elif n > 0.62:
+				scatter.set_cell(c, 3, Vector2i(int(_rnd(x, y + 23) * 6) % 6, TUFT_ROW))
+				used[c] = true
+	return used
+
+
+func _scatter_group(scatter: TileMapLayer, reserved: Dictionary, used: Dictionary,
+		stamps: Array, tries: int, salt: int, margin: int) -> void:
+	for i in tries:
+		var x := int(_rnd(i, salt) * level_width)
+		if x < 0 or x >= level_width:
+			continue
+		if _bot[x] - _top[x] < 2 + margin:
+			continue
+		var span: int = max(1, _bot[x] - _top[x] - 2 * margin)
+		var y := _top[x] + margin + int(_rnd(i, salt + 1) * span)
+		var stamp: Array = stamps[int(_rnd(i, salt + 2) * stamps.size()) % stamps.size()]
+		if not _stamp_fits(x, y, stamp, reserved, used):
+			continue
+		for dy in stamp.size():
+			var row: Array = stamp[dy]
+			for dx in row.size():
+				var t: Array = row[dx]
+				var c := Vector2i(x + dx, y + dy)
+				scatter.set_cell(c, int(t[0]), Vector2i(int(t[1]), int(t[2])))
+				used[c] = true
+
+
+func _stamp_fits(x: int, y: int, stamp: Array, reserved: Dictionary, used: Dictionary) -> bool:
+	for dy in stamp.size():
+		var row: Array = stamp[dy]
+		for dx in row.size():
+			var cx := x + dx
+			var cy := y + dy
+			if cx < 0 or cx >= level_width:
+				return false
+			if cy < _top[cx] or cy > _bot[cx]:
+				return false
+			var c := Vector2i(cx, cy)
+			if reserved.has(c) or used.has(c):
+				return false
+	return true
+
+
+## A railing on the lip row, stepping with it. Segments break wherever the lip
+## drops more than a row so the posts still read as joined, with gaps left so it
+## looks maintained in places rather than walled off.
+func _build_fences(fences: TileMapLayer, reserved: Dictionary, used: Dictionary) -> void:
+	if fences == null:
+		return
+	var segments: Array = []
+	var cur: Array = []
+	for c in level_width:
+		if _fence_ok(c, reserved) and (cur.is_empty() or absi(_bot[c] - _bot[cur[cur.size() - 1]]) <= 1):
+			cur.append(c)
+		else:
+			if cur.size() >= 4:
+				segments.append(cur)
+			cur = [c] if _fence_ok(c, reserved) else []
+	if cur.size() >= 4:
+		segments.append(cur)
+
+	var sc := _layer("Scatter")
+	for seg in segments:
+		var i := 0
+		while i < seg.size():
+			var span := 5 + int(_rnd(seg[i], 7) * 7)
+			var run: Array = seg.slice(i, min(i + span, seg.size()))
+			if run.size() >= 3:
+				for j in run.size():
+					var c: int = run[j]
+					var t := FENCE_L if j == 0 else (FENCE_R if j == run.size() - 1 else FENCE_M)
+					fences.set_cell(Vector2i(c, _bot[c]), SRC_FENCE, t)
+					# a fence wins the cell over whatever scatter landed there
+					if sc and used.has(Vector2i(c, _bot[c])):
+						sc.erase_cell(Vector2i(c, _bot[c]))
+			i += span + 3 + int(_rnd(seg[i], 13) * 5)
+
+
+func _fence_ok(c: int, reserved: Dictionary) -> bool:
+	if c < 1 or c >= level_width - 1:
+		return false
+	if _bot[c] - _top[c] < 3:
+		return false
+	if reserved.has(Vector2i(c, _bot[c])):
+		return false
+	return true
