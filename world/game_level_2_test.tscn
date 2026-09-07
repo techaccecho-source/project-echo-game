@@ -10,12 +10,12 @@ y_sort_enabled = true
 [node name="GameLevel2" parent="." instance=ExtResource("level2")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(360, 328)
+position = Vector2(72, 184)
 zoom = Vector2(3, 3)
 
 [node name="PlayerJosh" parent="." instance=ExtResource("player")]
 z_index = 5
-position = Vector2(360, 328)
+position = Vector2(72, 184)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerJosh"]
 remote_path = NodePath("../../Camera2D")
