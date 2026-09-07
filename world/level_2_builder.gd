@@ -128,6 +128,15 @@ const FENCE_R := Vector2i(2, 2)
 @export var cave_column: int = 76
 @export var build_cave: bool = true
 
+@export_group("Dressing")
+## Tiles the scatter and fencing must leave alone -- the Forester's camp and
+## the props at the collapsed span live here. The props themselves are authored
+## in the scene under "Dressing"; the builder only keeps their ground clear.
+@export var keep_clear: Array[Vector2i] = [
+	Vector2i(52, 10), Vector2i(49, 11), Vector2i(48, 10), Vector2i(54, 11),
+	Vector2i(23, 11), Vector2i(24, 12),
+]
+
 @export_group("Props")
 @export var place_props: bool = true
 @export var pine_scene: PackedScene = preload("res://objects/pine_tree_large.tscn")
@@ -253,6 +262,11 @@ func _build() -> void:
 	# keep the entities' own tiles clear
 	for rc in [Vector2i(50, 10), Vector2i(cave_column, 8), Vector2i(cave_column, 7)]:
 		reserved[rc] = true
+	# and a one-tile margin around every dressing prop
+	for kc in keep_clear:
+		for ox in range(-1, 2):
+			for oy in range(-1, 2):
+				reserved[kc + Vector2i(ox, oy)] = true
 	var used := _build_scatter(_layer("Scatter"), reserved)
 	_build_fences(_layer("Fences"), reserved, used)
 

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3]
+[gd_resource type="TileSet" format=3 uid="uid://cqa6gdmimohd5"]
 
 [ext_resource type="Texture2D" uid="uid://0qb6cppbvu2t" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Exterior/Fence and Bridge/Fence Wood.png" id="1_fence"]
 
