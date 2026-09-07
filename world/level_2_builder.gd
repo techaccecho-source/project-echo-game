@@ -135,6 +135,7 @@ const FENCE_R := Vector2i(2, 2)
 @export var keep_clear: Array[Vector2i] = [
 	Vector2i(52, 10), Vector2i(49, 11), Vector2i(48, 10), Vector2i(54, 11),
 	Vector2i(23, 11), Vector2i(24, 12),
+	Vector2i(22, 11),  ## Cedric's page at the break
 ]
 
 @export_group("Props")

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c8frgpk2echo"]
+
+[ext_resource type="Script" path="res://objects/fragment_pickup.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://7g7rmeqwftkm" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Icons/Weapons/Books and Potions/Books.png" id="2_books"]
+[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="3_iarea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pick"]
+size = Vector2(30, 26)
+
+[node name="FragmentPickup" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_script")
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(1, 0.87, 0.6, 0.25)
+scale = Vector2(1.9, 1.9)
+texture = ExtResource("2_books")
+region_enabled = true
+region_rect = Rect2(0, 48, 16, 16)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_books")
+region_enabled = true
+region_rect = Rect2(0, 48, 16, 16)
+
+[node name="InteractionArea" parent="." instance=ExtResource("3_iarea")]
+action_name = "read the page"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_pick")

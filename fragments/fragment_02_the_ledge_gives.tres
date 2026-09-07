@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Fragment" format=3 uid="uid://bqechofrag02x"]
+
+[ext_resource type="Script" path="res://core/fragment.gd" id="1_frag"]
+
+[resource]
+script = ExtResource("1_frag")
+id = "f02_the_ledge_gives"
+title = "the ledge gives"
+entry_label = "ENTRY 14"
+level = 2
+found_at = "the washed-out ledge, Cliffside Path"
+body = "Third day on the ridge.\n\nThe path up here is wrong in a way I can't photograph. It reads fine through the lens. It reads fine to the eye. It's only wrong when you [i]walk[/i] it — like the ground is remembering a shape it doesn't have any more, and can't quite decide which one of them to be.\n\nMet a man at the fire line below. Wouldn't give a name. Old, careful, hands like bark. He told me the way ahead was sealed and that sealing it had been a kindness. I told him I'd been following this for six months and a pile of rock wasn't going to be the thing that stopped me.\n\nHe said: [i]\"It isn't the rock. It's what the rock is holding still.\"[/i]\n\nI laughed. He didn't.\n\nGoing through anyway. If the ledge gives, it gives. Whatever is past that wall has been waiting long enough to be"
+footer = "— the rest of this page is water-damaged and does not resume."
+metadata/_custom_type_script = "res://core/fragment.gd"
