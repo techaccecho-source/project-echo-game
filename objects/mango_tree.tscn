@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://2psdotq4ysgn"]
+
+[ext_resource type="Texture2D" uid="uid://cfql2s0siua54" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm Crops/Old/Fruits/Summer/Mango Tree.png" id="1_kn5a5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s46vj"]
+size = Vector2(6, 7)
+
+[node name="MangoTree" type="Sprite2D" unique_id=1349906026]
+texture = ExtResource("1_kn5a5")
+offset = Vector2(0, -17)
+region_enabled = true
+region_rect = Rect2(288, 16, 48, 64)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=724494765]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=184023555]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_s46vj")

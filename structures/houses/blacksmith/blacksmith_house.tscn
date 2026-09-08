@@ -5,6 +5,7 @@
 [ext_resource type="TileSet" uid="uid://ls5ufjbwxb68" path="res://structures/houses/tilesets/houses.tres" id="2_weath"]
 [ext_resource type="TileSet" uid="uid://bbsoqod2r2a3x" path="res://structures/houses/tilesets/stone_wall.tres" id="3_45ug1"]
 [ext_resource type="TileSet" uid="uid://dnw6mm5d4ult6" path="res://structures/houses/tilesets/doors_windows_chimneys.tres" id="4_i0bso"]
+[ext_resource type="TileSet" uid="uid://sswxdtsu3k4r" path="res://tilesets/shadow.tres" id="6_weath"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45ug1"]
 size = Vector2(144, 20)
@@ -72,3 +73,8 @@ tile_set = ExtResource("2_weath")
 position = Vector2(2, 4)
 tile_map_data = PackedByteArray("AAD//wAAAwAEAAgAAAD//wEAAwAEAAkAAAAAAAAAAwAFAAgAAAAAAAEAAwAFAAkAAAA=")
 tile_set = ExtResource("1_i0bso")
+
+[node name="Shadow" type="TileMapLayer" parent="." unique_id=864474501]
+z_index = 3
+tile_map_data = PackedByteArray("AAD7/wQAAAAIAAMAAAD7/wMAAAAAAAEAAAD7/wIAAAAJAAIAAAD8/wQAAAAJAAMAAAD9/wQAAAAJAAMAAAD+/wQAAAAJAAMAAAACAAQAAAAJAAMAAAADAAQAAAAJAAMAAAAEAAQAAAAJAAMAAAAFAAQAAAALAAMAAAAFAAMAAAALAAIAAAAFAAIAAAALAAIAAAAFAAEAAAALAAAAAAAEAAEAAAAKAAAAAAD7/wEAAAAIAAAAAAAEAAIAAAAJAAIAAAADAAIAAAAJAAIAAAACAAIAAAAJAAIAAAABAAIAAAAJAAIAAAAAAAIAAAAJAAIAAAD//wIAAAAJAAIAAAD+/wIAAAAJAAIAAAD9/wIAAAAJAAIAAAD8/wIAAAAJAAIAAAABAP7/AAAJAAMAAAACAP7/AAAJAAMAAAADAP7/AAAJAAMAAAAEAP7/AAAJAAMAAAAEAP3/AAALAAAAAAAAAP7/AAAIAAMAAAAAAP3/AAAIAAAAAAD//wQAAAAJAAMAAAABAAQAAAAJAAMAAAAAAAQAAAAJAAMAAAA=")
+tile_set = ExtResource("6_weath")

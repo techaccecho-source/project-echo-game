@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" format=3 uid="uid://bx8h5n2p4qty3"]
+
+[ext_resource type="Script" uid="uid://by0khe2xbsbyd" path="res://inventory/inventory_item.gd" id="1_m3h8r"]
+[ext_resource type="Texture2D" uid="uid://b0627e0yw6qwa" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Icons/Fish/River/Sunfish.png" id="2_sunfish"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sunfish0"]
+atlas = ExtResource("2_sunfish")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_m3h8r")
+name = "Sunfish"
+texture = SubResource("AtlasTexture_sunfish0")
+metadata/_custom_type_script = "uid://by0khe2xbsbyd"

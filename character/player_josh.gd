@@ -126,7 +126,7 @@ func play_weapon_logic():
 
 func disable_movement():
 	movement_enabled = false
-	
+
 	update_animation(Vector2.ZERO, false)  # snap to idle animation immediately
 
 func enable_movement():
@@ -248,3 +248,27 @@ func _revive() -> void:
 	InteractionManager.can_interact = true
 	movement_enabled = true
 	update_animation(Vector2.ZERO, false)
+
+# Fishing
+# Called by a FishingSpot when the player interacts with it. Plays the cast/wait/catch
+# sequence facing the spot, then drops a random fish from the pool into the inventory.
+func catch_fish(fish_pool: Array, face_direction: Vector2 = Vector2.ZERO, min_wait: float = 0.8, max_wait: float = 1.8) -> void:
+	disable_movement()
+	if face_direction != Vector2.ZERO:
+		last_direction = face_direction
+	var suffix = get_direction_suffix(last_direction)
+
+	animated_sprite.play("fish_cast_" + suffix)
+	await animated_sprite.animation_finished
+
+	animated_sprite.play("fish_wait_" + suffix)
+	await get_tree().create_timer(randf_range(min_wait, max_wait)).timeout
+
+	var caught_bite = await FishingMinigame.play_sequence(3)
+
+	if caught_bite and fish_pool.size() > 0:
+		animated_sprite.play("fish_catch_" + suffix)
+		await animated_sprite.animation_finished
+		collect(fish_pool[randi() % fish_pool.size()])
+
+	enable_movement()

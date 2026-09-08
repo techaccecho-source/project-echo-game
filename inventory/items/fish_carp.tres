@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" format=3 uid="uid://cq7fj2h8b3xk1"]
+
+[ext_resource type="Script" uid="uid://by0khe2xbsbyd" path="res://inventory/inventory_item.gd" id="1_m3h8r"]
+[ext_resource type="Texture2D" uid="uid://dlhnefah3r03" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Icons/Fish/River/Carp.png" id="2_carp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_carp0"]
+atlas = ExtResource("2_carp")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_m3h8r")
+name = "Carp"
+texture = SubResource("AtlasTexture_carp0")
+metadata/_custom_type_script = "uid://by0khe2xbsbyd"
