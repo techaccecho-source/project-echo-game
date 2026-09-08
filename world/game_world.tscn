@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dqp5std4t6fek" path="res://world/base_grass_level_1.tscn" id="2_1i7os"]
 [ext_resource type="PackedScene" uid="uid://bey33j4ma35bh" path="res://world/blacksmith_front_yard.tscn" id="4_4054t"]
 [ext_resource type="PackedScene" uid="uid://bl8bydys1a8qm" path="res://base_terrain/scenes/river.tscn" id="9_druaq"]
-[ext_resource type="PackedScene" uid="uid://bgyve10sjdd61" path="res://base_terrain/scenes/level_1_forest.tscn" id="10_4054t"]
+[ext_resource type="PackedScene" path="res://base_terrain/scenes/level_1_forest.tscn" id="10_4054t"]
 [ext_resource type="TileSet" uid="uid://bu48edd5oif51" path="res://tilesets/rock_flower_tree_grass.tres" id="10_ccgqp"]
 [ext_resource type="PackedScene" uid="uid://5xvypv6jcbq3" path="res://character/npc_blacksmith.tscn" id="10_druaq"]
 [ext_resource type="PackedScene" uid="uid://ntcl7tkfgme1" path="res://base_terrain/scenes/water_border.tscn" id="10_hdkfl"]
@@ -11,10 +11,16 @@
 [ext_resource type="PackedScene" uid="uid://doa04urw7iidr" path="res://inventory/inv_ui.tscn" id="13_1i7os"]
 [ext_resource type="PackedScene" uid="uid://dfo2onkt5unk" path="res://structures/houses/blacksmith/workshop_shell.tscn" id="14_qu7vk"]
 [ext_resource type="PackedScene" uid="uid://wvbxyfgl33vp" path="res://character/player_josh.tscn" id="15_8cpu7"]
+[ext_resource type="PackedScene" path="res://world/game_level_2.tscn" id="16_h77br"]
 [ext_resource type="PackedScene" uid="uid://cjv2qoon2uq34" path="res://base_terrain/scenes/tree_border.tscn" id="17_esbob"]
 [ext_resource type="PackedScene" uid="uid://yayo4t5ledsq" path="res://objects/pine_tree_large.tscn" id="22_q8vt7"]
 [ext_resource type="PackedScene" uid="uid://c22k3vhlkopgk" path="res://structures/houses/blacksmith/workshop.tscn" id="24_6rc46"]
 [ext_resource type="PackedScene" uid="uid://ccxk7nsx3r1g3" path="res://objects/anvil_white_gray.tscn" id="30_65dot"]
+[ext_resource type="Script" path="res://world/game_world.gd" id="gw_script"]
+[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="portal_area"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_portal"]
+size = Vector2(28, 18)
 [ext_resource type="PackedScene" uid="uid://c8q2fr5t7wjm4" path="res://interaction/fishing_spot/fishing_spot.tscn" id="40_fshsp"]
 [ext_resource type="Script" uid="uid://by0khe2xbsbyd" path="res://inventory/inventory_item.gd" id="41_invitem"]
 [ext_resource type="Resource" uid="uid://cq7fj2h8b3xk1" path="res://inventory/items/fish_carp.tres" id="42_carp"]
@@ -23,6 +29,7 @@
 
 [node name="GameWorld" type="Node2D" unique_id=906258989]
 y_sort_enabled = true
+script = ExtResource("gw_script")
 
 [node name="AnvilWhiteGray" parent="." unique_id=572894837 instance=ExtResource("30_65dot")]
 z_index = 5
@@ -71,6 +78,8 @@ position = Vector2(-587, -456)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameLevel1/PlayerJosh" unique_id=493444989]
 remote_path = NodePath("../../../Camera2D")
+update_rotation = false
+update_scale = false
 
 [node name="WorkshopShell" parent="GameLevel1" unique_id=2097110525 instance=ExtResource("14_qu7vk")]
 z_index = 5
@@ -79,6 +88,9 @@ position = Vector2(-204, -851)
 [node name="River" parent="GameLevel1" unique_id=347155084 instance=ExtResource("9_druaq")]
 
 [node name="Forest" parent="GameLevel1" unique_id=29376356 instance=ExtResource("10_4054t")]
+
+[node name="TreeBorder" parent="GameLevel1" unique_id=1449392446 instance=ExtResource("17_esbob")]
+z_index = 5
 
 [node name="FishingSpotNorth" parent="GameLevel1" unique_id=1595381012 instance=ExtResource("40_fshsp")]
 position = Vector2(-736, -778)
@@ -97,8 +109,6 @@ position = Vector2(-835, -782)
 fish_pool = Array[ExtResource("41_invitem")]([ExtResource("42_carp"), ExtResource("43_perch"), ExtResource("44_sunfish")])
 
 [node name="WaterBorder" parent="." unique_id=1357689819 instance=ExtResource("10_hdkfl")]
-
-[node name="TreeBorder" parent="." unique_id=1449392446 instance=ExtResource("17_esbob")]
 
 [node name="PineTreeLarge" parent="." unique_id=1488782070 instance=ExtResource("22_q8vt7")]
 z_index = 5
@@ -136,3 +146,20 @@ offset_top = 167.0
 offset_right = 624.0
 offset_bottom = 241.0
 scale = Vector2(10, 10)
+
+[node name="Portal" parent="." unique_id=1866590606 instance=ExtResource("portal_area")]
+position = Vector2(-1036, -812)
+action_name = "travel"
+
+[node name="Pad" type="Polygon2D" parent="Portal" unique_id=178969412]
+color = Color(0.3, 0.75, 1, 0.55)
+polygon = PackedVector2Array(-14, 0, -7, -9, 7, -9, 14, 0, 7, 9, -7, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" unique_id=102852437]
+shape = SubResource("RectangleShape2D_portal")
+
+[node name="ReturnSpawn" type="Marker2D" parent="." unique_id=729082798 groups=["player_spawn"]]
+position = Vector2(-1000, -812)
+
+[node name="GameLevel2" parent="." unique_id=773361100 instance=ExtResource("16_h77br")]
+position = Vector2(401, -512)

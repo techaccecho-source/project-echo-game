@@ -2,14 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://cq4vuodybxthq" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tree/Deep Forest/bushes.png" id="1_5q04h"]
 [ext_resource type="Texture2D" uid="uid://di6mblxxt64wn" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tileset/Tilled Soil and wet soil.png" id="2_fppw6"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0aweq"]
-atlas = ExtResource("1_5q04h")
-region = Rect2(48, 0, 48, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yxi7h"]
-atlas = ExtResource("1_5q04h")
-region = Rect2(48, 32, 48, 32)
+[ext_resource type="Texture2D" uid="uid://c8ykgeghdacey" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tree/Common/Shadow/Maple Tree Animation.png" id="2_myffe"]
+[ext_resource type="Script" uid="uid://56ulkgqqkusc" path="res://objects/bush_breakable.gd" id="3_yxi7h"]
+[ext_resource type="PackedScene" uid="uid://bwscujgphetvn" path="res://components/hurt_component.tscn" id="4_myffe"]
+[ext_resource type="PackedScene" uid="uid://d16se0xbu72m2" path="res://components/damage_component.tscn" id="5_nc0ip"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_myffe"]
 atlas = ExtResource("1_5q04h")
@@ -20,27 +16,21 @@ atlas = ExtResource("1_5q04h")
 region = Rect2(48, 32, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgydk"]
-atlas = ExtResource("2_fppw6")
-region = Rect2(192, 48, 16, 16)
+atlas = ExtResource("2_myffe")
+region = Rect2(0, 240, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0aweq"]
+atlas = ExtResource("1_5q04h")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxi7h"]
+atlas = ExtResource("1_5q04h")
+region = Rect2(48, 32, 48, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oktcr"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0aweq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yxi7h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0aweq")
-}],
-"loop": false,
-"name": &"hit_one",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_myffe")
 }, {
 "duration": 1.0,
@@ -50,19 +40,59 @@ animations = [{
 "texture": SubResource("AtlasTexture_hgydk")
 }],
 "loop": false,
-"name": &"hit_two",
+"name": &"removed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.5,
+"texture": SubResource("AtlasTexture_0aweq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxi7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0aweq")
+}],
+"loop": false,
+"name": &"shake",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2omw"]
 size = Vector2(18, 13)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hgydk"]
+radius = 11.045361
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oktcr"]
+atlas = ExtResource("2_fppw6")
+region = Rect2(192, 48, 16, 16)
+
 [node name="Bush" type="AnimatedSprite2D" unique_id=1371277669]
+z_index = 5
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_oktcr")
-animation = &"hit_one"
+animation = &"shake"
+script = ExtResource("3_yxi7h")
 
 [node name="Body" type="StaticBody2D" parent="." unique_id=489911013]
 
 [node name="Rectangle" type="CollisionShape2D" parent="Body" unique_id=598842346]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_n2omw")
+
+[node name="HurtComponent" parent="." unique_id=862619382 instance=ExtResource("4_myffe")]
+
+[node name="HurtComponentCollisionShape2D" type="CollisionShape2D" parent="HurtComponent" unique_id=985328825]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_hgydk")
+debug_color = Color(0.85922307, 0.27987522, 0.594629, 0.41960785)
+
+[node name="DamageComponent" parent="." unique_id=1266352200 instance=ExtResource("5_nc0ip")]
+max_damage = 2
+
+[node name="OpenGround" type="Sprite2D" parent="." unique_id=322903629]
+z_index = 3
+z_as_relative = false
+position = Vector2(0, 12)
+texture = SubResource("AtlasTexture_oktcr")

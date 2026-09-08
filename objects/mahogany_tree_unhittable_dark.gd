@@ -1,12 +1,11 @@
 class_name MahoganyTreeUnhittableDark
 extends AnimatedSprite2D
 
-func _ready() -> void:
-	pass
+@onready var hurt_component: HurtComponent = $HurtComponent
 
-func _on_interact() -> void:
-	# Play the shake, and stay "busy" (the manager awaits this) until it ends so
-	# it can't be re-triggered mid-shake. The non-looping "hit" clip settles back
-	# on its resting frame when finished.
-	play("hit")
-	await animation_finished
+func _ready() -> void:
+	hurt_component.hurt.connect(on_hurt)
+
+func on_hurt(hit_damage: int) -> void:
+	play("shake")
+	

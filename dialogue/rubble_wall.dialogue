@@ -1,0 +1,12 @@
+~ blocked
+do disable_movement()
+Stone and vine, stacked shoulder high across the gap. Someone piled this here on purpose.
+You could shift it with an axe. You don't have one.
+do enable_movement()
+=> END
+
+~ cleared
+do disable_movement()
+The pile comes apart easier than it looks. The vines were holding it together, not the stone.
+do enable_movement()
+=> END
