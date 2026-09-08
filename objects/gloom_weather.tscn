@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bg100mwthr2ec"]
+
+[ext_resource type="Script" path="res://objects/gloom_weather.gd" id="1_script"]
+
+[node name="GloomWeather" type="Node2D"]
+script = ExtResource("1_script")

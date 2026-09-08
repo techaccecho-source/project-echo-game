@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://c8frgpk2echo" path="res://objects/fragment_pickup.tscn" id="fragpick"]
 [ext_resource type="Resource" uid="uid://bqechofrag02x" path="res://fragments/fragment_02_the_ledge_gives.tres" id="frag02"]
 [ext_resource type="PackedScene" uid="uid://bf4ll00nedge" path="res://objects/fall_zone.tscn" id="fallzone"]
+[ext_resource type="PackedScene" uid="uid://c5earock2sea" path="res://objects/sea_rock.tscn" id="searock"]
+[ext_resource type="PackedScene" uid="uid://bg100mwthr2ec" path="res://objects/gloom_weather.tscn" id="weather"]
 
 [sub_resource type="RectangleShape2D" id="RS_mtn_0"]
 size = Vector2(112, 128)
@@ -442,6 +444,72 @@ position = Vector2(472, 292)
 size = Vector2(144, 248)
 water_y = 252
 respawn_spawn = "Entrance"
+
+[node name="SeaRocks" type="Node2D" parent="."]
+
+[node name="SeaRock0" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(56, 376)
+animation = &"large"
+
+[node name="SeaRock1" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(200, 392)
+animation = &"small"
+
+[node name="SeaRock2" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(344, 408)
+animation = &"small"
+
+[node name="SeaRock3" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(392, 360)
+animation = &"large"
+
+[node name="SeaRock4" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(440, 328)
+animation = &"large"
+
+[node name="SeaRock5" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(536, 392)
+animation = &"large"
+
+[node name="SeaRock6" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(584, 408)
+animation = &"large"
+
+[node name="SeaRock7" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(824, 408)
+animation = &"large"
+
+[node name="SeaRock8" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(920, 408)
+animation = &"large"
+
+[node name="SeaRock9" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(968, 392)
+animation = &"small"
+
+[node name="SeaRock10" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(1064, 360)
+animation = &"small"
+
+[node name="SeaRock11" parent="SeaRocks" instance=ExtResource("searock")]
+z_index = -15
+position = Vector2(1160, 392)
+animation = &"small"
+
+[node name="Weather" parent="." instance=ExtResource("weather")]
+area_center = Vector2(640, 208)
+area_size = Vector2(1500, 576)
 
 [node name="TerrainBuilder" type="Node2D" parent="."]
 script = ExtResource("builder")
