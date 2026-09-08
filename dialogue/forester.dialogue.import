@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://88ea4ikfojkv"
+path="res://.godot/imported/forester.dialogue-2cee9695af984ff26682aaea890e1cad.tres"
+
+[deps]
+
+source_file="res://dialogue/forester.dialogue"
+dest_files=["res://.godot/imported/forester.dialogue-2cee9695af984ff26682aaea890e1cad.tres"]
+
+[params]
+
+defaults=true

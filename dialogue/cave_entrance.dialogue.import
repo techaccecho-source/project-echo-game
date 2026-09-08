@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bqigljkndi37x"
+path="res://.godot/imported/cave_entrance.dialogue-39eb8dc6f8ed5e0d1a197d759e4369d0.tres"
+
+[deps]
+
+source_file="res://dialogue/cave_entrance.dialogue"
+dest_files=["res://.godot/imported/cave_entrance.dialogue-39eb8dc6f8ed5e0d1a197d759e4369d0.tres"]
+
+[params]
+
+defaults=true

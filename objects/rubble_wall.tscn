@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cq405tqrfraea"]
+
+[ext_resource type="Script" path="res://objects/rubble_wall.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://rclfy536u0dj" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Props/Deep Forest/deep forest stones.png" id="2_stones"]
+[ext_resource type="Texture2D" uid="uid://h2osetkxilb4" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Props/Summer/Stones Summer.png" id="3_mossy"]
+[ext_resource type="Resource" uid="uid://gh5xdkvqmbo7" path="res://inventory/items/axe.tres" id="4_axe"]
+[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="5_iarea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_block"]
+size = Vector2(44, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(52, 34)
+
+[node name="RubbleWall" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_script")
+required_item = ExtResource("4_axe")
+
+[node name="Rubble" type="Node2D" parent="."]
+
+[node name="Boulder" type="Sprite2D" parent="Rubble"]
+texture = ExtResource("2_stones")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+position = Vector2(-12, -6)
+
+[node name="Cluster" type="Sprite2D" parent="Rubble"]
+texture = ExtResource("2_stones")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+position = Vector2(10, 0)
+
+[node name="MossyLeft" type="Sprite2D" parent="Rubble"]
+texture = ExtResource("3_mossy")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+position = Vector2(-18, 4)
+
+[node name="MossyRight" type="Sprite2D" parent="Rubble"]
+texture = ExtResource("3_mossy")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+position = Vector2(16, 5)
+
+[node name="Body" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_block")
+
+[node name="InteractionArea" parent="." instance=ExtResource("5_iarea")]
+action_name = "inspect"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_interact")
