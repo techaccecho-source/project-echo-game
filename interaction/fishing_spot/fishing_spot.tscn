@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c8q2fr5t7wjm4"]
+
+[ext_resource type="Script" uid="uid://dxk8h3n2q7fsp" path="res://interaction/fishing_spot/fishing_spot.gd" id="1_fshsp"]
+[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="2_fshsp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fshsp"]
+radius = 24.0
+
+[node name="FishingSpot" type="Node2D" unique_id=644111101]
+position = Vector2(-429, -328)
+script = ExtResource("1_fshsp")
+
+[node name="InteractionArea" parent="." unique_id=1630740666 instance=ExtResource("2_fshsp")]
+action_name = "fish"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=886694523]
+shape = SubResource("CircleShape2D_fshsp")
