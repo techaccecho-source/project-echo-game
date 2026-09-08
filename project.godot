@@ -22,6 +22,7 @@ DialogueManager="*uid://c3rodes2l3gxb"
 SceneManager="*res://world/scene_manager.gd"
 EchoLog="*res://core/echo_log.gd"
 FishingMinigame="*uid://dw3n9q6r2xfk8"
+Audio="*res://core/audio.gd"
 
 [dialogue_manager]
 

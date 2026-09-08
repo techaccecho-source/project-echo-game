@@ -11,13 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://doa04urw7iidr" path="res://inventory/inv_ui.tscn" id="13_1i7os"]
 [ext_resource type="PackedScene" uid="uid://dfo2onkt5unk" path="res://structures/houses/blacksmith/workshop_shell.tscn" id="14_qu7vk"]
 [ext_resource type="PackedScene" uid="uid://wvbxyfgl33vp" path="res://character/player_josh.tscn" id="15_8cpu7"]
-[ext_resource type="PackedScene" path="res://world/game_level_2.tscn" id="16_h77br"]
 [ext_resource type="PackedScene" uid="uid://cjv2qoon2uq34" path="res://base_terrain/scenes/tree_border.tscn" id="17_esbob"]
 [ext_resource type="PackedScene" uid="uid://yayo4t5ledsq" path="res://objects/pine_tree_large.tscn" id="22_q8vt7"]
 [ext_resource type="PackedScene" uid="uid://c22k3vhlkopgk" path="res://structures/houses/blacksmith/workshop.tscn" id="24_6rc46"]
 [ext_resource type="PackedScene" uid="uid://ccxk7nsx3r1g3" path="res://objects/anvil_white_gray.tscn" id="30_65dot"]
 [ext_resource type="Script" path="res://world/game_world.gd" id="gw_script"]
 [ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="portal_area"]
+[ext_resource type="PackedScene" uid="uid://blvlaud102ec" path="res://objects/level_audio.tscn" id="lvlaudio"]
 [ext_resource type="PackedScene" uid="uid://c8q2fr5t7wjm4" path="res://interaction/fishing_spot/fishing_spot.tscn" id="40_fshsp"]
 [ext_resource type="Script" uid="uid://by0khe2xbsbyd" path="res://inventory/inventory_item.gd" id="41_invitem"]
 [ext_resource type="Resource" uid="uid://cq7fj2h8b3xk1" path="res://inventory/items/fish_carp.tres" id="42_carp"]
@@ -158,8 +158,15 @@ polygon = PackedVector2Array(-14, 0, -7, -9, 7, -9, 14, 0, 7, 9, -7, 9)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" unique_id=102852437]
 shape = SubResource("RectangleShape2D_portal")
 
+[node name="LevelAudio" parent="." instance=ExtResource("lvlaudio")]
+music = "res://audio/music/hearth_hollow_bed.wav"
+music_volume_db = -5.0
+ambience = {
+"forest": "res://audio/ambience/forest_loop.wav"
+}
+ambience_volume_db = {
+"forest": -7.0
+}
+
 [node name="ReturnSpawn" type="Marker2D" parent="." unique_id=729082798 groups=["player_spawn"]]
 position = Vector2(-1000, -812)
-
-[node name="GameLevel2" parent="." unique_id=773361100 instance=ExtResource("16_h77br")]
-position = Vector2(401, -512)

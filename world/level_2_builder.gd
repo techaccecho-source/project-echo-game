@@ -27,7 +27,18 @@ const T_TL     := Vector2i(4, 0)
 const T_TR     := Vector2i(8, 0)
 const T_BL     := Vector2i(4, 3)
 const T_BR     := Vector2i(8, 3)
-const T_FACE   := Vector2i(9, 4)   ## rock wall body
+const T_FACE   := Vector2i(9, 4)   ## rock wall body -- the ONLY plain rock
+## tile in the whole sheet, verified by hashing every tile in the atlas.
+## Two-wide blue alcoves. Both halves must be placed or you get a sliced grotto.
+const GROTTOS: Array[Vector2i] = [
+	Vector2i(12, 2), Vector2i(14, 2), Vector2i(16, 2), Vector2i(18, 2),
+]
+## Rock meeting the sea; the bump variants have a stack poking through the surf.
+const WATERLINE: Array[Vector2i] = [
+	Vector2i(1, 5), Vector2i(2, 5), Vector2i(4, 5),
+	Vector2i(5, 5), Vector2i(7, 5), Vector2i(8, 5),
+]
+const WATERLINE_BUMP: Array[Vector2i] = [Vector2i(3, 5), Vector2i(6, 5)]
 const T_WATER  := Vector2i(0, 0)   ## source 3, single sea tile
 ## Dry cave arch. The (13,x)..(16,x) variants have a waterline in them.
 const T_CAVE_TOP := Vector2i(12, 0)
@@ -88,7 +99,12 @@ const FENCE_R := Vector2i(2, 2)
 @export var level_width: int = 80
 @export var level_height: int = 26
 ## How many rows of rock face hang below the ledge before the sea.
-@export var cliff_depth: int = 2
+## Rock rows below the grass lip before the sea. At 2 this read as a kerb
+## rather than a sea cliff; the last row is always a waterline tile.
+@export var cliff_depth: int = 5
+## Bite alcoves out of the base of the mountain so it doesn't meet the ledge
+## along a ruler-straight line. Only ever carved upward.
+@export var carve_wall_alcoves: bool = true
 ## Ledge profile control points: x = column, y = first grass row,
 ## z = last grass row. Values are interpolated between consecutive points, so
 ## two points one column apart give a hard step (that is how the collapsed
@@ -97,10 +113,11 @@ const FENCE_R := Vector2i(2, 2)
 	Vector3i(0, 8, 15),
 	Vector3i(10, 8, 14),
 	Vector3i(18, 8, 13),
-	Vector3i(24, 8, 12),
-	Vector3i(25, 8, 9),    # abrupt: the span fell away
-	Vector3i(33, 8, 9),    # the squeeze
-	Vector3i(34, 7, 12),   # abrupt: ledge resumes
+	Vector3i(23, 8, 13),
+	Vector3i(24, 9, 11),   ## pinches to three rows: the crossing, no margin
+	Vector3i(32, 9, 11),
+	Vector3i(33, 8, 13),   ## opens out again
+	Vector3i(39, 8, 13),
 	Vector3i(42, 7, 16),
 	Vector3i(50, 7, 17),   # camp shelf, widest point
 	Vector3i(58, 7, 16),
@@ -134,13 +151,31 @@ const FENCE_R := Vector2i(2, 2)
 ## in the scene under "Dressing"; the builder only keeps their ground clear.
 @export var keep_clear: Array[Vector2i] = [
 	Vector2i(52, 10), Vector2i(49, 11), Vector2i(48, 10), Vector2i(54, 11),
-	Vector2i(23, 11), Vector2i(24, 12),
+	Vector2i(23, 11), Vector2i(23, 12),
 	Vector2i(22, 11),  ## Cedric's page at the break
 ]
 
 ## Columns (inclusive) where the drop is left with no collision, so the player
 ## can walk off the unfenced squeeze. Set x > y to close it again.
-@export var fall_gap: Vector2i = Vector2i(25, 33)
+## Columns where the drop gets no collision, so the seaward side of the pinch
+## is open air and a step off the bottom lane is a fall. Pair with a FallZone in
+## the scene covering the same span. Normally the same as wide_path_columns.
+@export var fall_gap: Vector2i = Vector2i(24, 32)
+
+@export_group("Crossing")
+## Columns (inclusive) carrying the crumbling slabs. Terrain here is ordinary
+## cliff path -- ground, grass and dirt are all drawn as normal, and the sea
+## stays at the foot of the cliff. Must match the CrumbleBridge node's grid.
+@export var crossing_columns: Vector2i = Vector2i(26, 30)
+## Rows (inclusive) the three lanes occupy.
+@export var crossing_rows: Vector2i = Vector2i(9, 11)
+## Columns where the path runs three rows wide, so the approach and the landing
+## both meet all three lanes squarely. Normally the crossing plus a margin.
+@export var wide_path_columns: Vector2i = Vector2i(24, 32)
+
+
+func _is_wide_path(x: int) -> bool:
+	return x >= wide_path_columns.x and x <= wide_path_columns.y
 
 @export_group("Props")
 @export var place_props: bool = true
@@ -156,6 +191,9 @@ var _bot: PackedInt32Array
 
 
 # --- profile ---------------------------------------------------------------
+
+var _features: Dictionary = {}
+
 
 func _resolve_profile() -> void:
 	_top = PackedInt32Array()
@@ -181,6 +219,72 @@ func _resolve_profile() -> void:
 		var lip := _bot[waterfall_column]
 		for x in range(waterfall_column, min(waterfall_column + 4, level_width)):
 			_bot[x] = lip
+	if carve_wall_alcoves:
+		_carve_alcoves()
+
+
+## Short bays bitten out of the base of the mountain wall. Never carved
+## downward, so the walkable ledge and the path can't be pinched.
+func _carve_alcoves() -> void:
+	var x := 3
+	while x < level_width - 4:
+		var run := 2 + int(_rnd(x, 122) * 4)
+		# The cave is carved at a fixed offset from _top[cave_column] and its
+		# entity sits at a hardcoded position, so that column must not move.
+		var hits_cave := x - 1 <= cave_column and cave_column <= x + run
+		if _rnd(x, 121) < 0.34 and not hits_cave:
+			var deep := 1 + (1 if _rnd(x, 123) < 0.35 else 0)
+			for c in range(x, min(level_width, x + run)):
+				_top[c] = max(2, _top[c] - deep)
+			x += run + 2
+		else:
+			x += 2
+
+
+## Rock rows below the lip for this column, jittered so the shoreline is not a
+## ruler line and always leaving a row for the waterline tile.
+func _drop_depth(x: int) -> int:
+	var col := x
+	if build_waterfall and x >= waterfall_column and x <= waterfall_column + 3:
+		col = waterfall_column
+	var d := cliff_depth
+	if _rnd(col, 55) > 0.74:
+		d += 1
+	elif _rnd(col, 56) > 0.80:
+		d -= 1
+	return maxi(2, mini(d, level_height - 1 - _bot[x]))
+
+
+func _pick(table: Array[Vector2i], x: int, y: int, salt: int) -> Vector2i:
+	return table[int(_rnd(x, y * 61 + salt) * table.size()) % table.size()]
+
+
+## Two-wide alcoves scattered through the mountain wall and the sea cliff.
+## There are deliberately no dark "cave" tiles here: the sheet has no
+## rock-above/opening-below tile, so a bare dark cell is just a black rectangle.
+func _build_features() -> void:
+	_features.clear()
+	for x in range(3, level_width - 6, 4):
+		if _top[x] < 3 or absi(x - cave_column) <= 2 or _rnd(x, 88) >= 0.42:
+			continue
+		var y := 1 + int(_rnd(x, 89) * (_top[x] - 2))
+		if y >= _top[x] or y >= _top[x + 1]:
+			continue
+		var left := GROTTOS[int(_rnd(x, 90) * GROTTOS.size()) % GROTTOS.size()]
+		_features[Vector2i(x, y)] = left
+		_features[Vector2i(x + 1, y)] = left + Vector2i(1, 0)
+	for x in range(2, level_width - 6, 7):
+		var d := _drop_depth(x)
+		if d < 3 or _rnd(x, 91) >= 0.30 or absi(x - waterfall_column) < 5:
+			continue
+		var y := _bot[x] + 2 + int(_rnd(x, 92) * maxi(1, d - 2))
+		if y >= _bot[x] + d or _bot[x + 1] != _bot[x]:
+			continue
+		if y >= _bot[x + 1] + _drop_depth(x + 1):
+			continue
+		var left2 := GROTTOS[int(_rnd(x, 93) * GROTTOS.size()) % GROTTOS.size()]
+		_features[Vector2i(x, y)] = left2
+		_features[Vector2i(x + 1, y)] = left2 + Vector2i(1, 0)
 
 
 func _is_grass(x: int, y: int) -> bool:
@@ -248,19 +352,34 @@ func _build() -> void:
 	_resolve_profile()
 	_clear()
 
+	_build_features()
 	for x in level_width:
 		for y in level_height:
 			water.set_cell(Vector2i(x, y), SRC_WATER, T_WATER)
 		for y in range(0, _top[x]):
-			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, T_FACE)
-		for y in range(_bot[x] + 1, min(_bot[x] + 1 + cliff_depth, level_height)):
-			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, T_FACE)
+			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, _features.get(Vector2i(x, y), T_FACE))
+		var d := _drop_depth(x)
+		for i in d:
+			var y := _bot[x] + 1 + i
+			if y >= level_height:
+				break
+			var tile: Vector2i
+			if i == d - 1:
+				var table := WATERLINE_BUMP if _rnd(x, 41) < 0.12 else WATERLINE
+				tile = _pick(table, x, 0, 5)
+			else:
+				tile = _features.get(Vector2i(x, y), T_FACE)
+			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, tile)
 		for y in range(_top[x], _bot[x] + 1):
 			ground.set_cell(Vector2i(x, y), SRC_CLIFF, _grass_tile(x, y))
 
 	if build_cave:
 		_build_cave(cliffs)
 	var reserved := _build_path(_layer("Path"))
+	# Keep scatter and fencing off the slabs.
+	for cx in range(crossing_columns.x - 1, crossing_columns.y + 2):
+		for cy in range(crossing_rows.x - 1, crossing_rows.y + 2):
+			reserved[Vector2i(cx, cy)] = true
 	if build_waterfall:
 		for k in _build_waterfall(_layer("Waterfall")):
 			reserved[k] = true
@@ -314,6 +433,13 @@ func _build_path(path: TileMapLayer) -> Dictionary:
 			continue
 		var lo: int = _top[x]
 		var hi: int = max(_top[x], _bot[x] - 1)
+		if _is_wide_path(x):
+			# All three rows across the crossing, lip included: no grass verge
+			# is wanted here, the path should run right to the drop.
+			for wy in range(crossing_rows.x, crossing_rows.y + 1):
+				if wy >= _top[x] and wy <= _bot[x]:
+					cells[Vector2i(x, wy)] = true
+			continue
 		# Nudge the centre onto the ledge rather than dropping the column, so
 		# the path never breaks where the ledge narrows.
 		var cy: int = clampi(int(centre[x]), lo, hi)
@@ -338,12 +464,19 @@ func _build_waterfall(fall: TileMapLayer) -> Dictionary:
 	if fall == null or waterfall_column < 0 or waterfall_column >= level_width:
 		return cells
 	var y0 := _bot[waterfall_column]
+	# The stamp is 4 rows; a taller cliff needs its middle row repeated so the
+	# fall still lands in the sea instead of stopping partway down the rock.
+	var rows := _drop_depth(waterfall_column) + 1
+	var seq: Array[int] = [0, 1]
+	for _i in maxi(0, rows - 3):
+		seq.append(2)
+	seq.append(3)
 	for dx in 4:
-		for dy in 4:
+		for i in seq.size():
 			var x := waterfall_column + dx
-			var y := y0 + dy
+			var y := y0 + i
 			if x < level_width and y < level_height:
-				fall.set_cell(Vector2i(x, y), SRC_FALL, Vector2i(dx, dy))
+				fall.set_cell(Vector2i(x, y), SRC_FALL, Vector2i(dx, seq[i]))
 				cells[Vector2i(x, y)] = true
 	return cells
 
@@ -417,14 +550,14 @@ func _build_props(parent: Node) -> void:
 	var owner_node := get_tree().edited_scene_root if Engine.is_editor_hint() else parent
 	var i := 0
 	for x in range(2, level_width - 2, max(1, pine_spacing)):
-		if x >= pine_skip_from and x <= pine_skip_to:
+		if _is_wide_path(x) or (x >= pine_skip_from and x <= pine_skip_to):
 			continue
 		var jitter := int(_rnd(x, 5) * 9) - 4
 		i = _add_pine(props, owner_node, i,
 			Vector2(x * 16 + 8 + jitter, _top[x] * 16 + 12 + int(_rnd(x, 11) * 6)))
 	# a few standing out on the ledge itself
 	for x in range(6, level_width - 6, 11):
-		if x >= pine_skip_from and x <= pine_skip_to:
+		if _is_wide_path(x) or (x >= pine_skip_from and x <= pine_skip_to):
 			continue
 		if x >= waterfall_column - 1 and x <= waterfall_column + 4:
 			continue
@@ -555,6 +688,8 @@ func _build_fences(fences: TileMapLayer, reserved: Dictionary, used: Dictionary)
 func _fence_ok(c: int, reserved: Dictionary) -> bool:
 	if c < 1 or c >= level_width - 1:
 		return false
+	if _is_wide_path(c) or _is_wide_path(c - 1) or _is_wide_path(c + 1):
+		return false   ## the crossing is meant to be unguarded
 	if _bot[c] - _top[c] < 3:
 		return false
 	if reserved.has(Vector2i(c, _bot[c])):

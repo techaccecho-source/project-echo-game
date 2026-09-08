@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://c5earock2sea"]
+
+[ext_resource type="Script" path="res://objects/sea_rock.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://n5u1ff0ttwmk" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Props/Beach/Stones.png" id="1_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0"]
+atlas = ExtResource("1_tex")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0"]
+atlas = ExtResource("1_tex")
+region = Rect2(5, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1"]
+atlas = ExtResource("1_tex")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1"]
+atlas = ExtResource("1_tex")
+region = Rect2(53, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2"]
+atlas = ExtResource("1_tex")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2"]
+atlas = ExtResource("1_tex")
+region = Rect2(101, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3"]
+atlas = ExtResource("1_tex")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3"]
+atlas = ExtResource("1_tex")
+region = Rect2(149, 32, 40, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rock"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3")
+}],
+"loop": true,
+"name": &"large",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3")
+}],
+"loop": true,
+"name": &"small",
+"speed": 4.0
+}]
+
+[node name="SeaRock" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_rock")
+animation = &"large"
+script = ExtResource("1_script")
