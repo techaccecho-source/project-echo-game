@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dqp5std4t6fek" path="res://world/base_grass_level_1.tscn" id="2_1i7os"]
 [ext_resource type="PackedScene" uid="uid://bl8bydys1a8qm" path="res://base_terrain/scenes/river.tscn" id="9_druaq"]
-[ext_resource type="PackedScene" uid="uid://bgyve10sjdd61" path="res://base_terrain/scenes/level_1_forest.tscn" id="10_4054t"]
+[ext_resource type="PackedScene" path="res://base_terrain/scenes/level_1_forest.tscn" id="10_4054t"]
 [ext_resource type="TileSet" uid="uid://bu48edd5oif51" path="res://tilesets/rock_flower_tree_grass.tres" id="10_ccgqp"]
 [ext_resource type="PackedScene" uid="uid://5xvypv6jcbq3" path="res://character/npc_blacksmith.tscn" id="10_druaq"]
 [ext_resource type="PackedScene" uid="uid://ntcl7tkfgme1" path="res://base_terrain/scenes/water_border.tscn" id="10_hdkfl"]
@@ -10,12 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://doa04urw7iidr" path="res://inventory/inv_ui.tscn" id="13_1i7os"]
 [ext_resource type="PackedScene" uid="uid://dfo2onkt5unk" path="res://structures/houses/blacksmith/workshop_shell.tscn" id="14_qu7vk"]
 [ext_resource type="PackedScene" uid="uid://wvbxyfgl33vp" path="res://character/player_josh.tscn" id="15_8cpu7"]
-[ext_resource type="PackedScene" uid="uid://cri8ttppkvehu" path="res://world/game_level_2.tscn" id="16_h77br"]
+[ext_resource type="PackedScene" path="res://world/game_level_2.tscn" id="16_h77br"]
 [ext_resource type="PackedScene" uid="uid://cjv2qoon2uq34" path="res://base_terrain/scenes/tree_border.tscn" id="17_esbob"]
 [ext_resource type="PackedScene" uid="uid://yayo4t5ledsq" path="res://objects/pine_tree_large.tscn" id="22_q8vt7"]
 [ext_resource type="PackedScene" uid="uid://c22k3vhlkopgk" path="res://structures/houses/blacksmith/workshop.tscn" id="24_6rc46"]
 [ext_resource type="PackedScene" uid="uid://ccxk7nsx3r1g3" path="res://objects/anvil_white_gray.tscn" id="30_65dot"]
-[ext_resource type="Script" uid="uid://cpwnfxebcpy1u" path="res://world/game_world.gd" id="gw_script"]
+[ext_resource type="Script" path="res://world/game_world.gd" id="gw_script"]
 [ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="portal_area"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_portal"]
@@ -136,4 +136,4 @@ shape = SubResource("RectangleShape2D_portal")
 position = Vector2(-1000, -812)
 
 [node name="GameLevel2" parent="." unique_id=773361100 instance=ExtResource("16_h77br")]
-position = Vector2(0, -986)
+position = Vector2(401, -512)
