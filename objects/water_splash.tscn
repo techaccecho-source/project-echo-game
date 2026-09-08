@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dspl4shw8ter"]
+
+[ext_resource type="Script" path="res://objects/water_splash.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cfuvt7bvd1iqo" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Fish/bubbles.png" id="1_bub"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0"]
+atlas = ExtResource("1_bub")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1"]
+atlas = ExtResource("1_bub")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2"]
+atlas = ExtResource("1_bub")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3"]
+atlas = ExtResource("1_bub")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4"]
+atlas = ExtResource("1_bub")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5"]
+atlas = ExtResource("1_bub")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6"]
+atlas = ExtResource("1_bub")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_splash"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 12.0
+}]
+
+[node name="WaterSplash" type="Node2D"]
+z_index = 6
+script = ExtResource("1_script")
+
+[node name="Burst" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_splash")
+animation = &"splash"

@@ -19,6 +19,8 @@ z_index = 5
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerJosh"]
 remote_path = NodePath("../../Camera2D")
+update_rotation = false
+update_scale = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

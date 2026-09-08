@@ -97,12 +97,19 @@ func on_standalone_ready() -> void:
 # --- Swapping levels inside the shell --------------------------------------
 
 ## Swap the level currently inside the shell. Player/camera/UI stay alive.
-func change_level(level_path: String, spawn: String = "") -> void:
+##
+## `on_loaded` runs after the new level is in and the player placed, but before
+## the screen fades back in — the only safe moment to fix up anything the player
+## is carrying across the swap (a death animation's scale/rotation/alpha, say).
+func change_level(level_path: String, spawn: String = "",
+		on_loaded: Callable = Callable()) -> void:
 	if level_holder == null:
 		push_warning("SceneManager.change_level() called while not in the shell.")
 		return
 	await _fade_to(1.0)
 	_load_into_holder(level_path, spawn)
+	if on_loaded.is_valid():
+		on_loaded.call()
 	await _fade_to(0.0)
 
 

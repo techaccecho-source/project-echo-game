@@ -67,6 +67,8 @@ position = Vector2(-1036, -871)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameLevel1/PlayerJosh" unique_id=493444989]
 remote_path = NodePath("../../../Camera2D")
+update_rotation = false
+update_scale = false
 
 [node name="WorkshopShell" parent="GameLevel1" unique_id=2097110525 instance=ExtResource("14_qu7vk")]
 z_index = 5

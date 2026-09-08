@@ -138,6 +138,10 @@ const FENCE_R := Vector2i(2, 2)
 	Vector2i(22, 11),  ## Cedric's page at the break
 ]
 
+## Columns (inclusive) where the drop is left with no collision, so the player
+## can walk off the unfenced squeeze. Set x > y to close it again.
+@export var fall_gap: Vector2i = Vector2i(25, 33)
+
 @export_group("Props")
 @export var place_props: bool = true
 @export var pine_scene: PackedScene = preload("res://objects/pine_tree_large.tscn")
@@ -371,10 +375,26 @@ func _build_collision(parent: Node) -> void:
 			e2 += 1
 		var h := (level_height - 1 - _bot[x]) * 16
 		if h > 0:
-			_add_rect(body, owner_node, "drop_%d" % x,
-				(e2 - x + 1) * 16, h,
-				x * 16 + (e2 - x + 1) * 8, (_bot[x] + 1) * 16 + h / 2.0)
+			for part in _minus_fall_gap(x, e2):
+				var a := part.x
+				var c := part.y
+				_add_rect(body, owner_node, "drop_%d" % a,
+					(c - a + 1) * 16, h,
+					a * 16 + (c - a + 1) * 8, (_bot[x] + 1) * 16 + h / 2.0)
 		x = e2 + 1
+
+
+## Split a run of columns around the fall gap, so the drop simply has no floor
+## across it. Pair with a FallZone in the scene covering the same span.
+func _minus_fall_gap(a: int, b: int) -> Array[Vector2i]:
+	if fall_gap.x > fall_gap.y or b < fall_gap.x or a > fall_gap.y:
+		return [Vector2i(a, b)]
+	var parts: Array[Vector2i] = []
+	if a < fall_gap.x:
+		parts.append(Vector2i(a, fall_gap.x - 1))
+	if b > fall_gap.y:
+		parts.append(Vector2i(fall_gap.y + 1, b))
+	return parts
 
 
 func _add_rect(body: StaticBody2D, owner_node: Node, n: String,

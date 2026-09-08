@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cq40pact703ea" path="res://objects/cave_entrance.tscn" id="caveent"]
 [ext_resource type="PackedScene" uid="uid://c8frgpk2echo" path="res://objects/fragment_pickup.tscn" id="fragpick"]
 [ext_resource type="Resource" uid="uid://bqechofrag02x" path="res://fragments/fragment_02_the_ledge_gives.tres" id="frag02"]
+[ext_resource type="PackedScene" uid="uid://bf4llz0nedge" path="res://objects/fall_zone.tscn" id="fallzone"]
 
 [sub_resource type="RectangleShape2D" id="RS_mtn_0"]
 size = Vector2(544, 128)
@@ -44,9 +45,6 @@ size = Vector2(112, 192)
 
 [sub_resource type="RectangleShape2D" id="RS_drop_22"]
 size = Vector2(48, 208)
-
-[sub_resource type="RectangleShape2D" id="RS_drop_25"]
-size = Vector2(144, 256)
 
 [sub_resource type="RectangleShape2D" id="RS_drop_34"]
 size = Vector2(16, 208)
@@ -151,10 +149,6 @@ shape = SubResource("RS_drop_15")
 [node name="drop_22" type="CollisionShape2D" parent="TerrainCollision"]
 position = Vector2(376, 312.0)
 shape = SubResource("RS_drop_22")
-
-[node name="drop_25" type="CollisionShape2D" parent="TerrainCollision"]
-position = Vector2(472, 288.0)
-shape = SubResource("RS_drop_25")
 
 [node name="drop_34" type="CollisionShape2D" parent="TerrainCollision"]
 position = Vector2(552, 312.0)
@@ -366,12 +360,18 @@ position = Vector2(1224, 130)
 
 [node name="CaveEntrance" parent="Entities" instance=ExtResource("caveent")]
 position = Vector2(1224, 102)
+rubble_path = NodePath("../RubbleWall")
 
 [node name="Fragment2" parent="Entities" instance=ExtResource("fragpick")]
 z_index = 5
 position = Vector2(360, 184)
 fragment = ExtResource("frag02")
-rubble_path = NodePath("../RubbleWall")
+
+[node name="FallZone" parent="Entities" instance=ExtResource("fallzone")]
+position = Vector2(472, 292)
+size = Vector2(144, 248)
+water_y = 200
+respawn_spawn = "Entrance"
 
 [node name="TerrainBuilder" type="Node2D" parent="."]
 script = ExtResource("builder")
