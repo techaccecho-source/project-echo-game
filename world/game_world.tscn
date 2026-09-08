@@ -18,14 +18,14 @@
 [ext_resource type="PackedScene" uid="uid://ccxk7nsx3r1g3" path="res://objects/anvil_white_gray.tscn" id="30_65dot"]
 [ext_resource type="Script" path="res://world/game_world.gd" id="gw_script"]
 [ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="portal_area"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_portal"]
-size = Vector2(28, 18)
 [ext_resource type="PackedScene" uid="uid://c8q2fr5t7wjm4" path="res://interaction/fishing_spot/fishing_spot.tscn" id="40_fshsp"]
 [ext_resource type="Script" uid="uid://by0khe2xbsbyd" path="res://inventory/inventory_item.gd" id="41_invitem"]
 [ext_resource type="Resource" uid="uid://cq7fj2h8b3xk1" path="res://inventory/items/fish_carp.tres" id="42_carp"]
 [ext_resource type="Resource" uid="uid://dqk3xyram7wl2" path="res://inventory/items/fish_perch.tres" id="43_perch"]
 [ext_resource type="Resource" uid="uid://bx8h5n2p4qty3" path="res://inventory/items/fish_sunfish.tres" id="44_sunfish"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_portal"]
+size = Vector2(28, 18)
 
 [node name="GameWorld" type="Node2D" unique_id=906258989]
 y_sort_enabled = true
