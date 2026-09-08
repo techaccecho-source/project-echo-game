@@ -10,13 +10,20 @@
 [ext_resource type="PackedScene" uid="uid://doa04urw7iidr" path="res://inventory/inv_ui.tscn" id="13_1i7os"]
 [ext_resource type="PackedScene" uid="uid://dfo2onkt5unk" path="res://structures/houses/blacksmith/workshop_shell.tscn" id="14_qu7vk"]
 [ext_resource type="PackedScene" uid="uid://wvbxyfgl33vp" path="res://character/player_josh.tscn" id="15_8cpu7"]
+[ext_resource type="PackedScene" uid="uid://cri8ttppkvehu" path="res://world/game_level_2.tscn" id="16_h77br"]
 [ext_resource type="PackedScene" uid="uid://cjv2qoon2uq34" path="res://base_terrain/scenes/tree_border.tscn" id="17_esbob"]
 [ext_resource type="PackedScene" uid="uid://yayo4t5ledsq" path="res://objects/pine_tree_large.tscn" id="22_q8vt7"]
 [ext_resource type="PackedScene" uid="uid://c22k3vhlkopgk" path="res://structures/houses/blacksmith/workshop.tscn" id="24_6rc46"]
 [ext_resource type="PackedScene" uid="uid://ccxk7nsx3r1g3" path="res://objects/anvil_white_gray.tscn" id="30_65dot"]
+[ext_resource type="Script" uid="uid://cpwnfxebcpy1u" path="res://world/game_world.gd" id="gw_script"]
+[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="portal_area"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_portal"]
+size = Vector2(28, 18)
 
 [node name="GameWorld" type="Node2D" unique_id=906258989]
 y_sort_enabled = true
+script = ExtResource("gw_script")
 
 [node name="AnvilWhiteGray" parent="." unique_id=572894837 instance=ExtResource("30_65dot")]
 z_index = 5
@@ -61,6 +68,8 @@ position = Vector2(-587, -456)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameLevel1/PlayerJosh" unique_id=493444989]
 remote_path = NodePath("../../../Camera2D")
+update_rotation = false
+update_scale = false
 
 [node name="WorkshopShell" parent="GameLevel1" unique_id=2097110525 instance=ExtResource("14_qu7vk")]
 z_index = 5
@@ -110,3 +119,20 @@ offset_top = 166.99998
 offset_right = 623.99994
 offset_bottom = 240.99998
 scale = Vector2(10, 10)
+
+[node name="Portal" parent="." unique_id=1866590606 instance=ExtResource("portal_area")]
+position = Vector2(-1036, -812)
+action_name = "travel"
+
+[node name="Pad" type="Polygon2D" parent="Portal" unique_id=178969412]
+color = Color(0.3, 0.75, 1, 0.55)
+polygon = PackedVector2Array(-14, 0, -7, -9, 7, -9, 14, 0, 7, 9, -7, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" unique_id=102852437]
+shape = SubResource("RectangleShape2D_portal")
+
+[node name="ReturnSpawn" type="Marker2D" parent="." unique_id=729082798 groups=["player_spawn"]]
+position = Vector2(-1000, -812)
+
+[node name="GameLevel2" parent="." unique_id=773361100 instance=ExtResource("16_h77br")]
+position = Vector2(0, -986)

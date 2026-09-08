@@ -1,0 +1,32 @@
+[gd_scene format=4 uid="uid://loao66nslui"]
+
+[ext_resource type="Script" path="res://world/game.gd" id="game_script"]
+[ext_resource type="PackedScene" uid="uid://wvbxyfgl33vp" path="res://character/player_josh.tscn" id="player"]
+[ext_resource type="PackedScene" uid="uid://doa04urw7iidr" path="res://inventory/inv_ui.tscn" id="invui"]
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("game_script")
+
+[node name="LevelHolder" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="PlayerJosh" parent="." instance=ExtResource("player")]
+z_index = 5
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerJosh"]
+remote_path = NodePath("../../Camera2D")
+update_rotation = false
+update_scale = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inv_UI" parent="CanvasLayer" instance=ExtResource("invui")]
+offset_left = 526.99994
+offset_top = 166.99998
+offset_right = 623.99994
+offset_bottom = 240.99998
+scale = Vector2(10, 10)

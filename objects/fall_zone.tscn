@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bf4ll00nedge"]
+
+[ext_resource type="Script" path="res://objects/fall_zone.gd" id="1_script"]
+
+[node name="FallZone" type="Area2D"]
+script = ExtResource("1_script")

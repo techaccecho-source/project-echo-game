@@ -1,0 +1,16 @@
+~ start
+do start_talking()
+do disable_movement()
+Forester: So. You found the key.
+- Why did you bury it? Why block the way at all?
+	Forester: Because I hoped nobody would ever need to find it. That barricade wasn't spite. It was to keep something else in.
+	Forester: [wait=1] Past a certain point, the forest has been wrong for a long time now. Wrong in a way that spreads, if you let it get behind you.
+	Forester: Sealing the path was the only thing I knew how to do about it. Didn't hold forever, I suppose.
+- The blacksmith made you sound like a menace.
+	Forester: [[Good.|That was rather the idea.|Let them talk.]] Better they're afraid of an old man in the woods than go looking for what I was actually guarding against.
+	Forester: [wait=1] You're not the first to get past me, either. A stranger came through months back, asking odd questions about the trees. He never came back down.
+	Forester: I should have buried that key deeper.
+Forester: The way on is past the rubble, if you're set on it. Mind yourself down there.
+do stop_talking()
+do enable_movement()
+=> END
