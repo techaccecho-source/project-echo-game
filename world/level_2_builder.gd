@@ -27,7 +27,18 @@ const T_TL     := Vector2i(4, 0)
 const T_TR     := Vector2i(8, 0)
 const T_BL     := Vector2i(4, 3)
 const T_BR     := Vector2i(8, 3)
-const T_FACE   := Vector2i(9, 4)   ## rock wall body
+const T_FACE   := Vector2i(9, 4)   ## rock wall body -- the ONLY plain rock
+## tile in the whole sheet, verified by hashing every tile in the atlas.
+## Two-wide blue alcoves. Both halves must be placed or you get a sliced grotto.
+const GROTTOS: Array[Vector2i] = [
+	Vector2i(12, 2), Vector2i(14, 2), Vector2i(16, 2), Vector2i(18, 2),
+]
+## Rock meeting the sea; the bump variants have a stack poking through the surf.
+const WATERLINE: Array[Vector2i] = [
+	Vector2i(1, 5), Vector2i(2, 5), Vector2i(4, 5),
+	Vector2i(5, 5), Vector2i(7, 5), Vector2i(8, 5),
+]
+const WATERLINE_BUMP: Array[Vector2i] = [Vector2i(3, 5), Vector2i(6, 5)]
 const T_WATER  := Vector2i(0, 0)   ## source 3, single sea tile
 ## Dry cave arch. The (13,x)..(16,x) variants have a waterline in them.
 const T_CAVE_TOP := Vector2i(12, 0)
@@ -88,7 +99,12 @@ const FENCE_R := Vector2i(2, 2)
 @export var level_width: int = 80
 @export var level_height: int = 26
 ## How many rows of rock face hang below the ledge before the sea.
-@export var cliff_depth: int = 2
+## Rock rows below the grass lip before the sea. At 2 this read as a kerb
+## rather than a sea cliff; the last row is always a waterline tile.
+@export var cliff_depth: int = 5
+## Bite alcoves out of the base of the mountain so it doesn't meet the ledge
+## along a ruler-straight line. Only ever carved upward.
+@export var carve_wall_alcoves: bool = true
 ## Ledge profile control points: x = column, y = first grass row,
 ## z = last grass row. Values are interpolated between consecutive points, so
 ## two points one column apart give a hard step (that is how the collapsed
@@ -157,6 +173,9 @@ var _bot: PackedInt32Array
 
 # --- profile ---------------------------------------------------------------
 
+var _features: Dictionary = {}
+
+
 func _resolve_profile() -> void:
 	_top = PackedInt32Array()
 	_bot = PackedInt32Array()
@@ -181,6 +200,72 @@ func _resolve_profile() -> void:
 		var lip := _bot[waterfall_column]
 		for x in range(waterfall_column, min(waterfall_column + 4, level_width)):
 			_bot[x] = lip
+	if carve_wall_alcoves:
+		_carve_alcoves()
+
+
+## Short bays bitten out of the base of the mountain wall. Never carved
+## downward, so the walkable ledge and the path can't be pinched.
+func _carve_alcoves() -> void:
+	var x := 3
+	while x < level_width - 4:
+		var run := 2 + int(_rnd(x, 122) * 4)
+		# The cave is carved at a fixed offset from _top[cave_column] and its
+		# entity sits at a hardcoded position, so that column must not move.
+		var hits_cave := x - 1 <= cave_column and cave_column <= x + run
+		if _rnd(x, 121) < 0.34 and not hits_cave:
+			var deep := 1 + (1 if _rnd(x, 123) < 0.35 else 0)
+			for c in range(x, min(level_width, x + run)):
+				_top[c] = max(2, _top[c] - deep)
+			x += run + 2
+		else:
+			x += 2
+
+
+## Rock rows below the lip for this column, jittered so the shoreline is not a
+## ruler line and always leaving a row for the waterline tile.
+func _drop_depth(x: int) -> int:
+	var col := x
+	if build_waterfall and x >= waterfall_column and x <= waterfall_column + 3:
+		col = waterfall_column
+	var d := cliff_depth
+	if _rnd(col, 55) > 0.74:
+		d += 1
+	elif _rnd(col, 56) > 0.80:
+		d -= 1
+	return maxi(2, mini(d, level_height - 1 - _bot[x]))
+
+
+func _pick(table: Array[Vector2i], x: int, y: int, salt: int) -> Vector2i:
+	return table[int(_rnd(x, y * 61 + salt) * table.size()) % table.size()]
+
+
+## Two-wide alcoves scattered through the mountain wall and the sea cliff.
+## There are deliberately no dark "cave" tiles here: the sheet has no
+## rock-above/opening-below tile, so a bare dark cell is just a black rectangle.
+func _build_features() -> void:
+	_features.clear()
+	for x in range(3, level_width - 6, 4):
+		if _top[x] < 3 or absi(x - cave_column) <= 2 or _rnd(x, 88) >= 0.42:
+			continue
+		var y := 1 + int(_rnd(x, 89) * (_top[x] - 2))
+		if y >= _top[x] or y >= _top[x + 1]:
+			continue
+		var left := GROTTOS[int(_rnd(x, 90) * GROTTOS.size()) % GROTTOS.size()]
+		_features[Vector2i(x, y)] = left
+		_features[Vector2i(x + 1, y)] = left + Vector2i(1, 0)
+	for x in range(2, level_width - 6, 7):
+		var d := _drop_depth(x)
+		if d < 3 or _rnd(x, 91) >= 0.30 or absi(x - waterfall_column) < 5:
+			continue
+		var y := _bot[x] + 2 + int(_rnd(x, 92) * maxi(1, d - 2))
+		if y >= _bot[x] + d or _bot[x + 1] != _bot[x]:
+			continue
+		if y >= _bot[x + 1] + _drop_depth(x + 1):
+			continue
+		var left2 := GROTTOS[int(_rnd(x, 93) * GROTTOS.size()) % GROTTOS.size()]
+		_features[Vector2i(x, y)] = left2
+		_features[Vector2i(x + 1, y)] = left2 + Vector2i(1, 0)
 
 
 func _is_grass(x: int, y: int) -> bool:
@@ -248,13 +333,24 @@ func _build() -> void:
 	_resolve_profile()
 	_clear()
 
+	_build_features()
 	for x in level_width:
 		for y in level_height:
 			water.set_cell(Vector2i(x, y), SRC_WATER, T_WATER)
 		for y in range(0, _top[x]):
-			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, T_FACE)
-		for y in range(_bot[x] + 1, min(_bot[x] + 1 + cliff_depth, level_height)):
-			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, T_FACE)
+			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, _features.get(Vector2i(x, y), T_FACE))
+		var d := _drop_depth(x)
+		for i in d:
+			var y := _bot[x] + 1 + i
+			if y >= level_height:
+				break
+			var tile: Vector2i
+			if i == d - 1:
+				var table := WATERLINE_BUMP if _rnd(x, 41) < 0.12 else WATERLINE
+				tile = _pick(table, x, 0, 5)
+			else:
+				tile = _features.get(Vector2i(x, y), T_FACE)
+			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, tile)
 		for y in range(_top[x], _bot[x] + 1):
 			ground.set_cell(Vector2i(x, y), SRC_CLIFF, _grass_tile(x, y))
 
@@ -338,12 +434,19 @@ func _build_waterfall(fall: TileMapLayer) -> Dictionary:
 	if fall == null or waterfall_column < 0 or waterfall_column >= level_width:
 		return cells
 	var y0 := _bot[waterfall_column]
+	# The stamp is 4 rows; a taller cliff needs its middle row repeated so the
+	# fall still lands in the sea instead of stopping partway down the rock.
+	var rows := _drop_depth(waterfall_column) + 1
+	var seq: Array[int] = [0, 1]
+	for _i in maxi(0, rows - 3):
+		seq.append(2)
+	seq.append(3)
 	for dx in 4:
-		for dy in 4:
+		for i in seq.size():
 			var x := waterfall_column + dx
-			var y := y0 + dy
+			var y := y0 + i
 			if x < level_width and y < level_height:
-				fall.set_cell(Vector2i(x, y), SRC_FALL, Vector2i(dx, dy))
+				fall.set_cell(Vector2i(x, y), SRC_FALL, Vector2i(dx, seq[i]))
 				cells[Vector2i(x, y)] = true
 	return cells
 
