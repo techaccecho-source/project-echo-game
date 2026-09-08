@@ -1,8 +1,9 @@
 [gd_scene format=4 uid="uid://d4i77i7kr7twl"]
 
 [ext_resource type="PackedScene" uid="uid://dqp5std4t6fek" path="res://world/base_grass_level_1.tscn" id="2_1i7os"]
+[ext_resource type="PackedScene" uid="uid://bey33j4ma35bh" path="res://world/blacksmith_front_yard.tscn" id="4_4054t"]
 [ext_resource type="PackedScene" uid="uid://bl8bydys1a8qm" path="res://base_terrain/scenes/river.tscn" id="9_druaq"]
-[ext_resource type="PackedScene" uid="uid://bgyve10sjdd61" path="res://base_terrain/scenes/level_1_forest.tscn" id="10_4054t"]
+[ext_resource type="PackedScene" path="res://base_terrain/scenes/level_1_forest.tscn" id="10_4054t"]
 [ext_resource type="TileSet" uid="uid://bu48edd5oif51" path="res://tilesets/rock_flower_tree_grass.tres" id="10_ccgqp"]
 [ext_resource type="PackedScene" uid="uid://5xvypv6jcbq3" path="res://character/npc_blacksmith.tscn" id="10_druaq"]
 [ext_resource type="PackedScene" uid="uid://ntcl7tkfgme1" path="res://base_terrain/scenes/water_border.tscn" id="10_hdkfl"]
@@ -10,17 +11,29 @@
 [ext_resource type="PackedScene" uid="uid://doa04urw7iidr" path="res://inventory/inv_ui.tscn" id="13_1i7os"]
 [ext_resource type="PackedScene" uid="uid://dfo2onkt5unk" path="res://structures/houses/blacksmith/workshop_shell.tscn" id="14_qu7vk"]
 [ext_resource type="PackedScene" uid="uid://wvbxyfgl33vp" path="res://character/player_josh.tscn" id="15_8cpu7"]
+[ext_resource type="PackedScene" path="res://world/game_level_2.tscn" id="16_h77br"]
 [ext_resource type="PackedScene" uid="uid://cjv2qoon2uq34" path="res://base_terrain/scenes/tree_border.tscn" id="17_esbob"]
 [ext_resource type="PackedScene" uid="uid://yayo4t5ledsq" path="res://objects/pine_tree_large.tscn" id="22_q8vt7"]
 [ext_resource type="PackedScene" uid="uid://c22k3vhlkopgk" path="res://structures/houses/blacksmith/workshop.tscn" id="24_6rc46"]
 [ext_resource type="PackedScene" uid="uid://ccxk7nsx3r1g3" path="res://objects/anvil_white_gray.tscn" id="30_65dot"]
+[ext_resource type="Script" path="res://world/game_world.gd" id="gw_script"]
+[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="portal_area"]
+[ext_resource type="PackedScene" uid="uid://c8q2fr5t7wjm4" path="res://interaction/fishing_spot/fishing_spot.tscn" id="40_fshsp"]
+[ext_resource type="Script" uid="uid://by0khe2xbsbyd" path="res://inventory/inventory_item.gd" id="41_invitem"]
+[ext_resource type="Resource" uid="uid://cq7fj2h8b3xk1" path="res://inventory/items/fish_carp.tres" id="42_carp"]
+[ext_resource type="Resource" uid="uid://dqk3xyram7wl2" path="res://inventory/items/fish_perch.tres" id="43_perch"]
+[ext_resource type="Resource" uid="uid://bx8h5n2p4qty3" path="res://inventory/items/fish_sunfish.tres" id="44_sunfish"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_portal"]
+size = Vector2(28, 18)
 
 [node name="GameWorld" type="Node2D" unique_id=906258989]
 y_sort_enabled = true
+script = ExtResource("gw_script")
 
 [node name="AnvilWhiteGray" parent="." unique_id=572894837 instance=ExtResource("30_65dot")]
 z_index = 5
-position = Vector2(-230, -782)
+position = Vector2(-225, -781)
 frame_progress = 0.35702416
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1409798256]
@@ -36,19 +49,23 @@ y_sort_enabled = true
 z_index = 5
 position = Vector2(-452, -865)
 
+[node name="BlacksmithFrontYard" parent="GameLevel1" unique_id=1582565861 instance=ExtResource("4_4054t")]
+position = Vector2(-520, -736)
+
 [node name="GroundItems0" type="TileMapLayer" parent="GameLevel1" unique_id=1743550438]
-tile_map_data = PackedByteArray("AAD0/8z/AAANAAIAAAD0/83/AAANAAMAAAD1/8z/AAAOAAIAAAD1/83/AAAOAAMAAADy/8z/AAANAAIAAADy/83/AAANAAMAAADz/8z/AAAOAAIAAADz/83/AAAOAAMAAADs/8v/AAADAAEAAADs/8z/AAAPAAMAAADx/8z/AAADAAEAAAD4/8//AwAFAAEAAAD3/8//AwAFAAEAAAD2/8//AwALAAEAAAD5/8v/AwAFAAEAAADu/83/AwAFAAEAAADt/83/AwALAAEAAADs/8f/AwAFAAEAAADv/8b/AwAFAAEAAAD0/8b/AwAFAAEAAAD1/8b/AwAFAAEAAAD4/8n/AwAFAAEAAAA=")
+tile_map_data = PackedByteArray("AAD0/8z/AAANAAIAAAD0/83/AAANAAMAAAD1/8z/AAAOAAIAAAD1/83/AAAOAAMAAADy/8z/AAANAAIAAADy/83/AAANAAMAAADz/8z/AAAOAAIAAADz/83/AAAOAAMAAADs/8v/AAADAAEAAADs/8z/AAAPAAMAAADx/8z/AAADAAEAAAD5/8v/AwAFAAEAAADu/83/AwAFAAEAAADt/83/AwALAAEAAADs/8f/AwAFAAEAAADv/8b/AwAFAAEAAAD0/8b/AwAFAAEAAAD1/8b/AwAFAAEAAAD4/8n/AwAFAAEAAAD3/9H/AwALAAEAAAD4/9H/AwAFAAEAAAD5/9H/AwAFAAEAAAA=")
 tile_set = ExtResource("10_ccgqp")
 
 [node name="GroundItems1" type="TileMapLayer" parent="GameLevel1" unique_id=1918723622]
-tile_map_data = PackedByteArray("AAD1/8z/AwAKAAEAAADw/8z/AwAKAAEAABD4/8n/AwAKAAEAABD3/8//AQACAAAAAAD4/8//AQADAAAAAAD4/8v/AQACAAAAAAD5/8v/AQADAAAAAADt/83/AQACAAAAAADu/83/AQADAAAAAAD0/8b/AQACAAAAAAD1/8b/AQADAAAAAADz/83/AQAAAAAAAADs/8f/AQAAAAAAAADt/8f/AQABAAAAAADs/8b/AAADAAEAAADt/8b/AAADAAEAAADv/8X/AAADAAEAAADw/8X/AAADAAEAAADx/8X/AAADAAEAAADy/8X/AAADAAEAAADz/8X/AAADAAEAAAD0/8X/AAADAAEAAAD1/8X/AAADAAEAAAD2/8X/AAADAAEAAAD3/8X/AAADAAEAAAA=")
+tile_map_data = PackedByteArray("AAD1/8z/AwAKAAEAAADw/8z/AwAKAAEAABD4/8n/AwAKAAEAABD4/8v/AQACAAAAAAD5/8v/AQADAAAAAADt/83/AQACAAAAAADu/83/AQADAAAAAAD0/8b/AQACAAAAAAD1/8b/AQADAAAAAADz/83/AQAAAAAAAADs/8f/AQAAAAAAAADt/8f/AQABAAAAAADs/8b/AAADAAEAAADt/8b/AAADAAEAAADv/8X/AAADAAEAAADw/8X/AAADAAEAAADx/8X/AAADAAEAAADy/8X/AAADAAEAAADz/8X/AAADAAEAAAD0/8X/AAADAAEAAAD1/8X/AAADAAEAAAD2/8X/AAADAAEAAAD3/8X/AAADAAEAAAD4/9H/AQACAAAAAAD5/9H/AQADAAAAAAA=")
 tile_set = ExtResource("10_ccgqp")
 
 [node name="GroundItems2" type="TileMapLayer" parent="GameLevel1" unique_id=1552360505]
-tile_map_data = PackedByteArray("AAD0/83/AQABAAAAAADz/83/AAADAAEAAADt/8f/AAADAAEAAADt/8X/AAALAAIAAADt/8b/AAALAAMAAAD2/8//AAANAAIAAAD2/9D/AAANAAMAAAD3/8//AAAOAAIAAAD3/9D/AAAOAAMAAAD4/8//AwALAAEAAAD1/8X/AwALAAEAAADu/8X/AwALAAAAAAD1/8b/AwALAAAAAAD2/8X/AwALAAAAAAA=")
+tile_map_data = PackedByteArray("AAD0/83/AQABAAAAAADz/83/AAADAAEAAADt/8f/AAADAAEAAADt/8X/AAALAAIAAADt/8b/AAALAAMAAAD1/8X/AwALAAEAAADu/8X/AwALAAAAAAD1/8b/AwALAAAAAAD2/8X/AwALAAAAAAD3/9H/AAANAAIAAAD3/9L/AAANAAMAAAD4/9H/AAAOAAIAAAD4/9L/AAAOAAMAAAD5/9H/AwALAAEAAAA=")
 tile_set = ExtResource("10_ccgqp")
 
 [node name="WorkshopGround" parent="GameLevel1" unique_id=691895347 instance=ExtResource("24_6rc46")]
+z_index = 1
 position = Vector2(-228, -874)
 
 [node name="NpcBlacksmith" parent="GameLevel1" unique_id=1996695969 instance=ExtResource("10_druaq")]
@@ -61,6 +78,8 @@ position = Vector2(-587, -456)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameLevel1/PlayerJosh" unique_id=493444989]
 remote_path = NodePath("../../../Camera2D")
+update_rotation = false
+update_scale = false
 
 [node name="WorkshopShell" parent="GameLevel1" unique_id=2097110525 instance=ExtResource("14_qu7vk")]
 z_index = 5
@@ -70,9 +89,26 @@ position = Vector2(-204, -851)
 
 [node name="Forest" parent="GameLevel1" unique_id=29376356 instance=ExtResource("10_4054t")]
 
-[node name="WaterBorder" parent="." unique_id=1357689819 instance=ExtResource("10_hdkfl")]
+[node name="TreeBorder" parent="GameLevel1" unique_id=1449392446 instance=ExtResource("17_esbob")]
+z_index = 5
 
-[node name="TreeBorder" parent="." unique_id=1449392446 instance=ExtResource("17_esbob")]
+[node name="FishingSpotNorth" parent="GameLevel1" unique_id=1595381012 instance=ExtResource("40_fshsp")]
+position = Vector2(-736, -778)
+fish_pool = Array[ExtResource("41_invitem")]([ExtResource("42_carp"), ExtResource("43_perch"), ExtResource("44_sunfish")])
+
+[node name="FishingSpotBend" parent="GameLevel1" unique_id=1198392607 instance=ExtResource("40_fshsp")]
+position = Vector2(-713, -501)
+fish_pool = Array[ExtResource("41_invitem")]([ExtResource("42_carp"), ExtResource("43_perch"), ExtResource("44_sunfish")])
+
+[node name="FishingSpotWest" parent="GameLevel1" unique_id=1895247757 instance=ExtResource("40_fshsp")]
+position = Vector2(-839, -320)
+fish_pool = Array[ExtResource("41_invitem")]([ExtResource("42_carp"), ExtResource("43_perch"), ExtResource("44_sunfish")])
+
+[node name="FishingSpotEast" parent="GameLevel1" unique_id=84056509 instance=ExtResource("40_fshsp")]
+position = Vector2(-835, -782)
+fish_pool = Array[ExtResource("41_invitem")]([ExtResource("42_carp"), ExtResource("43_perch"), ExtResource("44_sunfish")])
+
+[node name="WaterBorder" parent="." unique_id=1357689819 instance=ExtResource("10_hdkfl")]
 
 [node name="PineTreeLarge" parent="." unique_id=1488782070 instance=ExtResource("22_q8vt7")]
 z_index = 5
@@ -105,8 +141,25 @@ position = Vector2(-96, -904)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1780773830]
 
 [node name="Inv_UI" parent="CanvasLayer" unique_id=228588046 instance=ExtResource("13_1i7os")]
-offset_left = 526.99994
-offset_top = 166.99998
-offset_right = 623.99994
-offset_bottom = 240.99998
+offset_left = 527.0
+offset_top = 167.0
+offset_right = 624.0
+offset_bottom = 241.0
 scale = Vector2(10, 10)
+
+[node name="Portal" parent="." unique_id=1866590606 instance=ExtResource("portal_area")]
+position = Vector2(-1036, -812)
+action_name = "travel"
+
+[node name="Pad" type="Polygon2D" parent="Portal" unique_id=178969412]
+color = Color(0.3, 0.75, 1, 0.55)
+polygon = PackedVector2Array(-14, 0, -7, -9, 7, -9, 14, 0, 7, 9, -7, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" unique_id=102852437]
+shape = SubResource("RectangleShape2D_portal")
+
+[node name="ReturnSpawn" type="Marker2D" parent="." unique_id=729082798 groups=["player_spawn"]]
+position = Vector2(-1000, -812)
+
+[node name="GameLevel2" parent="." unique_id=773361100 instance=ExtResource("16_h77br")]
+position = Vector2(401, -512)

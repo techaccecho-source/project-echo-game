@@ -926,7 +926,6 @@ y_sort_enabled = true
 position = Vector2(-207, -118)
 
 [node name="Bushes" type="Node2D" parent="." unique_id=1550564266]
-z_index = 5
 y_sort_enabled = true
 
 [node name="Bush" parent="Bushes" unique_id=1371277669 instance=ExtResource("4_v4km1")]

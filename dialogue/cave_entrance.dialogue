@@ -1,0 +1,18 @@
+~ rubble
+do disable_movement()
+The rubble is in the way. Whatever is behind it, it stays behind it for now.
+do enable_movement()
+=> END
+
+~ sealed
+do disable_movement()
+Cold air moves against your face. The passage slopes down, further than it has any right to.
+Whatever is waiting down there isn't ready for you yet.
+do enable_movement()
+=> END
+
+~ enter
+do disable_movement()
+The dark resolves into a corridor. You go down.
+do enable_movement()
+=> END

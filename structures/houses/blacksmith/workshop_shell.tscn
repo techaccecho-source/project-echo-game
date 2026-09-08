@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://dfo2onkt5unk"]
+[gd_scene format=4 uid="uid://dfo2onkt5unk"]
 
 [ext_resource type="Texture2D" uid="uid://mh6ly8uo2gbu" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Exterior/Houses/NPCS houses/Blacksmith.png" id="1_8jdbb"]
+[ext_resource type="TileSet" uid="uid://sswxdtsu3k4r" path="res://tilesets/shadow.tres" id="2_ts3pn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts3pn"]
 size = Vector2(27, 13)
@@ -54,3 +55,7 @@ shape = SubResource("RectangleShape2D_r7875")
 [node name="PillarR" type="CollisionShape2D" parent="StaticBody2D" unique_id=1151656077]
 position = Vector2(68.5, -5.5)
 shape = SubResource("RectangleShape2D_r7875")
+
+[node name="Shadow" type="TileMapLayer" parent="." unique_id=1971039305]
+tile_map_data = PackedByteArray("AAD8/wAAAAAIAAMAAAD9/wAAAAAJAAMAAAD+/wAAAAAJAAMAAAD//wAAAAAJAAMAAAAAAAAAAAAJAAMAAAABAAAAAAAJAAMAAAACAAAAAAAJAAMAAAADAAAAAAAJAAMAAAAEAAAAAAALAAMAAAAEAP//AAALAAAAAAADAP//AAAKAAAAAAACAP//AAAKAAAAAAABAP//AAAKAAAAAAAAAP//AAAKAAAAAAD/////AAAKAAAAAAD+////AAAKAAAAAAD9////AAAKAAAAAAD8////AAAIAAAAAAA=")
+tile_set = ExtResource("2_ts3pn")

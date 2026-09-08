@@ -1,5 +1,12 @@
 extends CharacterBody2D
 
+## Emitted the moment the player goes under, before the level reloads.
+signal drowned
+
+const SPLASH := preload("res://objects/water_splash.tscn")
+const FALL_TIME := 0.6
+const SINK_TIME := 0.5
+
 @export var inv: Inv
 @export var walk_speed: float = 100
 @export var run_speed: float = 200
@@ -11,6 +18,8 @@ extends CharacterBody2D
 # Track last direction so idle plays the correct facing animation
 var last_direction: Vector2 = Vector2(0, 1) # default face down
 var movement_enabled: bool = true
+
+var is_dying: bool = false
 var is_chopping: bool = true
 
 func _ready() -> void:
@@ -90,7 +99,7 @@ func play_weapon_logic():
 
 func disable_movement():
 	movement_enabled = false
-	
+
 	update_animation(Vector2.ZERO, false)  # snap to idle animation immediately
 
 func enable_movement():
@@ -100,3 +109,93 @@ func enable_movement():
 # Our player has access to the inventory. This function puts an item into the inventory by calling inventory.insert
 func collect(item):
 	inv.insert(item)
+
+
+# Falling
+# Walking off an unrailed ledge drops the player into the water below. The
+# player node belongs to the persistent shell rather than to the level, so it
+# survives the reload in the middle of this and can put itself back together
+# afterwards.
+func fall_and_drown(water_y: float, respawn_scene: String, spawn: String) -> void:
+	if is_dying:
+		return
+	is_dying = true
+	movement_enabled = false
+	velocity = Vector2.ZERO
+	$CollisionShape2D.set_deferred("disabled", true)
+	InteractionManager.can_interact = false
+	update_animation(Vector2.ZERO, false)
+
+	# The drop: accelerating, shrinking with distance, tipping as it goes.
+	var fall = create_tween()
+	fall.set_parallel()
+	fall.tween_property(self, "global_position:y", water_y, FALL_TIME) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	fall.tween_property(self, "scale", Vector2(0.55, 0.55), FALL_TIME) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	fall.tween_property(self, "rotation_degrees", 22.0, FALL_TIME) \
+		.set_trans(Tween.TRANS_SINE)
+	await fall.finished
+
+	var splash = SPLASH.instantiate()
+	get_parent().add_child(splash)
+	splash.global_position = Vector2(global_position.x, water_y)
+
+	# Under.
+	var sink = create_tween()
+	sink.set_parallel()
+	sink.tween_property(self, "global_position:y", water_y + 9.0, SINK_TIME)
+	sink.tween_property(self, "scale", Vector2(0.22, 0.22), SINK_TIME)
+	sink.tween_property(self, "modulate:a", 0.0, SINK_TIME)
+	await sink.finished
+
+	drowned.emit()
+
+	if SceneManager.level_holder == null or respawn_scene == "":
+		# Standalone scene (no shell): nothing persists, so a plain reload is
+		# both the respawn and the cleanup — and it takes this node with it.
+		get_tree().reload_current_scene()
+		return
+
+	await SceneManager.change_level(respawn_scene, spawn, _revive)
+	# Cleared last, not in _revive: a fall zone re-instanced by the reload spends
+	# a frame settling, and this flag is what stops it firing a second time.
+	await get_tree().physics_frame
+	is_dying = false
+
+
+## Undo everything the death animation did. Called while the screen is black.
+func _revive() -> void:
+	scale = Vector2.ONE
+	rotation_degrees = 0.0
+	modulate.a = 1.0
+	velocity = Vector2.ZERO
+	last_direction = Vector2(0, 1)
+	$CollisionShape2D.set_deferred("disabled", false)
+	InteractionManager.can_interact = true
+	movement_enabled = true
+	update_animation(Vector2.ZERO, false)
+
+# Fishing
+# Called by a FishingSpot when the player interacts with it. Plays the cast/wait/catch
+# sequence facing the spot, then drops a random fish from the pool into the inventory.
+func catch_fish(fish_pool: Array, face_direction: Vector2 = Vector2.ZERO, min_wait: float = 0.8, max_wait: float = 1.8) -> void:
+	disable_movement()
+	if face_direction != Vector2.ZERO:
+		last_direction = face_direction
+	var suffix = get_direction_suffix(last_direction)
+
+	animated_sprite.play("fish_cast_" + suffix)
+	await animated_sprite.animation_finished
+
+	animated_sprite.play("fish_wait_" + suffix)
+	await get_tree().create_timer(randf_range(min_wait, max_wait)).timeout
+
+	var caught_bite = await FishingMinigame.play_sequence(3)
+
+	if caught_bite and fish_pool.size() > 0:
+		animated_sprite.play("fish_catch_" + suffix)
+		await animated_sprite.animation_finished
+		collect(fish_pool[randi() % fish_pool.size()])
+
+	enable_movement()
