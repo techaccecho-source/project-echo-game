@@ -113,10 +113,11 @@ const FENCE_R := Vector2i(2, 2)
 	Vector3i(0, 8, 15),
 	Vector3i(10, 8, 14),
 	Vector3i(18, 8, 13),
-	Vector3i(24, 8, 12),
-	Vector3i(25, 8, 9),    # abrupt: the span fell away
-	Vector3i(33, 8, 9),    # the squeeze
-	Vector3i(34, 7, 12),   # abrupt: ledge resumes
+	Vector3i(23, 8, 13),
+	Vector3i(24, 9, 11),   ## pinches to three rows: the crossing, no margin
+	Vector3i(32, 9, 11),
+	Vector3i(33, 8, 13),   ## opens out again
+	Vector3i(39, 8, 13),
 	Vector3i(42, 7, 16),
 	Vector3i(50, 7, 17),   # camp shelf, widest point
 	Vector3i(58, 7, 16),
@@ -150,13 +151,31 @@ const FENCE_R := Vector2i(2, 2)
 ## in the scene under "Dressing"; the builder only keeps their ground clear.
 @export var keep_clear: Array[Vector2i] = [
 	Vector2i(52, 10), Vector2i(49, 11), Vector2i(48, 10), Vector2i(54, 11),
-	Vector2i(23, 11), Vector2i(24, 12),
+	Vector2i(23, 11), Vector2i(23, 12),
 	Vector2i(22, 11),  ## Cedric's page at the break
 ]
 
 ## Columns (inclusive) where the drop is left with no collision, so the player
 ## can walk off the unfenced squeeze. Set x > y to close it again.
-@export var fall_gap: Vector2i = Vector2i(25, 33)
+## Columns where the drop gets no collision, so the seaward side of the pinch
+## is open air and a step off the bottom lane is a fall. Pair with a FallZone in
+## the scene covering the same span. Normally the same as wide_path_columns.
+@export var fall_gap: Vector2i = Vector2i(24, 32)
+
+@export_group("Crossing")
+## Columns (inclusive) carrying the crumbling slabs. Terrain here is ordinary
+## cliff path -- ground, grass and dirt are all drawn as normal, and the sea
+## stays at the foot of the cliff. Must match the CrumbleBridge node's grid.
+@export var crossing_columns: Vector2i = Vector2i(26, 30)
+## Rows (inclusive) the three lanes occupy.
+@export var crossing_rows: Vector2i = Vector2i(9, 11)
+## Columns where the path runs three rows wide, so the approach and the landing
+## both meet all three lanes squarely. Normally the crossing plus a margin.
+@export var wide_path_columns: Vector2i = Vector2i(24, 32)
+
+
+func _is_wide_path(x: int) -> bool:
+	return x >= wide_path_columns.x and x <= wide_path_columns.y
 
 @export_group("Props")
 @export var place_props: bool = true
@@ -357,6 +376,10 @@ func _build() -> void:
 	if build_cave:
 		_build_cave(cliffs)
 	var reserved := _build_path(_layer("Path"))
+	# Keep scatter and fencing off the slabs.
+	for cx in range(crossing_columns.x - 1, crossing_columns.y + 2):
+		for cy in range(crossing_rows.x - 1, crossing_rows.y + 2):
+			reserved[Vector2i(cx, cy)] = true
 	if build_waterfall:
 		for k in _build_waterfall(_layer("Waterfall")):
 			reserved[k] = true
@@ -410,6 +433,13 @@ func _build_path(path: TileMapLayer) -> Dictionary:
 			continue
 		var lo: int = _top[x]
 		var hi: int = max(_top[x], _bot[x] - 1)
+		if _is_wide_path(x):
+			# All three rows across the crossing, lip included: no grass verge
+			# is wanted here, the path should run right to the drop.
+			for wy in range(crossing_rows.x, crossing_rows.y + 1):
+				if wy >= _top[x] and wy <= _bot[x]:
+					cells[Vector2i(x, wy)] = true
+			continue
 		# Nudge the centre onto the ledge rather than dropping the column, so
 		# the path never breaks where the ledge narrows.
 		var cy: int = clampi(int(centre[x]), lo, hi)
@@ -520,14 +550,14 @@ func _build_props(parent: Node) -> void:
 	var owner_node := get_tree().edited_scene_root if Engine.is_editor_hint() else parent
 	var i := 0
 	for x in range(2, level_width - 2, max(1, pine_spacing)):
-		if x >= pine_skip_from and x <= pine_skip_to:
+		if _is_wide_path(x) or (x >= pine_skip_from and x <= pine_skip_to):
 			continue
 		var jitter := int(_rnd(x, 5) * 9) - 4
 		i = _add_pine(props, owner_node, i,
 			Vector2(x * 16 + 8 + jitter, _top[x] * 16 + 12 + int(_rnd(x, 11) * 6)))
 	# a few standing out on the ledge itself
 	for x in range(6, level_width - 6, 11):
-		if x >= pine_skip_from and x <= pine_skip_to:
+		if _is_wide_path(x) or (x >= pine_skip_from and x <= pine_skip_to):
 			continue
 		if x >= waterfall_column - 1 and x <= waterfall_column + 4:
 			continue
@@ -658,6 +688,8 @@ func _build_fences(fences: TileMapLayer, reserved: Dictionary, used: Dictionary)
 func _fence_ok(c: int, reserved: Dictionary) -> bool:
 	if c < 1 or c >= level_width - 1:
 		return false
+	if _is_wide_path(c) or _is_wide_path(c - 1) or _is_wide_path(c + 1):
+		return false   ## the crossing is meant to be unguarded
 	if _bot[c] - _top[c] < 3:
 		return false
 	if reserved.has(Vector2i(c, _bot[c])):

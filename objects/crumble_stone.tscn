@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dcrumb1est0ne"]
+
+[ext_resource type="Script" path="res://objects/crumble_stone.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bjt3hqaem6h1l" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Exterior/Road.png" id="1_road"]
+[ext_resource type="Texture2D" uid="uid://cgt67i41q1bhq" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tileset/Tileset Grass Cliff Tileset Spring.png" id="2_cliff"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hole"]
+atlas = ExtResource("2_cliff")
+region = Rect2(192, 16, 16, 16)
+
+[node name="CrumbleStone" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Hole" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Slab" type="Sprite2D" parent="."]
+texture = ExtResource("1_road")
+region_enabled = true
+region_rect = Rect2(0, 112, 16, 16)

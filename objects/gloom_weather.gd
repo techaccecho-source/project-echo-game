@@ -25,7 +25,12 @@ class_name GloomWeather
 ## Which way the wind pushes. Length is ignored; only the direction is used.
 @export var wind: Vector2 = Vector2(-1.0, 0.22)
 @export_range(0, 200) var streak_count: int = 52
-@export_range(0, 60) var mist_count: int = 14
+## Thin mist drifting over the whole level.
+@export_range(0, 120) var mist_count: int = 34
+## Extra dense banks, in level coordinates — the cliff faces and the tree line,
+## where mist actually collects. Each rect gets its own slower, fatter emitter.
+@export var mist_bands: Array[Rect2] = []
+@export_range(0, 120) var band_mist_count: int = 26
 ## Turn the tint off but keep the wind, e.g. for a level that sets its own mood.
 @export var tint_world: bool = true
 
@@ -43,6 +48,8 @@ func _ready() -> void:
 	add_child(_streaks)
 	_mist = _make_mist()
 	add_child(_mist)
+	for band in mist_bands:
+		add_child(_make_band(band))
 
 
 ## Thin, bright, mostly transparent — a gust you notice at the edge of vision.
@@ -61,15 +68,40 @@ func _make_streaks() -> CPUParticles2D:
 
 ## Big, slow, barely there. Sits under the wind but over the terrain.
 func _make_mist() -> CPUParticles2D:
-	var p := _base_emitter(mist_count, 11.0)
+	var p := _base_emitter(mist_count, 13.0)
 	p.z_index = 15
 	p.texture = _mist_texture()
-	p.initial_velocity_min = 10.0
-	p.initial_velocity_max = 26.0
-	p.spread = 18.0
-	p.scale_amount_min = 1.6
-	p.scale_amount_max = 4.2
-	p.color = Color(0.80, 0.85, 0.92, 0.085)
+	p.initial_velocity_min = 8.0
+	p.initial_velocity_max = 24.0
+	p.spread = 22.0
+	p.scale_amount_min = 2.0
+	p.scale_amount_max = 5.5
+	p.color = Color(0.82, 0.87, 0.94, 0.14)
+	return p
+
+
+## A bank clinging to one stretch — the cliff face, or the treeline at the foot
+## of the wall. Slower, fatter and thicker than the drifting mist, and it fades
+## in and out rather than streaming past.
+func _make_band(band: Rect2) -> CPUParticles2D:
+	var p := _base_emitter(band_mist_count, 16.0)
+	p.z_index = 14
+	p.texture = _mist_texture()
+	p.position = band.position + band.size * 0.5
+	p.emission_rect_extents = band.size * 0.5
+	p.initial_velocity_min = 4.0
+	p.initial_velocity_max = 14.0
+	p.spread = 10.0
+	p.scale_amount_min = 3.0
+	p.scale_amount_max = 8.0
+	p.color = Color(0.84, 0.89, 0.95, 0.19)
+	# Swell and thin out, so the bank breathes instead of sliding.
+	var ramp := Gradient.new()
+	ramp.set_color(0, Color(1, 1, 1, 0))
+	ramp.set_color(1, Color(1, 1, 1, 0))
+	ramp.add_point(0.35, Color(1, 1, 1, 1))
+	ramp.add_point(0.7, Color(1, 1, 1, 0.9))
+	p.color_ramp = ramp
 	return p
 
 
