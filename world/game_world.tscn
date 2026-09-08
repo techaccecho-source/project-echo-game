@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dqp5std4t6fek" path="res://world/base_grass_level_1.tscn" id="2_1i7os"]
 [ext_resource type="PackedScene" uid="uid://bl8bydys1a8qm" path="res://base_terrain/scenes/river.tscn" id="9_druaq"]
+[ext_resource type="PackedScene" uid="uid://bgyve10sjdd61" path="res://base_terrain/scenes/level_1_forest.tscn" id="10_4054t"]
 [ext_resource type="TileSet" uid="uid://bu48edd5oif51" path="res://tilesets/rock_flower_tree_grass.tres" id="10_ccgqp"]
 [ext_resource type="PackedScene" uid="uid://5xvypv6jcbq3" path="res://character/npc_blacksmith.tscn" id="10_druaq"]
 [ext_resource type="PackedScene" uid="uid://ntcl7tkfgme1" path="res://base_terrain/scenes/water_border.tscn" id="10_hdkfl"]
@@ -30,7 +31,7 @@ position = Vector2(-230, -782)
 frame_progress = 0.35702416
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1409798256]
-position = Vector2(-1036, -871)
+position = Vector2(-587, -456)
 zoom = Vector2(3, 3)
 
 [node name="GameLevel1" type="Node2D" parent="." unique_id=154145874]
@@ -63,7 +64,7 @@ position = Vector2(-392, -702)
 
 [node name="PlayerJosh" parent="GameLevel1" unique_id=1395837091 instance=ExtResource("15_8cpu7")]
 z_index = 5
-position = Vector2(-1036, -871)
+position = Vector2(-587, -456)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameLevel1/PlayerJosh" unique_id=493444989]
 remote_path = NodePath("../../../Camera2D")
@@ -75,6 +76,8 @@ z_index = 5
 position = Vector2(-204, -851)
 
 [node name="River" parent="GameLevel1" unique_id=347155084 instance=ExtResource("9_druaq")]
+
+[node name="Forest" parent="GameLevel1" unique_id=29376356 instance=ExtResource("10_4054t")]
 
 [node name="WaterBorder" parent="." unique_id=1357689819 instance=ExtResource("10_hdkfl")]
 

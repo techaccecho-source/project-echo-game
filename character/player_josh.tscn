@@ -4,7 +4,81 @@
 [ext_resource type="Texture2D" uid="uid://u6e65mvu1k6n" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Character and Portrait/Character/Pre-made/Josh/Idle.png" id="1_sj6nb"]
 [ext_resource type="Resource" uid="uid://dd653a22271cg" path="res://inventory/player_inv.tres" id="2_p735x"]
 [ext_resource type="Texture2D" uid="uid://cyk86p7ch4w21" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Character and Portrait/Character/Pre-made/Josh/Walk.png" id="3_3jgtt"]
+[ext_resource type="Texture2D" uid="uid://n82boka05fhd" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Character and Portrait/Character/Pre-made/Josh/Axe.png" id="3_7br5u"]
 [ext_resource type="Texture2D" uid="uid://b57o8ecif1pg3" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Character and Portrait/Character/Pre-made/Josh/Run.png" id="4_0mckw"]
+[ext_resource type="PackedScene" uid="uid://crobekel8noja" path="res://components/hit_component.tscn" id="7_aqeyu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts7kp"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hjwi"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih1xw"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fnpi"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fjr0"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbbwv"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcs2p"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_max3f"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_em05t"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptnfx"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uild6"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88n67"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0yct"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jaoco"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pkn0"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6d572"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b608f"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpmua"]
+atlas = ExtResource("3_7br5u")
+region = Rect2(160, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0mckw"]
 atlas = ExtResource("1_sj6nb")
@@ -226,6 +300,75 @@ region = Rect2(160, 32, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ts7kp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hjwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih1xw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fnpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fjr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbbwv")
+}],
+"loop": false,
+"name": &"axe_swing_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcs2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_max3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_em05t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptnfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uild6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88n67")
+}],
+"loop": false,
+"name": &"axe_swing_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0yct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jaoco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pkn0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6d572")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b608f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpmua")
+}],
+"loop": false,
+"name": &"axe_swing_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0mckw")
 }, {
 "duration": 1.0,
@@ -435,13 +578,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sj6nb"]
 size = Vector2(9, 10)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_cc6hj"]
+radius = 4.1231055
+
 [node name="PlayerJosh" type="CharacterBody2D" unique_id=1395837091 groups=["player"]]
 script = ExtResource("1_1n21y")
 inv = ExtResource("2_p735x")
 
 [node name="Movement" type="AnimatedSprite2D" parent="." unique_id=1394448707]
 sprite_frames = SubResource("SpriteFrames_ts7kp")
-animation = &"idle_up"
+animation = &"axe_swing_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=574768998]
 position = Vector2(0.5, 5)
@@ -449,3 +595,9 @@ shape = SubResource("RectangleShape2D_sj6nb")
 
 [node name="BalloonAnchor2D" type="Node2D" parent="." unique_id=414505729]
 position = Vector2(0, -18)
+
+[node name="HitComponent" parent="." unique_id=1488871277 instance=ExtResource("7_aqeyu")]
+
+[node name="HitComponentCollisionShape2D" type="CollisionShape2D" parent="HitComponent" unique_id=1635599541]
+shape = SubResource("CircleShape2D_cc6hj")
+debug_color = Color(0.8599115, 0.2353856, 0.69096845, 0.41960785)

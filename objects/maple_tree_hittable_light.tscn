@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://c47vpfnpe1k1i"]
+
+[ext_resource type="Texture2D" uid="uid://cyr3hbhw5wa1q" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tree/Common/Effects/FX Effects Dark Forest leafs 2.png" id="1_epkks"]
+[ext_resource type="Texture2D" uid="uid://c8ykgeghdacey" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tree/Common/Shadow/Maple Tree Animation.png" id="2_62wib"]
+[ext_resource type="Script" uid="uid://b0u18tvdf240j" path="res://objects/maple_tree_hittable_light.gd" id="3_28dd7"]
+[ext_resource type="PackedScene" uid="uid://bwscujgphetvn" path="res://components/hurt_component.tscn" id="4_73c18"]
+[ext_resource type="PackedScene" uid="uid://d16se0xbu72m2" path="res://components/damage_component.tscn" id="5_4wtfe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28dd7"]
+atlas = ExtResource("1_epkks")
+region = Rect2(0, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73c18"]
+atlas = ExtResource("1_epkks")
+region = Rect2(48, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wtfe"]
+atlas = ExtResource("2_62wib")
+region = Rect2(0, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qgdq"]
+atlas = ExtResource("2_62wib")
+region = Rect2(32, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qalj"]
+atlas = ExtResource("2_62wib")
+region = Rect2(64, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w0uh"]
+atlas = ExtResource("2_62wib")
+region = Rect2(96, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qessd"]
+atlas = ExtResource("2_62wib")
+region = Rect2(0, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wgjd"]
+atlas = ExtResource("2_62wib")
+region = Rect2(32, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6fsg"]
+atlas = ExtResource("2_62wib")
+region = Rect2(32, 240, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrwrk"]
+atlas = ExtResource("2_62wib")
+region = Rect2(64, 240, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bib2c"]
+atlas = ExtResource("2_62wib")
+region = Rect2(96, 240, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my47a"]
+atlas = ExtResource("2_62wib")
+region = Rect2(0, 240, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qessd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28dd7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73c18")
+}],
+"loop": true,
+"name": &"natural_leaves_fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.5,
+"texture": SubResource("AtlasTexture_4wtfe")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_6qgdq")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_8qalj")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_2w0uh")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_4wtfe")
+}],
+"loop": false,
+"name": &"shake",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.5,
+"texture": SubResource("AtlasTexture_qessd")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_7wgjd")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_i6fsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrwrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bib2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my47a")
+}],
+"loop": false,
+"name": &"trunk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wgjd"]
+size = Vector2(9, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qgdq"]
+size = Vector2(10, 14)
+
+[node name="TreeHittable" type="AnimatedSprite2D" unique_id=106629565]
+z_index = 5
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_qessd")
+animation = &"trunk"
+offset = Vector2(0, -11)
+script = ExtResource("3_28dd7")
+
+[node name="TreeBody" type="StaticBody2D" parent="." unique_id=450878321]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="TreeBody" unique_id=1290334748]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_7wgjd")
+
+[node name="HurtComponent" parent="." unique_id=862619382 instance=ExtResource("4_73c18")]
+
+[node name="HurtComponentCollisionShape2D" type="CollisionShape2D" parent="HurtComponent" unique_id=525579675]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_6qgdq")
+debug_color = Color(0.8427732, 0.24108443, 0.7361931, 0.41960785)
+
+[node name="DamageComponent" parent="." unique_id=1266352200 instance=ExtResource("5_4wtfe")]
+max_damage = 3

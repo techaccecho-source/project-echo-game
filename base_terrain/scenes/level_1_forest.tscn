@@ -1,0 +1,1010 @@
+[gd_scene format=4 uid="uid://bgyve10sjdd61"]
+
+[ext_resource type="PackedScene" uid="uid://c47vpfnpe1k1i" path="res://objects/maple_tree_hittable_light.tscn" id="1_36ubq"]
+[ext_resource type="PackedScene" uid="uid://dugw7qjqmfrdc" path="res://objects/mahogany_tree_unhittable_dark.tscn" id="2_gphni"]
+[ext_resource type="Texture2D" uid="uid://cyr3hbhw5wa1q" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tree/Common/Effects/FX Effects Dark Forest leafs 2.png" id="2_oorsj"]
+[ext_resource type="PackedScene" uid="uid://bu0py87jgq160" path="res://objects/bush_breakable.tscn" id="4_v4km1"]
+[ext_resource type="TileSet" uid="uid://bn57hrrqptm2r" path="res://base_terrain/grass_and_cliff_and_water.tres" id="5_dlpp7"]
+[ext_resource type="TileSet" uid="uid://cu70ub5pe6rno" path="res://base_terrain/water_tile_singular.tres" id="6_f7oae"]
+[ext_resource type="TileSet" uid="uid://bgo8j62wn03v4" path="res://base_terrain/grass_sand_spring.tres" id="6_gp6v5"]
+[ext_resource type="TileSet" uid="uid://daaxsrd5xb5iw" path="res://water_features/water_props.tres" id="7_2ntah"]
+[ext_resource type="TileSet" uid="uid://bu48edd5oif51" path="res://tilesets/rock_flower_tree_grass.tres" id="8_sf5q6"]
+[ext_resource type="TileSet" uid="uid://cok1cqxkvmqrh" path="res://tilesets/tilled_soil_wet_soil.tres" id="9_sf5q6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gphni"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 6
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_v4km1"]
+offsets = PackedFloat32Array(0, 0.1053068, 0.81177443, 0.9925373)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ahqma"]
+gradient = SubResource("Gradient_v4km1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_36ubq"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(350, 200, 1)
+direction = Vector3(-1, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = 49.99998
+gravity = Vector3(0, 10, 0)
+scale_min = 0.5
+scale_max = 1.5
+color_ramp = SubResource("GradientTexture1D_ahqma")
+anim_offset_max = 1.0
+
+[node name="Forest" type="Node2D" unique_id=29376356]
+y_sort_enabled = true
+
+[node name="Leaves" type="GPUParticles2D" parent="." unique_id=77938211]
+z_index = 5
+y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_gphni")
+position = Vector2(-341, -204)
+amount = 100
+texture = ExtResource("2_oorsj")
+visibility_rect = Rect2(-350, -250, 700, 400)
+process_material = SubResource("ParticleProcessMaterial_36ubq")
+
+[node name="HittableTrees" type="Node2D" parent="." unique_id=2127645315]
+y_sort_enabled = true
+
+[node name="tree_hittable" parent="HittableTrees" unique_id=912617466 instance=ExtResource("1_36ubq")]
+position = Vector2(-394, -299)
+
+[node name="tree_hittable7" parent="HittableTrees" unique_id=106629565 instance=ExtResource("1_36ubq")]
+position = Vector2(-535, -179)
+
+[node name="tree_hittable8" parent="HittableTrees" unique_id=974303519 instance=ExtResource("1_36ubq")]
+position = Vector2(-511, -191)
+
+[node name="tree_hittable12" parent="HittableTrees" unique_id=608104012 instance=ExtResource("1_36ubq")]
+position = Vector2(-534, -187)
+
+[node name="tree_hittable13" parent="HittableTrees" unique_id=2085544460 instance=ExtResource("1_36ubq")]
+position = Vector2(-539, -169)
+
+[node name="tree_hittable11" parent="HittableTrees" unique_id=275076078 instance=ExtResource("1_36ubq")]
+position = Vector2(-501, -199)
+
+[node name="tree_hittable2" parent="HittableTrees" unique_id=1803544258 instance=ExtResource("1_36ubq")]
+position = Vector2(-549, -176)
+
+[node name="tree_hittable14" parent="HittableTrees" unique_id=900388362 instance=ExtResource("1_36ubq")]
+position = Vector2(-498, -209)
+
+[node name="tree_hittable3" parent="HittableTrees" unique_id=1205157206 instance=ExtResource("1_36ubq")]
+position = Vector2(-561, -153)
+
+[node name="tree_hittable4" parent="HittableTrees" unique_id=29204725 instance=ExtResource("1_36ubq")]
+position = Vector2(-552, -163)
+
+[node name="tree_hittable5" parent="HittableTrees" unique_id=587300907 instance=ExtResource("1_36ubq")]
+position = Vector2(-379, -300)
+
+[node name="tree_hittable6" parent="HittableTrees" unique_id=1132311288 instance=ExtResource("1_36ubq")]
+position = Vector2(-83, -390)
+
+[node name="tree_hittable9" parent="HittableTrees" unique_id=1546944898 instance=ExtResource("1_36ubq")]
+position = Vector2(-105, -395)
+
+[node name="tree_hittable10" parent="HittableTrees" unique_id=668964658 instance=ExtResource("1_36ubq")]
+position = Vector2(-102, -381)
+
+[node name="NonHittableTrees" type="Node2D" parent="." unique_id=1023877989]
+y_sort_enabled = true
+
+[node name="TreeUnhittable" parent="NonHittableTrees" unique_id=46041949 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-121, -386)
+
+[node name="TreeUnhittable2" parent="NonHittableTrees" unique_id=1811441075 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-213, -393)
+
+[node name="TreeUnhittable3" parent="NonHittableTrees" unique_id=943558704 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-191, -398)
+
+[node name="TreeUnhittable4" parent="NonHittableTrees" unique_id=517389859 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-173, -392)
+
+[node name="TreeUnhittable5" parent="NonHittableTrees" unique_id=1554598086 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-154, -383)
+
+[node name="TreeUnhittable6" parent="NonHittableTrees" unique_id=301384606 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-135, -392)
+
+[node name="TreeUnhittable7" parent="NonHittableTrees" unique_id=1461360652 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-77, -377)
+
+[node name="TreeUnhittable36" parent="NonHittableTrees" unique_id=965011487 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-77, -316)
+
+[node name="TreeUnhittable37" parent="NonHittableTrees" unique_id=285728158 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-74, -334)
+
+[node name="TreeUnhittable38" parent="NonHittableTrees" unique_id=1574352541 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-90, -343)
+
+[node name="TreeUnhittable39" parent="NonHittableTrees" unique_id=628685971 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-85, -358)
+
+[node name="TreeUnhittable40" parent="NonHittableTrees" unique_id=586301726 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-95, -320)
+
+[node name="TreeUnhittable41" parent="NonHittableTrees" unique_id=1909037755 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-105, -307)
+
+[node name="TreeUnhittable42" parent="NonHittableTrees" unique_id=2113294411 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-124, -308)
+
+[node name="TreeUnhittable8" parent="NonHittableTrees" unique_id=698729819 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-233, -398)
+
+[node name="TreeUnhittable9" parent="NonHittableTrees" unique_id=1982745317 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-257, -368)
+
+[node name="TreeUnhittable10" parent="NonHittableTrees" unique_id=263533995 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-273, -359)
+
+[node name="TreeUnhittable11" parent="NonHittableTrees" unique_id=323099816 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-160, -319)
+
+[node name="TreeUnhittable12" parent="NonHittableTrees" unique_id=1052249779 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-254, -384)
+
+[node name="TreeUnhittable13" parent="NonHittableTrees" unique_id=961977161 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-161, -362)
+
+[node name="TreeUnhittable14" parent="NonHittableTrees" unique_id=1999027235 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-166, -382)
+
+[node name="TreeUnhittable16" parent="NonHittableTrees" unique_id=238196258 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-291, -351)
+
+[node name="TreeUnhittable17" parent="NonHittableTrees" unique_id=1892848485 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-329, -324)
+
+[node name="TreeUnhittable18" parent="NonHittableTrees" unique_id=301439936 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-250, -295)
+
+[node name="TreeUnhittable19" parent="NonHittableTrees" unique_id=2007242442 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-270, -293)
+
+[node name="TreeUnhittable20" parent="NonHittableTrees" unique_id=1784917330 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-303, -309)
+
+[node name="TreeUnhittable21" parent="NonHittableTrees" unique_id=636628229 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-317, -322)
+
+[node name="TreeUnhittable22" parent="NonHittableTrees" unique_id=1257317154 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-286, -303)
+
+[node name="TreeUnhittable23" parent="NonHittableTrees" unique_id=160816440 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-310, -340)
+
+[node name="TreeUnhittable24" parent="NonHittableTrees" unique_id=868399242 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-212, -285)
+
+[node name="TreeUnhittable25" parent="NonHittableTrees" unique_id=1906485924 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-171, -288)
+
+[node name="TreeUnhittable26" parent="NonHittableTrees" unique_id=2000645491 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-143, -328)
+
+[node name="TreeUnhittable27" parent="NonHittableTrees" unique_id=242233564 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-191, -291)
+
+[node name="TreeUnhittable28" parent="NonHittableTrees" unique_id=1763612545 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-232, -292)
+
+[node name="TreeUnhittable29" parent="NonHittableTrees" unique_id=1532336913 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-344, -316)
+
+[node name="TreeUnhittable30" parent="NonHittableTrees" unique_id=525321682 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-358, -314)
+
+[node name="TreeUnhittable31" parent="NonHittableTrees" unique_id=1815394632 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-158, -301)
+
+[node name="TreeUnhittable32" parent="NonHittableTrees" unique_id=1261365332 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-156, -345)
+
+[node name="TreeUnhittable43" parent="NonHittableTrees" unique_id=1297959197 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-276, -278)
+
+[node name="TreeUnhittable44" parent="NonHittableTrees" unique_id=1364087403 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-368, -285)
+
+[node name="TreeUnhittable45" parent="NonHittableTrees" unique_id=1768731028 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-346, -290)
+
+[node name="TreeUnhittable46" parent="NonHittableTrees" unique_id=1832166909 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-328, -284)
+
+[node name="TreeUnhittable47" parent="NonHittableTrees" unique_id=1435059096 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-309, -275)
+
+[node name="TreeUnhittable48" parent="NonHittableTrees" unique_id=1489337129 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-290, -284)
+
+[node name="TreeUnhittable49" parent="NonHittableTrees" unique_id=1940785455 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-232, -269)
+
+[node name="TreeUnhittable50" parent="NonHittableTrees" unique_id=742246692 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-223, -232)
+
+[node name="TreeUnhittable51" parent="NonHittableTrees" unique_id=716403161 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-206, -228)
+
+[node name="TreeUnhittable52" parent="NonHittableTrees" unique_id=1866817926 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-213, -212)
+
+[node name="TreeUnhittable53" parent="NonHittableTrees" unique_id=173108082 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-242, -229)
+
+[node name="TreeUnhittable56" parent="NonHittableTrees" unique_id=349735033 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-240, -250)
+
+[node name="TreeUnhittable57" parent="NonHittableTrees" unique_id=996187957 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-250, -212)
+
+[node name="TreeUnhittable58" parent="NonHittableTrees" unique_id=1300665672 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-260, -199)
+
+[node name="TreeUnhittable59" parent="NonHittableTrees" unique_id=293395931 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-279, -200)
+
+[node name="TreeUnhittable60" parent="NonHittableTrees" unique_id=1533796676 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-388, -290)
+
+[node name="TreeUnhittable61" parent="NonHittableTrees" unique_id=1079121017 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-412, -260)
+
+[node name="TreeUnhittable62" parent="NonHittableTrees" unique_id=1478700140 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-428, -251)
+
+[node name="TreeUnhittable63" parent="NonHittableTrees" unique_id=145361078 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-315, -211)
+
+[node name="TreeUnhittable64" parent="NonHittableTrees" unique_id=659072515 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-409, -276)
+
+[node name="TreeUnhittable65" parent="NonHittableTrees" unique_id=155445508 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-316, -254)
+
+[node name="TreeUnhittable66" parent="NonHittableTrees" unique_id=1748858990 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-321, -274)
+
+[node name="TreeUnhittable68" parent="NonHittableTrees" unique_id=1815566132 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-446, -243)
+
+[node name="TreeUnhittable69" parent="NonHittableTrees" unique_id=908115442 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-484, -216)
+
+[node name="TreeUnhittable70" parent="NonHittableTrees" unique_id=1577000394 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-405, -187)
+
+[node name="TreeUnhittable71" parent="NonHittableTrees" unique_id=307712559 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-425, -185)
+
+[node name="TreeUnhittable72" parent="NonHittableTrees" unique_id=1695964945 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-458, -201)
+
+[node name="TreeUnhittable73" parent="NonHittableTrees" unique_id=1301297732 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-472, -214)
+
+[node name="TreeUnhittable74" parent="NonHittableTrees" unique_id=934802034 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-441, -195)
+
+[node name="TreeUnhittable75" parent="NonHittableTrees" unique_id=1174490318 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-465, -232)
+
+[node name="TreeUnhittable76" parent="NonHittableTrees" unique_id=629246095 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-367, -177)
+
+[node name="TreeUnhittable77" parent="NonHittableTrees" unique_id=1700940361 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-326, -180)
+
+[node name="TreeUnhittable78" parent="NonHittableTrees" unique_id=43216505 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-298, -220)
+
+[node name="TreeUnhittable79" parent="NonHittableTrees" unique_id=1077850728 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-346, -183)
+
+[node name="TreeUnhittable80" parent="NonHittableTrees" unique_id=1276078336 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-387, -184)
+
+[node name="TreeUnhittable83" parent="NonHittableTrees" unique_id=2105954122 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-313, -193)
+
+[node name="TreeUnhittable84" parent="NonHittableTrees" unique_id=240655693 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-311, -237)
+
+[node name="TreeUnhittable85" parent="NonHittableTrees" unique_id=1555845097 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-463, -132)
+
+[node name="TreeUnhittable86" parent="NonHittableTrees" unique_id=609124100 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-555, -144)
+
+[node name="TreeUnhittable87" parent="NonHittableTrees" unique_id=1217210599 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-533, -144)
+
+[node name="TreeUnhittable88" parent="NonHittableTrees" unique_id=1187222258 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-515, -138)
+
+[node name="TreeUnhittable89" parent="NonHittableTrees" unique_id=564969429 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-496, -129)
+
+[node name="TreeUnhittable90" parent="NonHittableTrees" unique_id=1991279080 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-477, -138)
+
+[node name="TreeUnhittable91" parent="NonHittableTrees" unique_id=920533122 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-419, -123)
+
+[node name="TreeUnhittable92" parent="NonHittableTrees" unique_id=1290689215 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-402, -116)
+
+[node name="TreeUnhittable93" parent="NonHittableTrees" unique_id=1293788251 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-393, -82)
+
+[node name="TreeUnhittable95" parent="NonHittableTrees" unique_id=1288023508 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-419, -62)
+
+[node name="TreeUnhittable100" parent="NonHittableTrees" unique_id=1090498552 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-447, -53)
+
+[node name="TreeUnhittable101" parent="NonHittableTrees" unique_id=1371813966 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-466, -54)
+
+[node name="TreeUnhittable102" parent="NonHittableTrees" unique_id=1056045026 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-575, -144)
+
+[node name="TreeUnhittable103" parent="NonHittableTrees" unique_id=1216218801 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-599, -114)
+
+[node name="TreeUnhittable104" parent="NonHittableTrees" unique_id=874831645 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-615, -105)
+
+[node name="TreeUnhittable105" parent="NonHittableTrees" unique_id=148974778 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-502, -65)
+
+[node name="TreeUnhittable106" parent="NonHittableTrees" unique_id=1233348548 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-596, -130)
+
+[node name="TreeUnhittable107" parent="NonHittableTrees" unique_id=2106363879 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-504, -118)
+
+[node name="TreeUnhittable109" parent="NonHittableTrees" unique_id=1473978513 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-520, -191)
+
+[node name="TreeUnhittable110" parent="NonHittableTrees" unique_id=487073582 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-633, -97)
+
+[node name="TreeUnhittable111" parent="NonHittableTrees" unique_id=452915109 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-671, -70)
+
+[node name="TreeUnhittable112" parent="NonHittableTrees" unique_id=620448156 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-592, -41)
+
+[node name="TreeUnhittable113" parent="NonHittableTrees" unique_id=873027620 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-612, -39)
+
+[node name="TreeUnhittable114" parent="NonHittableTrees" unique_id=2114481197 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-645, -55)
+
+[node name="TreeUnhittable115" parent="NonHittableTrees" unique_id=1233243384 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-659, -68)
+
+[node name="TreeUnhittable116" parent="NonHittableTrees" unique_id=1458215218 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-628, -49)
+
+[node name="TreeUnhittable117" parent="NonHittableTrees" unique_id=1957014910 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-652, -86)
+
+[node name="TreeUnhittable119" parent="NonHittableTrees" unique_id=1812291513 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-384, -118)
+
+[node name="TreeUnhittable120" parent="NonHittableTrees" unique_id=884329058 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-485, -74)
+
+[node name="TreeUnhittable121" parent="NonHittableTrees" unique_id=501999305 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-493, -52)
+
+[node name="TreeUnhittable123" parent="NonHittableTrees" unique_id=412762184 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-686, -62)
+
+[node name="TreeUnhittable124" parent="NonHittableTrees" unique_id=1181114824 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-700, -60)
+
+[node name="TreeUnhittable125" parent="NonHittableTrees" unique_id=283794245 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-515, -54)
+
+[node name="TreeUnhittable126" parent="NonHittableTrees" unique_id=1835256387 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-498, -91)
+
+[node name="TreeUnhittable128" parent="NonHittableTrees" unique_id=1891987724 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-109, -274)
+
+[node name="TreeUnhittable129" parent="NonHittableTrees" unique_id=1241285301 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-87, -279)
+
+[node name="TreeUnhittable130" parent="NonHittableTrees" unique_id=1799295603 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-69, -273)
+
+[node name="TreeUnhittable142" parent="NonHittableTrees" unique_id=1894237645 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-148, -155)
+
+[node name="TreeUnhittable143" parent="NonHittableTrees" unique_id=651166597 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-135, -264)
+
+[node name="TreeUnhittable144" parent="NonHittableTrees" unique_id=693286794 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-129, -279)
+
+[node name="TreeUnhittable145" parent="NonHittableTrees" unique_id=1707721188 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-153, -249)
+
+[node name="TreeUnhittable146" parent="NonHittableTrees" unique_id=1809938651 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-169, -240)
+
+[node name="TreeUnhittable148" parent="NonHittableTrees" unique_id=97420818 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-150, -265)
+
+[node name="TreeUnhittable152" parent="NonHittableTrees" unique_id=1086572840 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-187, -232)
+
+[node name="TreeUnhittable154" parent="NonHittableTrees" unique_id=435721767 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-146, -176)
+
+[node name="TreeUnhittable155" parent="NonHittableTrees" unique_id=396115990 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-166, -174)
+
+[node name="TreeUnhittable156" parent="NonHittableTrees" unique_id=689579373 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-199, -190)
+
+[node name="TreeUnhittable158" parent="NonHittableTrees" unique_id=1349995746 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-182, -184)
+
+[node name="TreeUnhittable159" parent="NonHittableTrees" unique_id=742720881 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-158, -138)
+
+[node name="TreeUnhittable160" parent="NonHittableTrees" unique_id=197459165 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-108, -166)
+
+[node name="TreeUnhittable161" parent="NonHittableTrees" unique_id=1196838956 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-87, -186)
+
+[node name="TreeUnhittable163" parent="NonHittableTrees" unique_id=345815924 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-87, -172)
+
+[node name="TreeUnhittable164" parent="NonHittableTrees" unique_id=38640776 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-128, -173)
+
+[node name="TreeUnhittable166" parent="NonHittableTrees" unique_id=56679721 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-254, -195)
+
+[node name="TreeUnhittable169" parent="NonHittableTrees" unique_id=980873016 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-172, -159)
+
+[node name="TreeUnhittable170" parent="NonHittableTrees" unique_id=1271744415 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-264, -166)
+
+[node name="TreeUnhittable171" parent="NonHittableTrees" unique_id=9680873 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-242, -171)
+
+[node name="TreeUnhittable172" parent="NonHittableTrees" unique_id=1223180485 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-224, -165)
+
+[node name="TreeUnhittable173" parent="NonHittableTrees" unique_id=1793250893 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-205, -156)
+
+[node name="TreeUnhittable174" parent="NonHittableTrees" unique_id=572531570 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-227, -189)
+
+[node name="TreeUnhittable175" parent="NonHittableTrees" unique_id=86541328 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-180, -116)
+
+[node name="TreeUnhittable176" parent="NonHittableTrees" unique_id=1192370088 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-111, -143)
+
+[node name="TreeUnhittable177" parent="NonHittableTrees" unique_id=1212481419 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-102, -109)
+
+[node name="TreeUnhittable178" parent="NonHittableTrees" unique_id=1695607922 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-109, -93)
+
+[node name="TreeUnhittable179" parent="NonHittableTrees" unique_id=1693599879 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-128, -89)
+
+[node name="TreeUnhittable180" parent="NonHittableTrees" unique_id=1216417636 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-125, -107)
+
+[node name="TreeUnhittable181" parent="NonHittableTrees" unique_id=962921366 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-141, -116)
+
+[node name="TreeUnhittable182" parent="NonHittableTrees" unique_id=1429632024 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-161, -221)
+
+[node name="TreeUnhittable183" parent="NonHittableTrees" unique_id=1011229713 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-146, -93)
+
+[node name="TreeUnhittable184" parent="NonHittableTrees" unique_id=1722294811 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-156, -80)
+
+[node name="TreeUnhittable185" parent="NonHittableTrees" unique_id=1766443825 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-175, -81)
+
+[node name="TreeUnhittable189" parent="NonHittableTrees" unique_id=1878102514 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-211, -92)
+
+[node name="TreeUnhittable191" parent="NonHittableTrees" unique_id=342590185 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-212, -135)
+
+[node name="TreeUnhittable192" parent="NonHittableTrees" unique_id=1846832016 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-217, -155)
+
+[node name="TreeUnhittable193" parent="NonHittableTrees" unique_id=1477974858 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-94, -129)
+
+[node name="TreeUnhittable195" parent="NonHittableTrees" unique_id=1246529673 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-230, -209)
+
+[node name="TreeUnhittable196" parent="NonHittableTrees" unique_id=320315795 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-301, -68)
+
+[node name="TreeUnhittable197" parent="NonHittableTrees" unique_id=118411976 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-321, -66)
+
+[node name="TreeUnhittable198" parent="NonHittableTrees" unique_id=1606981109 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-354, -82)
+
+[node name="TreeUnhittable199" parent="NonHittableTrees" unique_id=660710629 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-368, -95)
+
+[node name="TreeUnhittable200" parent="NonHittableTrees" unique_id=848054993 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-337, -76)
+
+[node name="TreeUnhittable201" parent="NonHittableTrees" unique_id=862446465 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-361, -113)
+
+[node name="TreeUnhittable202" parent="NonHittableTrees" unique_id=1693835750 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-263, -58)
+
+[node name="TreeUnhittable203" parent="NonHittableTrees" unique_id=1408343662 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-222, -61)
+
+[node name="TreeUnhittable204" parent="NonHittableTrees" unique_id=1832836887 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-194, -101)
+
+[node name="TreeUnhittable205" parent="NonHittableTrees" unique_id=655586448 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-242, -64)
+
+[node name="TreeUnhittable206" parent="NonHittableTrees" unique_id=598821 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-283, -65)
+
+[node name="TreeUnhittable207" parent="NonHittableTrees" unique_id=936632400 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-119, -78)
+
+[node name="TreeUnhittable209" parent="NonHittableTrees" unique_id=1444836668 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-209, -74)
+
+[node name="TreeUnhittable210" parent="NonHittableTrees" unique_id=1246614070 instance=ExtResource("2_gphni")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-207, -118)
+
+[node name="Bushes" type="Node2D" parent="." unique_id=1550564266]
+y_sort_enabled = true
+
+[node name="Bush" parent="Bushes" unique_id=1371277669 instance=ExtResource("4_v4km1")]
+position = Vector2(-433, -124)
+scale = Vector2(0.6666667, 0.71875)
+
+[node name="Bush2" parent="Bushes" unique_id=1143481155 instance=ExtResource("4_v4km1")]
+position = Vector2(-330, -172)
+scale = Vector2(0.6666667, 0.71875)
+
+[node name="Bush6" parent="Bushes" unique_id=1973568334 instance=ExtResource("4_v4km1")]
+position = Vector2(-350, -137)
+scale = Vector2(0.6666667, 0.71875)
+
+[node name="Bush3" parent="Bushes" unique_id=1422034549 instance=ExtResource("4_v4km1")]
+position = Vector2(-345, -145.00002)
+scale = Vector2(0.6666667, 0.71875)
+
+[node name="Bush4" parent="Bushes" unique_id=1774597170 instance=ExtResource("4_v4km1")]
+position = Vector2(-337, -153.00002)
+scale = Vector2(0.6666667, 0.71875)
+
+[node name="Bush5" parent="Bushes" unique_id=922907389 instance=ExtResource("4_v4km1")]
+position = Vector2(-328, -161.00002)
+scale = Vector2(0.6666667, 0.71875)
+
+[node name="Decorations" type="Node2D" parent="." unique_id=1454645792]
+
+[node name="Water" type="Node2D" parent="Decorations" unique_id=2121914131]
+
+[node name="WaterEdges" type="TileMapLayer" parent="Decorations/Water" unique_id=268662953]
+tile_map_data = PackedByteArray("AADe//n/AAALAAYAAADd//n/AAAFAAUAAADc//n/AAAKAAQAAADb//v/AAAIAAcAAADb//r/AAAIAAUAAADb//n/AAAIAAQAAADc//r/AQAAAAAAAADd//r/AQAAAAAAAADe//v/AAALAAcAAADe//r/AAALAAYAAADd//v/AAAJAAcAAADc//v/AAAJAAcAAADv//j/AAABAAQAAADx//j/AAAHAAYAAADx//f/AAALAAQAAADw//j/AAAFAAcAAADw//f/AAAIAAQAAADx//n/AAAAAAYAAADv//n/AAAAAAYAAADe//j/AAALAAQAAADd//j/AAAIAAQAAAA=")
+tile_set = ExtResource("5_dlpp7")
+
+[node name="Water" type="TileMapLayer" parent="Decorations/Water" unique_id=206767592]
+z_index = -5
+tile_map_data = PackedByteArray("AADb//n/AwAAAAAAAADc//n/AwAAAAAAAADd//n/AwAAAAAAAADe//n/AwAAAAAAAADe//r/AwAAAAAAAADe//v/AwAAAAAAAADd//v/AwAAAAAAAADc//v/AwAAAAAAAADb//v/AwAAAAAAAADb//r/AwAAAAAAAADw//f/AwAAAAAAAADv//n/AwAAAAAAAADv//j/AwAAAAAAAADw//j/AwAAAAAAAADx//f/AwAAAAAAAADx//j/AwAAAAAAAADx//n/AwAAAAAAAADd//j/AwAAAAAAAADe//j/AwAAAAAAAAA=")
+tile_set = ExtResource("6_f7oae")
+
+[node name="Floaties" type="TileMapLayer" parent="Decorations/Water" unique_id=1597830265]
+tile_map_data = PackedByteArray("AADc//r/AgAAAAAAAADd//r/AgADAAAAAAA=")
+tile_set = ExtResource("7_2ntah")
+
+[node name="Underwater" type="TileMapLayer" parent="Decorations/Water" unique_id=1453651073]
+z_index = -2
+tile_map_data = PackedByteArray("AADc//r/AgAAAAAAAADe//r/CgAAAAAAAAA=")
+tile_set = ExtResource("7_2ntah")
+
+[node name="Reeds" type="TileMapLayer" parent="Decorations/Water" unique_id=920207231]
+z_index = -1
+tile_map_data = PackedByteArray("AADc//r/AgAAAAAAAADe//v/AgAGAAQAAADe//r/AgAHAAQAAAA=")
+tile_set = ExtResource("7_2ntah")
+
+[node name="Grass" type="Node2D" parent="Decorations" unique_id=428172015]
+
+[node name="Level0" type="TileMapLayer" parent="Decorations/Grass" unique_id=1448067850]
+tile_map_data = PackedByteArray("AADc//f/AAAFAAIAAADc//j/AAAFAAMAAADd//f/AAAGAAIAAADd//j/AAAGAAMAAADa//n/AAAFAAIAAADa//r/AAAFAAMAAADb//n/AAAGAAIAAADb//r/AAAGAAMAAADZ//r/AwABAAAAAADd//z/AwABAAAAAADc//3/AwABAAAAAADf//j/AwABAAAAAADf//r/AwABAAAAAADk//r/BQABAAAAAADl//n/BQABAAAAAADh//j/BQABAAAAAADh//n/BQABAAAAAADi//j/BQABAAAAAADk//n/BQABAAAAAADj//n/BQADAAAAAADo//v/BQABAAAAAADo//z/BQABAAAAAADp//v/BQABAAAAAAA=")
+tile_set = ExtResource("8_sf5q6")
+
+[node name="Level1" type="TileMapLayer" parent="Decorations/Grass" unique_id=1201733823]
+z_index = 1
+tile_map_data = PackedByteArray("AADc//j/AwAAAAAAAADd//f/AAAGAAIAAADd//j/AAAGAAMAAADb//j/AwACAAAAAADc//f/AwABAAEAAADe//z/AwADAAEAAADf//j/AwAGAAIAAADa//v/AwACAAAAAADl//n/AQAAAAAAAADm//n/AQABAAAAAADk//r/BQAGAAEAAADh//j/BQAGAAEAAADi//r/BQACAAAAAADj//n/AAADAAEAAADj//j/AQACAAAAAADk//j/AQADAAAAAADo//v/BQADAAAAAAA=")
+tile_set = ExtResource("8_sf5q6")
+
+[node name="Level2" type="TileMapLayer" parent="Decorations/Grass" unique_id=1167920382]
+z_index = 2
+tile_map_data = PackedByteArray("AADc//f/AAAFAAIAAADc//j/AAAFAAMAAADd//f/AAAGAAIAAADd//j/AAAGAAMAAADa//n/AAAFAAIAAADa//r/BQAKAAAAAADb//n/AAAGAAIAAADb//r/AAAGAAMAAADa//v/AwAIAAIAAADj//n/AAAMAAEAAAA=")
+tile_set = ExtResource("8_sf5q6")
+
+[node name="Dirt" type="Node2D" parent="Decorations" unique_id=1589901827]
+
+[node name="Floor" type="TileMapLayer" parent="Decorations/Dirt" unique_id=2115780415]
+tile_map_data = PackedByteArray("AADj//X/BgABAAMAAADm//X/BgABAAMAAADn//X/BgAFAAAAAADo//X/BgALAAAAAADo//b/BgAGAAMAAADp//b/BgACAAMAAADn//b/BgAIAAMAAADk//b/BgAAAAIAAADq//b/BgACAAMAAADr//b/BgADAAIAAADr//X/BgABAAAAAADs//X/BgADAAMAAADi//T/BgADAAMAAADh//T/BgAEAAMAAADh//P/BgAAAAAAAADh//X/BgALAAMAAADg//X/BgAIAAMAAADg//T/BgAIAAAAAADk//X/BgADAAAAAAA=")
+tile_set = ExtResource("9_sf5q6")
+
+[node name="REMOVE_GrassBackground" type="Node2D" parent="." unique_id=1027331573]
+visible = false
+z_index = -10
+
+[node name="TileMapLayer" type="TileMapLayer" parent="REMOVE_GrassBackground" unique_id=2099847168]
+tile_map_data = PackedByteArray("AADQ/+T/BAAJABIAAADQ/+X/BAAJABIAAADQ/+b/BAAJABIAAADQ/+f/BAAJABIAAADQ/+j/BAAJABIAAADQ/+n/BAAJABIAAADQ/+r/BAAJABIAAADQ/+v/BAAJABIAAADQ/+z/BAAJABIAAADQ/+3/BAAJABIAAADQ/+7/BAAJABIAAADQ/+//BAAJABIAAADQ//D/BAAJABIAAADQ//H/BAAJABIAAADQ//L/BAAJABIAAADQ//P/BAAJABIAAADQ//T/BAAJABIAAADQ//X/BAAJABIAAADQ//b/BAAJABIAAADQ//f/BAAJABIAAADQ//j/BAAJABIAAADQ//n/BAAJABIAAADQ//r/BAAJABIAAADQ//v/BAAJABIAAADQ//z/BAAJABIAAADQ//3/BAAJABIAAADQ//7/BAAJABIAAADQ////BAAJABIAAADR/+T/BAAJABIAAADR/+X/BAAJABIAAADR/+b/BAAJABIAAADR/+f/BAAJABIAAADR/+j/BAAJABIAAADR/+n/BAAJABIAAADR/+r/BAAJABIAAADR/+v/BAAJABIAAADR/+z/BAAJABIAAADR/+3/BAAJABIAAADR/+7/BAAJABIAAADR/+//BAAJABIAAADR//D/BAAJABIAAADR//H/BAAJABIAAADR//L/BAAJABIAAADR//P/BAAJABIAAADR//T/BAAJABIAAADR//X/BAAJABIAAADR//b/BAAJABIAAADR//f/BAAJABIAAADR//j/BAAJABIAAADR//n/BAAJABIAAADR//r/BAAJABIAAADR//v/BAAJABIAAADR//z/BAAJABIAAADR//3/BAAJABIAAADR//7/BAAJABIAAADR////BAAJABIAAADS/+T/BAAJABIAAADS/+X/BAAJABIAAADS/+b/BAAJABIAAADS/+f/BAAJABIAAADS/+j/BAAJABIAAADS/+n/BAAJABIAAADS/+r/BAAJABIAAADS/+v/BAAJABIAAADS/+z/BAAJABIAAADS/+3/BAAJABIAAADS/+7/BAAJABIAAADS/+//BAAJABIAAADS//D/BAAJABIAAADS//H/BAAJABIAAADS//L/BAAJABIAAADS//P/BAAJABIAAADS//T/BAAJABIAAADS//X/BAAJABIAAADS//b/BAAJABIAAADS//f/BAAJABIAAADS//j/BAAJABIAAADS//n/BAAJABIAAADS//r/BAAJABIAAADS//v/BAAJABIAAADS//z/BAAJABIAAADS//3/BAAJABIAAADS//7/BAAJABIAAADS////BAAJABIAAADT/+T/BAAJABIAAADT/+X/BAAJABIAAADT/+b/BAAJABIAAADT/+f/BAAJABIAAADT/+j/BAAJABIAAADT/+n/BAAJABIAAADT/+r/BAAJABIAAADT/+v/BAAJABIAAADT/+z/BAAJABIAAADT/+3/BAAJABIAAADT/+7/BAAJABIAAADT/+//BAAJABIAAADT//D/BAAJABIAAADT//H/BAAJABIAAADT//L/BAAJABIAAADT//P/BAAJABIAAADT//T/BAAJABIAAADT//X/BAAJABIAAADT//b/BAAJABIAAADT//f/BAAJABIAAADT//j/BAAJABIAAADT//n/BAAJABIAAADT//r/BAAJABIAAADT//v/BAAJABIAAADT//z/BAAJABIAAADT//3/BAAJABIAAADT//7/BAAJABIAAADT////BAAJABIAAADU/+T/BAAJABIAAADU/+X/BAAJABIAAADU/+b/BAAJABIAAADU/+f/BAAJABIAAADU/+j/BAAJABIAAADU/+n/BAAJABIAAADU/+r/BAAJABIAAADU/+v/BAAJABIAAADU/+z/BAAJABIAAADU/+3/BAAJABIAAADU/+7/BAAJABIAAADU/+//BAAJABIAAADU//D/BAAJABIAAADU//H/BAAJABIAAADU//L/BAAJABIAAADU//P/BAAJABIAAADU//T/BAAJABIAAADU//X/BAAJABIAAADU//b/BAAJABIAAADU//f/BAAJABIAAADU//j/BAAJABIAAADU//n/BAAJABIAAADU//r/BAAJABIAAADU//v/BAAJABIAAADU//z/BAAJABIAAADU//3/BAAJABIAAADU//7/BAAJABIAAADU////BAAJABIAAADV/+T/BAAJABIAAADV/+X/BAAJABIAAADV/+b/BAAJABIAAADV/+f/BAAJABIAAADV/+j/BAAJABIAAADV/+n/BAAJABIAAADV/+r/BAAJABIAAADV/+v/BAAJABIAAADV/+z/BAAJABIAAADV/+3/BAAJABIAAADV/+7/BAAJABIAAADV/+//BAAJABIAAADV//D/BAAJABIAAADV//H/BAAJABIAAADV//L/BAAJABIAAADV//P/BAAJABIAAADV//T/BAAJABIAAADV//X/BAAJABIAAADV//b/BAAJABIAAADV//f/BAAJABIAAADV//j/BAAJABIAAADV//n/BAAJABIAAADV//r/BAAJABIAAADV//v/BAAJABIAAADV//z/BAAJABIAAADV//3/BAAJABIAAADV//7/BAAJABIAAADV////BAAJABIAAADW/+T/BAAJABIAAADW/+X/BAAJABIAAADW/+b/BAAJABIAAADW/+f/BAAJABIAAADW/+j/BAAJABIAAADW/+n/BAAJABIAAADW/+r/BAAJABIAAADW/+v/BAAJABIAAADW/+z/BAAJABIAAADW/+3/BAAJABIAAADW/+7/BAAJABIAAADW/+//BAAJABIAAADW//D/BAAJABIAAADW//H/BAAJABIAAADW//L/BAAJABIAAADW//P/BAAJABIAAADW//T/BAAJABIAAADW//X/BAAJABIAAADW//b/BAAJABIAAADW//f/BAAJABIAAADW//j/BAAJABIAAADW//n/BAAJABIAAADW//r/BAAJABIAAADW//v/BAAJABIAAADW//z/BAAJABIAAADW//3/BAAJABIAAADW//7/BAAJABIAAADW////BAAJABIAAADX/+T/BAAJABIAAADX/+X/BAAJABIAAADX/+b/BAAJABIAAADX/+f/BAAJABIAAADX/+j/BAAJABIAAADX/+n/BAAJABIAAADX/+r/BAAJABIAAADX/+v/BAAJABIAAADX/+z/BAAJABIAAADX/+3/BAAJABIAAADX/+7/BAAJABIAAADX/+//BAAJABIAAADX//D/BAAJABIAAADX//H/BAAJABIAAADX//L/BAAJABIAAADX//P/BAAJABIAAADX//T/BAAJABIAAADX//X/BAAJABIAAADX//b/BAAJABIAAADX//f/BAAJABIAAADX//j/BAAJABIAAADX//n/BAAJABIAAADX//r/BAAJABIAAADX//v/BAAJABIAAADX//z/BAAJABIAAADX//3/BAAJABIAAADX//7/BAAJABIAAADX////BAAJABIAAADY/+T/BAAJABIAAADY/+X/BAAJABIAAADY/+b/BAAJABIAAADY/+f/BAAJABIAAADY/+j/BAAJABIAAADY/+n/BAAJABIAAADY/+r/BAAJABIAAADY/+v/BAAJABIAAADY/+z/BAAJABIAAADY/+3/BAAJABIAAADY/+7/BAAJABIAAADY/+//BAAJABIAAADY//D/BAAJABIAAADY//H/BAAJABIAAADY//L/BAAJABIAAADY//P/BAAJABIAAADY//T/BAAJABIAAADY//X/BAAJABIAAADY//b/BAAJABIAAADY//f/BAAJABIAAADY//j/BAAJABIAAADY//n/BAAJABIAAADY//r/BAAJABIAAADY//v/BAAJABIAAADY//z/BAAJABIAAADY//3/BAAJABIAAADY//7/BAAJABIAAADY////BAAJABIAAADZ/+T/BAAJABIAAADZ/+X/BAAJABIAAADZ/+b/BAAJABIAAADZ/+f/BAAJABIAAADZ/+j/BAAJABIAAADZ/+n/BAAJABIAAADZ/+r/BAAJABIAAADZ/+v/BAAJABIAAADZ/+z/BAAJABIAAADZ/+3/BAAJABIAAADZ/+7/BAAJABIAAADZ/+//BAAJABIAAADZ//D/BAAJABIAAADZ//H/BAAJABIAAADZ//L/BAAJABIAAADZ//P/BAAJABIAAADZ//T/BAAJABIAAADZ//X/BAAJABIAAADZ//b/BAAJABIAAADZ//f/BAAJABIAAADZ//j/BAAJABIAAADZ//n/BAAJABIAAADZ//r/BAAJABIAAADZ//v/BAAJABIAAADZ//z/BAAJABIAAADZ//3/BAAJABIAAADZ//7/BAAJABIAAADZ////BAAJABIAAADa/+T/BAAJABIAAADa/+X/BAAJABIAAADa/+b/BAAJABIAAADa/+f/BAAJABIAAADa/+j/BAAJABIAAADa/+n/BAAJABIAAADa/+r/BAAJABIAAADa/+v/BAAJABIAAADa/+z/BAAJABIAAADa/+3/BAAJABIAAADa/+7/BAAJABIAAADa/+//BAAJABIAAADa//D/BAAJABIAAADa//H/BAAJABIAAADa//L/BAAJABIAAADa//P/BAAJABIAAADa//T/BAAJABIAAADa//X/BAAJABIAAADa//b/BAAJABIAAADa//f/BAAJABIAAADa//j/BAAJABIAAADa//n/BAAJABIAAADa//r/BAAJABIAAADa//v/BAAJABIAAADa//z/BAAJABIAAADa//3/BAAJABIAAADa//7/BAAJABIAAADa////BAAJABIAAADb/+T/BAAJABIAAADb/+X/BAAJABIAAADb/+b/BAAJABIAAADb/+f/BAAJABIAAADb/+j/BAAJABIAAADb/+n/BAAJABIAAADb/+r/BAAJABIAAADb/+v/BAAJABIAAADb/+z/BAAJABIAAADb/+3/BAAJABIAAADb/+7/BAAJABIAAADb/+//BAAJABIAAADb//D/BAAJABIAAADb//H/BAAJABIAAADb//L/BAAJABIAAADb//P/BAAJABIAAADb//T/BAAJABIAAADb//X/BAAJABIAAADb//b/BAAJABIAAADb//f/BAAJABIAAADb//j/BAAJABIAAADb//n/BAAJABIAAADb//r/BAAJABIAAADb//v/BAAJABIAAADb//z/BAAJABIAAADb//3/BAAJABIAAADb//7/BAAJABIAAADb////BAAJABIAAADc/+T/BAAJABIAAADc/+X/BAAJABIAAADc/+b/BAAJABIAAADc/+f/BAAJABIAAADc/+j/BAAJABIAAADc/+n/BAAJABIAAADc/+r/BAAJABIAAADc/+v/BAAJABIAAADc/+z/BAAJABIAAADc/+3/BAAJABIAAADc/+7/BAAJABIAAADc/+//BAAJABIAAADc//D/BAAJABIAAADc//H/BAAJABIAAADc//L/BAAJABIAAADc//P/BAAJABIAAADc//T/BAAJABIAAADc//X/BAAJABIAAADc//b/BAAJABIAAADc//f/BAAJABIAAADc//j/BAAJABIAAADc//n/BAAJABIAAADc//r/BAAJABIAAADc//v/BAAJABIAAADc//z/BAAJABIAAADc//3/BAAJABIAAADc//7/BAAJABIAAADc////BAAJABIAAADd/+T/BAAJABIAAADd/+X/BAAJABIAAADd/+b/BAAJABIAAADd/+f/BAAJABIAAADd/+j/BAAJABIAAADd/+n/BAAJABIAAADd/+r/BAAJABIAAADd/+v/BAAJABIAAADd/+z/BAAJABIAAADd/+3/BAAJABIAAADd/+7/BAAJABIAAADd/+//BAAJABIAAADd//D/BAAJABIAAADd//H/BAAJABIAAADd//L/BAAJABIAAADd//P/BAAJABIAAADd//T/BAAJABIAAADd//X/BAAJABIAAADd//b/BAAJABIAAADd//f/BAAJABIAAADd//j/BAAJABIAAADd//n/BAAJABIAAADd//r/BAAJABIAAADd//v/BAAJABIAAADd//z/BAAJABIAAADd//3/BAAJABIAAADd//7/BAAJABIAAADd////BAAJABIAAADe/+T/BAAJABIAAADe/+X/BAAJABIAAADe/+b/BAAJABIAAADe/+f/BAAJABIAAADe/+j/BAAJABIAAADe/+n/BAAJABIAAADe/+r/BAAJABIAAADe/+v/BAAJABIAAADe/+z/BAAJABIAAADe/+3/BAAJABIAAADe/+7/BAAJABIAAADe/+//BAAJABIAAADe//D/BAAJABIAAADe//H/BAAJABIAAADe//L/BAAJABIAAADe//P/BAAJABIAAADe//T/BAAJABIAAADe//X/BAAJABIAAADe//b/BAAJABIAAADe//f/BAAJABIAAADe//j/BAAJABIAAADe//n/BAAJABIAAADe//r/BAAJABIAAADe//v/BAAJABIAAADe//z/BAAJABIAAADe//3/BAAJABIAAADe//7/BAAJABIAAADe////BAAJABIAAADf/+T/BAAJABIAAADf/+X/BAAJABIAAADf/+b/BAAJABIAAADf/+f/BAAJABIAAADf/+j/BAAJABIAAADf/+n/BAAJABIAAADf/+r/BAAJABIAAADf/+v/BAAJABIAAADf/+z/BAAJABIAAADf/+3/BAAJABIAAADf/+7/BAAJABIAAADf/+//BAAJABIAAADf//D/BAAJABIAAADf//H/BAAJABIAAADf//L/BAAJABIAAADf//P/BAAJABIAAADf//T/BAAJABIAAADf//X/BAAJABIAAADf//b/BAAJABIAAADf//f/BAAJABIAAADf//j/BAAJABIAAADf//n/BAAJABIAAADf//r/BAAJABIAAADf//v/BAAJABIAAADf//z/BAAJABIAAADf//3/BAAJABIAAADf//7/BAAJABIAAADf////BAAJABIAAADg/+T/BAAJABIAAADg/+X/BAAJABIAAADg/+b/BAAJABIAAADg/+f/BAAJABIAAADg/+j/BAAJABIAAADg/+n/BAAJABIAAADg/+r/BAAJABIAAADg/+v/BAAJABIAAADg/+z/BAAJABIAAADg/+3/BAAJABIAAADg/+7/BAAJABIAAADg/+//BAAJABIAAADg//D/BAAJABIAAADg//H/BAAJABIAAADg//L/BAAJABIAAADg//P/BAAJABIAAADg//T/BAAJABIAAADg//X/BAAJABIAAADg//b/BAAJABIAAADg//f/BAAJABIAAADg//j/BAAJABIAAADg//n/BAAJABIAAADg//r/BAAJABIAAADg//v/BAAJABIAAADg//z/BAAJABIAAADg//3/BAAJABIAAADg//7/BAAJABIAAADg////BAAJABIAAADh/+T/BAAJABIAAADh/+X/BAAJABIAAADh/+b/BAAJABIAAADh/+f/BAAJABIAAADh/+j/BAAJABIAAADh/+n/BAAJABIAAADh/+r/BAAJABIAAADh/+v/BAAJABIAAADh/+z/BAAJABIAAADh/+3/BAAJABIAAADh/+7/BAAJABIAAADh/+//BAAJABIAAADh//D/BAAJABIAAADh//H/BAAJABIAAADh//L/BAAJABIAAADh//P/BAAJABIAAADh//T/BAAJABIAAADh//X/BAAJABIAAADh//b/BAAJABIAAADh//f/BAAJABIAAADh//j/BAAJABIAAADh//n/BAAJABIAAADh//r/BAAJABIAAADh//v/BAAJABIAAADh//z/BAAJABIAAADh//3/BAAJABIAAADh//7/BAAJABIAAADh////BAAJABIAAADi/+T/BAAJABIAAADi/+X/BAAJABIAAADi/+b/BAAJABIAAADi/+f/BAAJABIAAADi/+j/BAAJABIAAADi/+n/BAAJABIAAADi/+r/BAAJABIAAADi/+v/BAAJABIAAADi/+z/BAAJABIAAADi/+3/BAAJABIAAADi/+7/BAAJABIAAADi/+//BAAJABIAAADi//D/BAAJABIAAADi//H/BAAJABIAAADi//L/BAAJABIAAADi//P/BAAJABIAAADi//T/BAAJABIAAADi//X/BAAJABIAAADi//b/BAAJABIAAADi//f/BAAJABIAAADi//j/BAAJABIAAADi//n/BAAJABIAAADi//r/BAAJABIAAADi//v/BAAJABIAAADi//z/BAAJABIAAADi//3/BAAJABIAAADi//7/BAAJABIAAADi////BAAJABIAAADj/+T/BAAJABIAAADj/+X/BAAJABIAAADj/+b/BAAJABIAAADj/+f/BAAJABIAAADj/+j/BAAJABIAAADj/+n/BAAJABIAAADj/+r/BAAJABIAAADj/+v/BAAJABIAAADj/+z/BAAJABIAAADj/+3/BAAJABIAAADj/+7/BAAJABIAAADj/+//BAAJABIAAADj//D/BAAJABIAAADj//H/BAAJABIAAADj//L/BAAJABIAAADj//P/BAAJABIAAADj//T/BAAJABIAAADj//X/BAAJABIAAADj//b/BAAJABIAAADj//f/BAAJABIAAADj//j/BAAJABIAAADj//n/BAAJABIAAADj//r/BAAJABIAAADj//v/BAAJABIAAADj//z/BAAJABIAAADj//3/BAAJABIAAADj//7/BAAJABIAAADj////BAAJABIAAADk/+T/BAAJABIAAADk/+X/BAAJABIAAADk/+b/BAAJABIAAADk/+f/BAAJABIAAADk/+j/BAAJABIAAADk/+n/BAAJABIAAADk/+r/BAAJABIAAADk/+v/BAAJABIAAADk/+z/BAAJABIAAADk/+3/BAAJABIAAADk/+7/BAAJABIAAADk/+//BAAJABIAAADk//D/BAAJABIAAADk//H/BAAJABIAAADk//L/BAAJABIAAADk//P/BAAJABIAAADk//T/BAAJABIAAADk//X/BAAJABIAAADk//b/BAAJABIAAADk//f/BAAJABIAAADk//j/BAAJABIAAADk//n/BAAJABIAAADk//r/BAAJABIAAADk//v/BAAJABIAAADk//z/BAAJABIAAADk//3/BAAJABIAAADk//7/BAAJABIAAADk////BAAJABIAAADl/+T/BAAJABIAAADl/+X/BAAJABIAAADl/+b/BAAJABIAAADl/+f/BAAJABIAAADl/+j/BAAJABIAAADl/+n/BAAJABIAAADl/+r/BAAJABIAAADl/+v/BAAJABIAAADl/+z/BAAJABIAAADl/+3/BAAJABIAAADl/+7/BAAJABIAAADl/+//BAAJABIAAADl//D/BAAJABIAAADl//H/BAAJABIAAADl//L/BAAJABIAAADl//P/BAAJABIAAADl//T/BAAJABIAAADl//X/BAAJABIAAADl//b/BAAJABIAAADl//f/BAAJABIAAADl//j/BAAJABIAAADl//n/BAAJABIAAADl//r/BAAJABIAAADl//v/BAAJABIAAADl//z/BAAJABIAAADl//3/BAAJABIAAADl//7/BAAJABIAAADl////BAAJABIAAADm/+T/BAAJABIAAADm/+X/BAAJABIAAADm/+b/BAAJABIAAADm/+f/BAAJABIAAADm/+j/BAAJABIAAADm/+n/BAAJABIAAADm/+r/BAAJABIAAADm/+v/BAAJABIAAADm/+z/BAAJABIAAADm/+3/BAAJABIAAADm/+7/BAAJABIAAADm/+//BAAJABIAAADm//D/BAAJABIAAADm//H/BAAJABIAAADm//L/BAAJABIAAADm//P/BAAJABIAAADm//T/BAAJABIAAADm//X/BAAJABIAAADm//b/BAAJABIAAADm//f/BAAJABIAAADm//j/BAAJABIAAADm//n/BAAJABIAAADm//r/BAAJABIAAADm//v/BAAJABIAAADm//z/BAAJABIAAADm//3/BAAJABIAAADm//7/BAAJABIAAADm////BAAJABIAAADn/+T/BAAJABIAAADn/+X/BAAJABIAAADn/+b/BAAJABIAAADn/+f/BAAJABIAAADn/+j/BAAJABIAAADn/+n/BAAJABIAAADn/+r/BAAJABIAAADn/+v/BAAJABIAAADn/+z/BAAJABIAAADn/+3/BAAJABIAAADn/+7/BAAJABIAAADn/+//BAAJABIAAADn//D/BAAJABIAAADn//H/BAAJABIAAADn//L/BAAJABIAAADn//P/BAAJABIAAADn//T/BAAJABIAAADn//X/BAAJABIAAADn//b/BAAJABIAAADn//f/BAAJABIAAADn//j/BAAJABIAAADn//n/BAAJABIAAADn//r/BAAJABIAAADn//v/BAAJABIAAADn//z/BAAJABIAAADn//3/BAAJABIAAADn//7/BAAJABIAAADn////BAAJABIAAADo/+T/BAAJABIAAADo/+X/BAAJABIAAADo/+b/BAAJABIAAADo/+f/BAAJABIAAADo/+j/BAAJABIAAADo/+n/BAAJABIAAADo/+r/BAAJABIAAADo/+v/BAAJABIAAADo/+z/BAAJABIAAADo/+3/BAAJABIAAADo/+7/BAAJABIAAADo/+//BAAJABIAAADo//D/BAAJABIAAADo//H/BAAJABIAAADo//L/BAAJABIAAADo//P/BAAJABIAAADo//T/BAAJABIAAADo//X/BAAJABIAAADo//b/BAAJABIAAADo//f/BAAJABIAAADo//j/BAAJABIAAADo//n/BAAJABIAAADo//r/BAAJABIAAADo//v/BAAJABIAAADo//z/BAAJABIAAADo//3/BAAJABIAAADo//7/BAAJABIAAADo////BAAJABIAAADp/+T/BAAJABIAAADp/+X/BAAJABIAAADp/+b/BAAJABIAAADp/+f/BAAJABIAAADp/+j/BAAJABIAAADp/+n/BAAJABIAAADp/+r/BAAJABIAAADp/+v/BAAJABIAAADp/+z/BAAJABIAAADp/+3/BAAJABIAAADp/+7/BAAJABIAAADp/+//BAAJABIAAADp//D/BAAJABIAAADp//H/BAAJABIAAADp//L/BAAJABIAAADp//P/BAAJABIAAADp//T/BAAJABIAAADp//X/BAAJABIAAADp//b/BAAJABIAAADp//f/BAAJABIAAADp//j/BAAJABIAAADp//n/BAAJABIAAADp//r/BAAJABIAAADp//v/BAAJABIAAADp//z/BAAJABIAAADp//3/BAAJABIAAADp//7/BAAJABIAAADp////BAAJABIAAADq/+T/BAAJABIAAADq/+X/BAAJABIAAADq/+b/BAAJABIAAADq/+f/BAAJABIAAADq/+j/BAAJABIAAADq/+n/BAAJABIAAADq/+r/BAAJABIAAADq/+v/BAAJABIAAADq/+z/BAAJABIAAADq/+3/BAAJABIAAADq/+7/BAAJABIAAADq/+//BAAJABIAAADq//D/BAAJABIAAADq//H/BAAJABIAAADq//L/BAAJABIAAADq//P/BAAJABIAAADq//T/BAAJABIAAADq//X/BAAJABIAAADq//b/BAAJABIAAADq//f/BAAJABIAAADq//j/BAAJABIAAADq//n/BAAJABIAAADq//r/BAAJABIAAADq//v/BAAJABIAAADq//z/BAAJABIAAADq//3/BAAJABIAAADq//7/BAAJABIAAADq////BAAJABIAAADr/+T/BAAJABIAAADr/+X/BAAJABIAAADr/+b/BAAJABIAAADr/+f/BAAJABIAAADr/+j/BAAJABIAAADr/+n/BAAJABIAAADr/+r/BAAJABIAAADr/+v/BAAJABIAAADr/+z/BAAJABIAAADr/+3/BAAJABIAAADr/+7/BAAJABIAAADr/+//BAAJABIAAADr//D/BAAJABIAAADr//H/BAAJABIAAADr//L/BAAJABIAAADr//P/BAAJABIAAADr//T/BAAJABIAAADr//X/BAAJABIAAADr//b/BAAJABIAAADr//f/BAAJABIAAADr//j/BAAJABIAAADr//n/BAAJABIAAADr//r/BAAJABIAAADr//v/BAAJABIAAADr//z/BAAJABIAAADr//3/BAAJABIAAADr//7/BAAJABIAAADr////BAAJABIAAADs/+T/BAAJABIAAADs/+X/BAAJABIAAADs/+b/BAAJABIAAADs/+f/BAAJABIAAADs/+j/BAAJABIAAADs/+n/BAAJABIAAADs/+r/BAAJABIAAADs/+v/BAAJABIAAADs/+z/BAAJABIAAADs/+3/BAAJABIAAADs/+7/BAAJABIAAADs/+//BAAJABIAAADs//D/BAAJABIAAADs//H/BAAJABIAAADs//L/BAAJABIAAADs//P/BAAJABIAAADs//T/BAAJABIAAADs//X/BAAJABIAAADs//b/BAAJABIAAADs//f/BAAJABIAAADs//j/BAAJABIAAADs//n/BAAJABIAAADs//r/BAAJABIAAADs//v/BAAJABIAAADs//z/BAAJABIAAADs//3/BAAJABIAAADs//7/BAAJABIAAADs////BAAJABIAAADt/+T/BAAJABIAAADt/+X/BAAJABIAAADt/+b/BAAJABIAAADt/+f/BAAJABIAAADt/+j/BAAJABIAAADt/+n/BAAJABIAAADt/+r/BAAJABIAAADt/+v/BAAJABIAAADt/+z/BAAJABIAAADt/+3/BAAJABIAAADt/+7/BAAJABIAAADt/+//BAAJABIAAADt//D/BAAJABIAAADt//H/BAAJABIAAADt//L/BAAJABIAAADt//P/BAAJABIAAADt//T/BAAJABIAAADt//X/BAAJABIAAADt//b/BAAJABIAAADt//f/BAAJABIAAADt//j/BAAJABIAAADt//n/BAAJABIAAADt//r/BAAJABIAAADt//v/BAAJABIAAADt//z/BAAJABIAAADt//3/BAAJABIAAADt//7/BAAJABIAAADt////BAAJABIAAADu/+T/BAAJABIAAADu/+X/BAAJABIAAADu/+b/BAAJABIAAADu/+f/BAAJABIAAADu/+j/BAAJABIAAADu/+n/BAAJABIAAADu/+r/BAAJABIAAADu/+v/BAAJABIAAADu/+z/BAAJABIAAADu/+3/BAAJABIAAADu/+7/BAAJABIAAADu/+//BAAJABIAAADu//D/BAAJABIAAADu//H/BAAJABIAAADu//L/BAAJABIAAADu//P/BAAJABIAAADu//T/BAAJABIAAADu//X/BAAJABIAAADu//b/BAAJABIAAADu//f/BAAJABIAAADu//j/BAAJABIAAADu//n/BAAJABIAAADu//r/BAAJABIAAADu//v/BAAJABIAAADu//z/BAAJABIAAADu//3/BAAJABIAAADu//7/BAAJABIAAADu////BAAJABIAAADv/+T/BAAJABIAAADv/+X/BAAJABIAAADv/+b/BAAJABIAAADv/+f/BAAJABIAAADv/+j/BAAJABIAAADv/+n/BAAJABIAAADv/+r/BAAJABIAAADv/+v/BAAJABIAAADv/+z/BAAJABIAAADv/+3/BAAJABIAAADv/+7/BAAJABIAAADv/+//BAAJABIAAADv//D/BAAJABIAAADv//H/BAAJABIAAADv//L/BAAJABIAAADv//P/BAAJABIAAADv//T/BAAJABIAAADv//X/BAAJABIAAADv//b/BAAJABIAAADv//f/BAAJABIAAADv//j/BAAJABIAAADv//n/BAAJABIAAADv//r/BAAJABIAAADv//v/BAAJABIAAADv//z/BAAJABIAAADv//3/BAAJABIAAADv//7/BAAJABIAAADv////BAAJABIAAADw/+T/BAAJABIAAADw/+X/BAAJABIAAADw/+b/BAAJABIAAADw/+f/BAAJABIAAADw/+j/BAAJABIAAADw/+n/BAAJABIAAADw/+r/BAAJABIAAADw/+v/BAAJABIAAADw/+z/BAAJABIAAADw/+3/BAAJABIAAADw/+7/BAAJABIAAADw/+//BAAJABIAAADw//D/BAAJABIAAADw//H/BAAJABIAAADw//L/BAAJABIAAADw//P/BAAJABIAAADw//T/BAAJABIAAADw//X/BAAJABIAAADw//b/BAAJABIAAADw//f/BAAJABIAAADw//j/BAAJABIAAADw//n/BAAJABIAAADw//r/BAAJABIAAADw//v/BAAJABIAAADw//z/BAAJABIAAADw//3/BAAJABIAAADw//7/BAAJABIAAADw////BAAJABIAAADx/+T/BAAJABIAAADx/+X/BAAJABIAAADx/+b/BAAJABIAAADx/+f/BAAJABIAAADx/+j/BAAJABIAAADx/+n/BAAJABIAAADx/+r/BAAJABIAAADx/+v/BAAJABIAAADx/+z/BAAJABIAAADx/+3/BAAJABIAAADx/+7/BAAJABIAAADx/+//BAAJABIAAADx//D/BAAJABIAAADx//H/BAAJABIAAADx//L/BAAJABIAAADx//P/BAAJABIAAADx//T/BAAJABIAAADx//X/BAAJABIAAADx//b/BAAJABIAAADx//f/BAAJABIAAADx//j/BAAJABIAAADx//n/BAAJABIAAADx//r/BAAJABIAAADx//v/BAAJABIAAADx//z/BAAJABIAAADx//3/BAAJABIAAADx//7/BAAJABIAAADx////BAAJABIAAADy/+T/BAAJABIAAADy/+X/BAAJABIAAADy/+b/BAAJABIAAADy/+f/BAAJABIAAADy/+j/BAAJABIAAADy/+n/BAAJABIAAADy/+r/BAAJABIAAADy/+v/BAAJABIAAADy/+z/BAAJABIAAADy/+3/BAAJABIAAADy/+7/BAAJABIAAADy/+//BAAJABIAAADy//D/BAAJABIAAADy//H/BAAJABIAAADy//L/BAAJABIAAADy//P/BAAJABIAAADy//T/BAAJABIAAADy//X/BAAJABIAAADy//b/BAAJABIAAADy//f/BAAJABIAAADy//j/BAAJABIAAADy//n/BAAJABIAAADy//r/BAAJABIAAADy//v/BAAJABIAAADy//z/BAAJABIAAADy//3/BAAJABIAAADy//7/BAAJABIAAADy////BAAJABIAAADz/+T/BAAJABIAAADz/+X/BAAJABIAAADz/+b/BAAJABIAAADz/+f/BAAJABIAAADz/+j/BAAJABIAAADz/+n/BAAJABIAAADz/+r/BAAJABIAAADz/+v/BAAJABIAAADz/+z/BAAJABIAAADz/+3/BAAJABIAAADz/+7/BAAJABIAAADz/+//BAAJABIAAADz//D/BAAJABIAAADz//H/BAAJABIAAADz//L/BAAJABIAAADz//P/BAAJABIAAADz//T/BAAJABIAAADz//X/BAAJABIAAADz//b/BAAJABIAAADz//f/BAAJABIAAADz//j/BAAJABIAAADz//n/BAAJABIAAADz//r/BAAJABIAAADz//v/BAAJABIAAADz//z/BAAJABIAAADz//3/BAAJABIAAADz//7/BAAJABIAAADz////BAAJABIAAAD0/+T/BAAJABIAAAD0/+X/BAAJABIAAAD0/+b/BAAJABIAAAD0/+f/BAAJABIAAAD0/+j/BAAJABIAAAD0/+n/BAAJABIAAAD0/+r/BAAJABIAAAD0/+v/BAAJABIAAAD0/+z/BAAJABIAAAD0/+3/BAAJABIAAAD0/+7/BAAJABIAAAD0/+//BAAJABIAAAD0//D/BAAJABIAAAD0//H/BAAJABIAAAD0//L/BAAJABIAAAD0//P/BAAJABIAAAD0//T/BAAJABIAAAD0//X/BAAJABIAAAD0//b/BAAJABIAAAD0//f/BAAJABIAAAD0//j/BAAJABIAAAD0//n/BAAJABIAAAD0//r/BAAJABIAAAD0//v/BAAJABIAAAD0//z/BAAJABIAAAD0//3/BAAJABIAAAD0//7/BAAJABIAAAD0////BAAJABIAAAD1/+T/BAAJABIAAAD1/+X/BAAJABIAAAD1/+b/BAAJABIAAAD1/+f/BAAJABIAAAD1/+j/BAAJABIAAAD1/+n/BAAJABIAAAD1/+r/BAAJABIAAAD1/+v/BAAJABIAAAD1/+z/BAAJABIAAAD1/+3/BAAJABIAAAD1/+7/BAAJABIAAAD1/+//BAAJABIAAAD1//D/BAAJABIAAAD1//H/BAAJABIAAAD1//L/BAAJABIAAAD1//P/BAAJABIAAAD1//T/BAAJABIAAAD1//X/BAAJABIAAAD1//b/BAAJABIAAAD1//f/BAAJABIAAAD1//j/BAAJABIAAAD1//n/BAAJABIAAAD1//r/BAAJABIAAAD1//v/BAAJABIAAAD1//z/BAAJABIAAAD1//3/BAAJABIAAAD1//7/BAAJABIAAAD1////BAAJABIAAAD2/+T/BAAJABIAAAD2/+X/BAAJABIAAAD2/+b/BAAJABIAAAD2/+f/BAAJABIAAAD2/+j/BAAJABIAAAD2/+n/BAAJABIAAAD2/+r/BAAJABIAAAD2/+v/BAAJABIAAAD2/+z/BAAJABIAAAD2/+3/BAAJABIAAAD2/+7/BAAJABIAAAD2/+//BAAJABIAAAD2//D/BAAJABIAAAD2//H/BAAJABIAAAD2//L/BAAJABIAAAD2//P/BAAJABIAAAD2//T/BAAJABIAAAD2//X/BAAJABIAAAD2//b/BAAJABIAAAD2//f/BAAJABIAAAD2//j/BAAJABIAAAD2//n/BAAJABIAAAD2//r/BAAJABIAAAD2//v/BAAJABIAAAD2//z/BAAJABIAAAD2//3/BAAJABIAAAD2//7/BAAJABIAAAD2////BAAJABIAAAD3/+T/BAAJABIAAAD3/+X/BAAJABIAAAD3/+b/BAAJABIAAAD3/+f/BAAJABIAAAD3/+j/BAAJABIAAAD3/+n/BAAJABIAAAD3/+r/BAAJABIAAAD3/+v/BAAJABIAAAD3/+z/BAAJABIAAAD3/+3/BAAJABIAAAD3/+7/BAAJABIAAAD3/+//BAAJABIAAAD3//D/BAAJABIAAAD3//H/BAAJABIAAAD3//L/BAAJABIAAAD3//P/BAAJABIAAAD3//T/BAAJABIAAAD3//X/BAAJABIAAAD3//b/BAAJABIAAAD3//f/BAAJABIAAAD3//j/BAAJABIAAAD3//n/BAAJABIAAAD3//r/BAAJABIAAAD3//v/BAAJABIAAAD3//z/BAAJABIAAAD3//3/BAAJABIAAAD3//7/BAAJABIAAAD3////BAAJABIAAAD4/+T/BAAJABIAAAD4/+X/BAAJABIAAAD4/+b/BAAJABIAAAD4/+f/BAAJABIAAAD4/+j/BAAJABIAAAD4/+n/BAAJABIAAAD4/+r/BAAJABIAAAD4/+v/BAAJABIAAAD4/+z/BAAJABIAAAD4/+3/BAAJABIAAAD4/+7/BAAJABIAAAD4/+//BAAJABIAAAD4//D/BAAJABIAAAD4//H/BAAJABIAAAD4//L/BAAJABIAAAD4//P/BAAJABIAAAD4//T/BAAJABIAAAD4//X/BAAJABIAAAD4//b/BAAJABIAAAD4//f/BAAJABIAAAD4//j/BAAJABIAAAD4//n/BAAJABIAAAD4//r/BAAJABIAAAD4//v/BAAJABIAAAD4//z/BAAJABIAAAD4//3/BAAJABIAAAD4//7/BAAJABIAAAD4////BAAJABIAAAD5/+T/BAAJABIAAAD5/+X/BAAJABIAAAD5/+b/BAAJABIAAAD5/+f/BAAJABIAAAD5/+j/BAAJABIAAAD5/+n/BAAJABIAAAD5/+r/BAAJABIAAAD5/+v/BAAJABIAAAD5/+z/BAAJABIAAAD5/+3/BAAJABIAAAD5/+7/BAAJABIAAAD5/+//BAAJABIAAAD5//D/BAAJABIAAAD5//H/BAAJABIAAAD5//L/BAAJABIAAAD5//P/BAAJABIAAAD5//T/BAAJABIAAAD5//X/BAAJABIAAAD5//b/BAAJABIAAAD5//f/BAAJABIAAAD5//j/BAAJABIAAAD5//n/BAAJABIAAAD5//r/BAAJABIAAAD5//v/BAAJABIAAAD5//z/BAAJABIAAAD5//3/BAAJABIAAAD5//7/BAAJABIAAAD5////BAAJABIAAAD6/+T/BAAJABIAAAD6/+X/BAAJABIAAAD6/+b/BAAJABIAAAD6/+f/BAAJABIAAAD6/+j/BAAJABIAAAD6/+n/BAAJABIAAAD6/+r/BAAJABIAAAD6/+v/BAAJABIAAAD6/+z/BAAJABIAAAD6/+3/BAAJABIAAAD6/+7/BAAJABIAAAD6/+//BAAJABIAAAD6//D/BAAJABIAAAD6//H/BAAJABIAAAD6//L/BAAJABIAAAD6//P/BAAJABIAAAD6//T/BAAJABIAAAD6//X/BAAJABIAAAD6//b/BAAJABIAAAD6//f/BAAJABIAAAD6//j/BAAJABIAAAD6//n/BAAJABIAAAD6//r/BAAJABIAAAD6//v/BAAJABIAAAD6//z/BAAJABIAAAD6//3/BAAJABIAAAD6//7/BAAJABIAAAD6////BAAJABIAAAD7/+T/BAAJABIAAAD7/+X/BAAJABIAAAD7/+b/BAAJABIAAAD7/+f/BAAJABIAAAD7/+j/BAAJABIAAAD7/+n/BAAJABIAAAD7/+r/BAAJABIAAAD7/+v/BAAJABIAAAD7/+z/BAAJABIAAAD7/+3/BAAJABIAAAD7/+7/BAAJABIAAAD7/+//BAAJABIAAAD7//D/BAAJABIAAAD7//H/BAAJABIAAAD7//L/BAAJABIAAAD7//P/BAAJABIAAAD7//T/BAAJABIAAAD7//X/BAAJABIAAAD7//b/BAAJABIAAAD7//f/BAAJABIAAAD7//j/BAAJABIAAAD7//n/BAAJABIAAAD7//r/BAAJABIAAAD7//v/BAAJABIAAAD7//z/BAAJABIAAAD7//3/BAAJABIAAAD7//7/BAAJABIAAAD7////BAAJABIAAAD8/+T/BAAJABIAAAD8/+X/BAAJABIAAAD8/+b/BAAJABIAAAD8/+f/BAAJABIAAAD8/+j/BAAJABIAAAD8/+n/BAAJABIAAAD8/+r/BAAJABIAAAD8/+v/BAAJABIAAAD8/+z/BAAJABIAAAD8/+3/BAAJABIAAAD8/+7/BAAJABIAAAD8/+//BAAJABIAAAD8//D/BAAJABIAAAD8//H/BAAJABIAAAD8//L/BAAJABIAAAD8//P/BAAJABIAAAD8//T/BAAJABIAAAD8//X/BAAJABIAAAD8//b/BAAJABIAAAD8//f/BAAJABIAAAD8//j/BAAJABIAAAD8//n/BAAJABIAAAD8//r/BAAJABIAAAD8//v/BAAJABIAAAD8//z/BAAJABIAAAD8//3/BAAJABIAAAD8//7/BAAJABIAAAD8////BAAJABIAAAD9/+T/BAAJABIAAAD9/+X/BAAJABIAAAD9/+b/BAAJABIAAAD9/+f/BAAJABIAAAD9/+j/BAAJABIAAAD9/+n/BAAJABIAAAD9/+r/BAAJABIAAAD9/+v/BAAJABIAAAD9/+z/BAAJABIAAAD9/+3/BAAJABIAAAD9/+7/BAAJABIAAAD9/+//BAAJABIAAAD9//D/BAAJABIAAAD9//H/BAAJABIAAAD9//L/BAAJABIAAAD9//P/BAAJABIAAAD9//T/BAAJABIAAAD9//X/BAAJABIAAAD9//b/BAAJABIAAAD9//f/BAAJABIAAAD9//j/BAAJABIAAAD9//n/BAAJABIAAAD9//r/BAAJABIAAAD9//v/BAAJABIAAAD9//z/BAAJABIAAAD9//3/BAAJABIAAAD9//7/BAAJABIAAAD9////BAAJABIAAAD+/+T/BAAJABIAAAD+/+X/BAAJABIAAAD+/+b/BAAJABIAAAD+/+f/BAAJABIAAAD+/+j/BAAJABIAAAD+/+n/BAAJABIAAAD+/+r/BAAJABIAAAD+/+v/BAAJABIAAAD+/+z/BAAJABIAAAD+/+3/BAAJABIAAAD+/+7/BAAJABIAAAD+/+//BAAJABIAAAD+//D/BAAJABIAAAD+//H/BAAJABIAAAD+//L/BAAJABIAAAD+//P/BAAJABIAAAD+//T/BAAJABIAAAD+//X/BAAJABIAAAD+//b/BAAJABIAAAD+//f/BAAJABIAAAD+//j/BAAJABIAAAD+//n/BAAJABIAAAD+//r/BAAJABIAAAD+//v/BAAJABIAAAD+//z/BAAJABIAAAD+//3/BAAJABIAAAD+//7/BAAJABIAAAD+////BAAJABIAAAD//+T/BAAJABIAAAD//+X/BAAJABIAAAD//+b/BAAJABIAAAD//+f/BAAJABIAAAD//+j/BAAJABIAAAD//+n/BAAJABIAAAD//+r/BAAJABIAAAD//+v/BAAJABIAAAD//+z/BAAJABIAAAD//+3/BAAJABIAAAD//+7/BAAJABIAAAD//+//BAAJABIAAAD///D/BAAJABIAAAD///H/BAAJABIAAAD///L/BAAJABIAAAD///P/BAAJABIAAAD///T/BAAJABIAAAD///X/BAAJABIAAAD///b/BAAJABIAAAD///f/BAAJABIAAAD///j/BAAJABIAAAD///n/BAAJABIAAAD///r/BAAJABIAAAD///v/BAAJABIAAAD///z/BAAJABIAAAD///3/BAAJABIAAAD///7/BAAJABIAAAD/////BAAJABIAAAA=")
+tile_set = ExtResource("6_gp6v5")

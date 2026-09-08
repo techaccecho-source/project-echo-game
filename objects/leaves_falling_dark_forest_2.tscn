@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://0dadk4mdtq5a"]
+
+[ext_resource type="Texture2D" uid="uid://cyr3hbhw5wa1q" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tree/Common/Effects/FX Effects Dark Forest leafs 2.png" id="1_yxfxa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbtl3"]
+atlas = ExtResource("1_yxfxa")
+region = Rect2(0, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obs03"]
+atlas = ExtResource("1_yxfxa")
+region = Rect2(48, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jt27x"]
+atlas = ExtResource("1_yxfxa")
+region = Rect2(0, 24, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrh5a"]
+atlas = ExtResource("1_yxfxa")
+region = Rect2(48, 24, 48, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k025g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbtl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obs03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jt27x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrh5a")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 1.0
+}]
+
+[node name="leaves_falling" type="AnimatedSprite2D" unique_id=229656392]
+sprite_frames = SubResource("SpriteFrames_k025g")
+animation = &"falling"
+frame_progress = 0.72104234

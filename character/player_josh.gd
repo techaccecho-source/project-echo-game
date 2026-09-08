@@ -11,12 +11,20 @@ const SINK_TIME := 0.5
 @export var walk_speed: float = 100
 @export var run_speed: float = 200
 @export var character_name: String = "Player"
+@onready var hit_component_collision_shape: CollisionShape2D = $HitComponent/HitComponentCollisionShape2D
+
 @onready var animated_sprite = $Movement
 
 # Track last direction so idle plays the correct facing animation
 var last_direction: Vector2 = Vector2(0, 1) # default face down
 var movement_enabled: bool = true
+
 var is_dying: bool = false
+var is_chopping: bool = true
+
+func _ready() -> void:
+	hit_component_collision_shape.disabled = true
+	hit_component_collision_shape.position = Vector2(0, 0)
 
 func _physics_process(_delta):
 	if (!movement_enabled):
@@ -34,6 +42,10 @@ func _physics_process(_delta):
 	
 	if input_direction != Vector2.ZERO:
 		last_direction = input_direction
+	
+	if Input.is_action_just_pressed("interact_alt"):
+		play_weapon_logic()
+		return
 	
 	update_animation(input_direction, is_running)
 
@@ -67,6 +79,23 @@ func get_direction_suffix(dir: Vector2) -> String:
 			return "up"
 		else:
 			return "down"
+
+func play_weapon_logic():
+		disable_movement()
+		hit_component_collision_shape.disabled = false
+		animated_sprite.play("axe_swing_" + get_direction_suffix(last_direction))
+		if last_direction == Vector2.UP:
+			hit_component_collision_shape.position = Vector2(-2, -11)
+		if last_direction == Vector2.RIGHT:
+			hit_component_collision_shape.position = Vector2(11, 4)
+		if last_direction == Vector2.DOWN:
+			hit_component_collision_shape.position = Vector2(2, 11)
+		if last_direction == Vector2.LEFT:
+			hit_component_collision_shape.position = Vector2(-11, 4)
+			
+		await animated_sprite.animation_finished
+		hit_component_collision_shape.disabled = true
+		enable_movement()
 
 func disable_movement():
 	movement_enabled = false

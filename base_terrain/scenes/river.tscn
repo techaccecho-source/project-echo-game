@@ -5,268 +5,18 @@
 [ext_resource type="TileSet" uid="uid://7n6dyiw5jy4m" path="res://base_terrain/ground_and_water.tres" id="3_qnkgf"]
 [ext_resource type="TileSet" uid="uid://bn57hrrqptm2r" path="res://base_terrain/grass_and_cliff_and_water.tres" id="4_mvt44"]
 [ext_resource type="TileSet" uid="uid://cpp6ye2esnnn" path="res://water_features/spring_waterfall.tres" id="5_u5joh"]
-[ext_resource type="Texture2D" uid="uid://idlapvxmfxs5" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Props/Spring/props water.png" id="6_36peq"]
-[ext_resource type="Texture2D" uid="uid://betnucvh881ck" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Fish/Fish point small.png" id="6_cr70t"]
-[ext_resource type="Texture2D" uid="uid://64o83nt3feov" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Props/Spring/Stones.png" id="7_4h3vr"]
-[ext_resource type="Texture2D" uid="uid://dttpy8qmqcqw3" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Props/wood.png" id="7_ixy7d"]
-[ext_resource type="Texture2D" uid="uid://n5u1ff0ttwmk" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Props/Beach/Stones.png" id="8_36peq"]
-[ext_resource type="Texture2D" uid="uid://heqyh0fjk248" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Props/Beach/Props.png" id="9_4h3vr"]
+[ext_resource type="TileSet" uid="uid://daaxsrd5xb5iw" path="res://water_features/water_props.tres" id="6_ufdml"]
 [ext_resource type="TileSet" uid="uid://bu48edd5oif51" path="res://tilesets/rock_flower_tree_grass.tres" id="10_4h3vr"]
-[ext_resource type="Texture2D" uid="uid://emqjsnstxc3n" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Props/Deep Forest/Stone structures Water.png" id="11_ix470"]
-[ext_resource type="Texture2D" uid="uid://ckqb8tpljv7bq" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Fish/FishPoint.png" id="12_ixy7d"]
+[ext_resource type="Texture2D" uid="uid://by0hx5n50wufy" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tileset/ALL props seasons.png" id="10_pdtrq"]
+[ext_resource type="TileSet" uid="uid://dcxw2dwxs4ck0" path="res://land_features/land_props.tres" id="11_8w07x"]
+[ext_resource type="TileSet" uid="uid://chwb2fblpo70u" path="res://structures/bridges/bridges.tres" id="16_ixy7d"]
 [ext_resource type="TileSet" uid="uid://bfn4hxvytx80x" path="res://base_terrain/beach_currents.tres" id="17_sihb4"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swajw"]
-texture = ExtResource("6_cr70t")
-0:0/animation_columns = 11
-0:0/animation_frame_0/duration = 1.0
-0:0/animation_frame_1/duration = 1.0
-0:0/animation_frame_2/duration = 1.0
-0:0/animation_frame_3/duration = 1.0
-0:0/animation_frame_4/duration = 1.0
-0:0/animation_frame_5/duration = 1.0
-0:0/animation_frame_6/duration = 1.0
-0:0/animation_frame_7/duration = 1.0
-0:0/animation_frame_8/duration = 1.0
-0:0/animation_frame_9/duration = 1.0
-0:0/animation_frame_10/duration = 1.0
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dtu0v"]
-texture = ExtResource("7_ixy7d")
-0:0/animation_columns = 4
-0:0/animation_frame_0/duration = 1.0
-0:0/animation_frame_1/duration = 1.0
-0:0/animation_frame_2/duration = 1.0
-0:0/animation_frame_3/duration = 1.0
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8w07x"]
-texture = ExtResource("6_36peq")
-0:0/animation_columns = 1
-0:0/animation_frame_0/duration = 1.0
-0:0/animation_frame_1/duration = 1.0
-0:0/animation_frame_2/duration = 1.0
-0:0/animation_frame_3/duration = 1.0
-0:0/0 = 0
-0:4/animation_columns = 1
-0:4/animation_frame_0/duration = 1.0
-0:4/animation_frame_1/duration = 1.0
-0:4/animation_frame_2/duration = 1.0
-0:4/animation_frame_3/duration = 1.0
-0:4/0 = 0
-1:4/animation_columns = 1
-1:4/animation_frame_0/duration = 1.0
-1:4/animation_frame_1/duration = 1.0
-1:4/animation_frame_2/duration = 1.0
-1:4/animation_frame_3/duration = 1.0
-1:4/0 = 0
-2:4/animation_columns = 1
-2:4/animation_frame_0/duration = 1.0
-2:4/animation_frame_1/duration = 1.0
-2:4/animation_frame_2/duration = 1.0
-2:4/animation_frame_3/duration = 1.0
-2:4/0 = 0
-3:4/animation_columns = 1
-3:4/animation_frame_0/duration = 1.0
-3:4/animation_frame_1/duration = 1.0
-3:4/animation_frame_2/duration = 1.0
-3:4/animation_frame_3/duration = 1.0
-3:4/0 = 0
-4:4/animation_columns = 1
-4:4/animation_frame_0/duration = 1.0
-4:4/animation_frame_1/duration = 1.0
-4:4/animation_frame_2/duration = 1.0
-4:4/animation_frame_3/duration = 1.0
-4:4/0 = 0
-5:4/animation_columns = 1
-5:4/animation_frame_0/duration = 1.0
-5:4/animation_frame_1/duration = 1.0
-5:4/animation_frame_2/duration = 1.0
-5:4/animation_frame_3/duration = 1.0
-5:4/0 = 0
-6:4/animation_columns = 1
-6:4/animation_frame_0/duration = 1.0
-6:4/animation_frame_1/duration = 1.0
-6:4/animation_frame_2/duration = 1.0
-6:4/animation_frame_3/duration = 1.0
-6:4/0 = 0
-7:4/animation_columns = 1
-7:4/animation_frame_0/duration = 1.0
-7:4/animation_frame_1/duration = 1.0
-7:4/animation_frame_2/duration = 1.0
-7:4/animation_frame_3/duration = 1.0
-7:4/0 = 0
-1:0/animation_columns = 1
-1:0/animation_frame_0/duration = 1.0
-1:0/animation_frame_1/duration = 1.0
-1:0/animation_frame_2/duration = 1.0
-1:0/animation_frame_3/duration = 1.0
-1:0/0 = 0
-2:0/animation_columns = 1
-2:0/animation_frame_0/duration = 1.0
-2:0/animation_frame_1/duration = 1.0
-2:0/animation_frame_2/duration = 1.0
-2:0/animation_frame_3/duration = 1.0
-2:0/0 = 0
-3:0/animation_columns = 1
-3:0/animation_frame_0/duration = 1.0
-3:0/animation_frame_1/duration = 1.0
-3:0/animation_frame_2/duration = 1.0
-3:0/animation_frame_3/duration = 1.0
-3:0/0 = 0
-4:0/animation_columns = 1
-4:0/animation_frame_0/duration = 1.0
-4:0/animation_frame_1/duration = 1.0
-4:0/animation_frame_2/duration = 1.0
-4:0/animation_frame_3/duration = 1.0
-4:0/0 = 0
-5:0/animation_columns = 1
-5:0/animation_frame_0/duration = 1.0
-5:0/animation_frame_1/duration = 1.0
-5:0/animation_frame_2/duration = 1.0
-5:0/animation_frame_3/duration = 1.0
-5:0/0 = 0
-6:0/animation_columns = 1
-6:0/animation_frame_0/duration = 1.0
-6:0/animation_frame_1/duration = 1.0
-6:0/animation_frame_2/duration = 1.0
-6:0/animation_frame_3/duration = 1.0
-6:0/0 = 0
-7:0/animation_columns = 1
-7:0/animation_frame_0/duration = 1.0
-7:0/animation_frame_1/duration = 1.0
-7:0/animation_frame_2/duration = 1.0
-7:0/animation_frame_3/duration = 1.0
-7:0/0 = 0
-8:0/animation_columns = 1
-8:0/animation_frame_0/duration = 1.0
-8:0/animation_frame_1/duration = 1.0
-8:0/animation_frame_2/duration = 1.0
-8:0/animation_frame_3/duration = 1.0
-8:0/0 = 0
-9:0/animation_columns = 1
-9:0/animation_frame_0/duration = 1.0
-9:0/animation_frame_1/duration = 1.0
-9:0/animation_frame_2/duration = 1.0
-9:0/animation_frame_3/duration = 1.0
-9:0/0 = 0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufdml"]
+size = Vector2(187, 9.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cr70t"]
-texture = ExtResource("7_4h3vr")
-0:0/animation_columns = 4
-0:0/animation_separation = Vector2i(1, 0)
-0:0/animation_frame_0/duration = 1.0
-0:0/animation_frame_1/duration = 1.0
-0:0/animation_frame_2/duration = 1.0
-0:0/animation_frame_3/duration = 1.0
-0:0/0 = 0
-0:1/animation_columns = 4
-0:1/animation_separation = Vector2i(1, 0)
-0:1/animation_frame_0/duration = 1.0
-0:1/animation_frame_1/duration = 1.0
-0:1/animation_frame_2/duration = 1.0
-0:1/animation_frame_3/duration = 1.0
-0:1/0 = 0
-1:0/animation_columns = 4
-1:0/animation_separation = Vector2i(1, 0)
-1:0/animation_frame_0/duration = 1.0
-1:0/animation_frame_1/duration = 1.0
-1:0/animation_frame_2/duration = 1.0
-1:0/animation_frame_3/duration = 1.0
-1:0/0 = 0
-1:1/animation_columns = 4
-1:1/animation_separation = Vector2i(1, 0)
-1:1/animation_frame_0/duration = 1.0
-1:1/animation_frame_1/duration = 1.0
-1:1/animation_frame_2/duration = 1.0
-1:1/animation_frame_3/duration = 1.0
-1:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufdml"]
-texture = ExtResource("8_36peq")
-0:0/animation_columns = 4
-0:0/animation_separation = Vector2i(1, 0)
-0:0/animation_frame_0/duration = 1.0
-0:0/animation_frame_1/duration = 1.0
-0:0/animation_frame_2/duration = 1.0
-0:0/animation_frame_3/duration = 1.0
-0:0/0 = 0
-1:0/animation_columns = 4
-1:0/animation_separation = Vector2i(1, 0)
-1:0/animation_frame_0/duration = 1.0
-1:0/animation_frame_1/duration = 1.0
-1:0/animation_frame_2/duration = 1.0
-1:0/animation_frame_3/duration = 1.0
-1:0/0 = 0
-0:1/animation_columns = 4
-0:1/animation_separation = Vector2i(1, 0)
-0:1/animation_frame_0/duration = 1.0
-0:1/animation_frame_1/duration = 1.0
-0:1/animation_frame_2/duration = 1.0
-0:1/animation_frame_3/duration = 1.0
-0:1/0 = 0
-1:1/animation_columns = 4
-1:1/animation_separation = Vector2i(1, 0)
-1:1/animation_frame_0/duration = 1.0
-1:1/animation_frame_1/duration = 1.0
-1:1/animation_frame_2/duration = 1.0
-1:1/animation_frame_3/duration = 1.0
-1:1/0 = 0
-0:2/animation_columns = 4
-0:2/animation_separation = Vector2i(2, 0)
-0:2/animation_frame_0/duration = 1.0
-0:2/animation_frame_1/duration = 1.0
-0:2/animation_frame_2/duration = 1.0
-0:2/animation_frame_3/duration = 1.0
-0:2/0 = 0
-1:2/animation_columns = 4
-1:2/animation_separation = Vector2i(2, 0)
-1:2/animation_frame_0/duration = 1.0
-1:2/animation_frame_1/duration = 1.0
-1:2/animation_frame_2/duration = 1.0
-1:2/animation_frame_3/duration = 1.0
-1:2/0 = 0
-2:2/animation_columns = 4
-2:2/animation_separation = Vector2i(2, 0)
-2:2/animation_frame_0/duration = 1.0
-2:2/animation_frame_1/duration = 1.0
-2:2/animation_frame_2/duration = 1.0
-2:2/animation_frame_3/duration = 1.0
-2:2/0 = 0
-0:3/animation_columns = 4
-0:3/animation_separation = Vector2i(2, 0)
-0:3/animation_frame_0/duration = 1.0
-0:3/animation_frame_1/duration = 1.0
-0:3/animation_frame_2/duration = 1.0
-0:3/animation_frame_3/duration = 1.0
-0:3/0 = 0
-1:3/animation_columns = 4
-1:3/animation_separation = Vector2i(2, 0)
-1:3/animation_frame_0/duration = 1.0
-1:3/animation_frame_1/duration = 1.0
-1:3/animation_frame_2/duration = 1.0
-1:3/animation_frame_3/duration = 1.0
-1:3/0 = 0
-2:3/animation_columns = 4
-2:3/animation_separation = Vector2i(2, 0)
-2:3/animation_frame_0/duration = 1.0
-2:3/animation_frame_1/duration = 1.0
-2:3/animation_frame_2/duration = 1.0
-2:3/animation_frame_3/duration = 1.0
-2:3/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pdtrq"]
-texture = ExtResource("9_4h3vr")
-0:0/animation_columns = 4
-0:0/animation_frame_0/duration = 1.0
-0:0/animation_frame_1/duration = 1.0
-0:0/animation_frame_2/duration = 1.0
-0:0/animation_frame_3/duration = 1.0
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ey4qm"]
-texture = ExtResource("11_ix470")
+texture = ExtResource("10_pdtrq")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -275,20 +25,13 @@ texture = ExtResource("11_ix470")
 5:0/0 = 0
 6:0/0 = 0
 7:0/0 = 0
-8:0/animation_columns = 4
-8:0/animation_separation = Vector2i(1, 0)
-8:0/animation_frame_0/duration = 1.0
-8:0/animation_frame_1/duration = 1.0
-8:0/animation_frame_2/duration = 1.0
-8:0/animation_frame_3/duration = 1.0
 8:0/0 = 0
-9:0/animation_columns = 4
-9:0/animation_separation = Vector2i(1, 0)
-9:0/animation_frame_0/duration = 1.0
-9:0/animation_frame_1/duration = 1.0
-9:0/animation_frame_2/duration = 1.0
-9:0/animation_frame_3/duration = 1.0
 9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
@@ -297,20 +40,13 @@ texture = ExtResource("11_ix470")
 5:1/0 = 0
 6:1/0 = 0
 7:1/0 = 0
-8:1/animation_columns = 4
-8:1/animation_separation = Vector2i(1, 0)
-8:1/animation_frame_0/duration = 1.0
-8:1/animation_frame_1/duration = 1.0
-8:1/animation_frame_2/duration = 1.0
-8:1/animation_frame_3/duration = 1.0
 8:1/0 = 0
-9:1/animation_columns = 4
-9:1/animation_separation = Vector2i(1, 0)
-9:1/animation_frame_0/duration = 1.0
-9:1/animation_frame_1/duration = 1.0
-9:1/animation_frame_2/duration = 1.0
-9:1/animation_frame_3/duration = 1.0
 9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
 0:2/0 = 0
 1:2/0 = 0
 2:2/0 = 0
@@ -326,7 +62,6 @@ texture = ExtResource("11_ix470")
 12:2/0 = 0
 13:2/0 = 0
 14:2/0 = 0
-15:2/0 = 0
 0:3/0 = 0
 1:3/0 = 0
 2:3/0 = 0
@@ -340,12 +75,8 @@ texture = ExtResource("11_ix470")
 10:3/0 = 0
 11:3/0 = 0
 12:3/0 = 0
-13:3/0 = 0
-14:3/0 = 0
-15:3/0 = 0
 0:4/0 = 0
 1:4/0 = 0
-2:4/0 = 0
 3:4/0 = 0
 4:4/0 = 0
 5:4/0 = 0
@@ -359,6 +90,12 @@ texture = ExtResource("11_ix470")
 13:4/0 = 0
 14:4/0 = 0
 15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+18:4/0 = 0
+19:4/0 = 0
+20:4/0 = 0
+21:4/0 = 0
 0:5/0 = 0
 1:5/0 = 0
 2:5/0 = 0
@@ -371,14 +108,15 @@ texture = ExtResource("11_ix470")
 9:5/0 = 0
 10:5/0 = 0
 11:5/0 = 0
-12:5/0 = 0
-13:5/0 = 0
-14:5/0 = 0
-15:5/0 = 0
+17:5/0 = 0
+18:5/0 = 0
 0:6/0 = 0
 1:6/0 = 0
 2:6/0 = 0
 3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+7:6/0 = 0
 8:6/0 = 0
 9:6/0 = 0
 10:6/0 = 0
@@ -387,118 +125,53 @@ texture = ExtResource("11_ix470")
 13:6/0 = 0
 14:6/0 = 0
 15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+18:6/0 = 0
+19:6/0 = 0
+20:6/0 = 0
+21:6/0 = 0
 0:7/0 = 0
 1:7/0 = 0
 2:7/0 = 0
 3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
 8:7/0 = 0
 9:7/0 = 0
 10:7/0 = 0
 11:7/0 = 0
 12:7/0 = 0
 13:7/0 = 0
-14:7/0 = 0
-15:7/0 = 0
 0:8/0 = 0
 1:8/0 = 0
 2:8/0 = 0
 3:8/0 = 0
 4:8/0 = 0
 5:8/0 = 0
-6:8/0 = 0
-7:8/0 = 0
-8:8/0 = 0
-9:8/0 = 0
-10:8/0 = 0
-11:8/0 = 0
-12:8/0 = 0
-13:8/0 = 0
-14:8/0 = 0
-15:8/0 = 0
 0:9/0 = 0
 1:9/0 = 0
 2:9/0 = 0
-3:9/0 = 0
 4:9/0 = 0
 5:9/0 = 0
 6:9/0 = 0
 7:9/0 = 0
 8:9/0 = 0
-9:9/0 = 0
-10:9/0 = 0
-11:9/0 = 0
-12:9/0 = 0
-13:9/0 = 0
-14:9/0 = 0
-15:9/0 = 0
 0:10/0 = 0
 1:10/0 = 0
 2:10/0 = 0
-3:10/0 = 0
 4:10/0 = 0
 5:10/0 = 0
 6:10/0 = 0
 7:10/0 = 0
 8:10/0 = 0
-9:10/0 = 0
-10:10/0 = 0
-11:10/0 = 0
-12:10/0 = 0
-13:10/0 = 0
-14:10/0 = 0
-15:10/0 = 0
-0:11/0 = 0
-1:11/0 = 0
-2:11/0 = 0
-3:11/0 = 0
 4:11/0 = 0
-5:11/0 = 0
-6:11/0 = 0
-7:11/0 = 0
-8:11/0 = 0
-9:11/0 = 0
-10:11/0 = 0
-11:11/0 = 0
-12:11/0 = 0
-13:11/0 = 0
-14:11/0 = 0
-15:11/0 = 0
-8:12/0 = 0
-9:12/0 = 0
-10:12/0 = 0
-11:12/0 = 0
-12:12/0 = 0
-13:12/0 = 0
-14:12/0 = 0
-15:12/0 = 0
-8:13/0 = 0
-9:13/0 = 0
-10:13/0 = 0
-11:13/0 = 0
-12:13/0 = 0
-13:13/0 = 0
-14:13/0 = 0
-15:13/0 = 0
+6:6/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_24rjt"]
-texture = ExtResource("12_ixy7d")
-0:0/animation_columns = 5
-0:0/animation_frame_0/duration = 1.0
-0:0/animation_frame_1/duration = 1.0
-0:0/animation_frame_2/duration = 1.0
-0:0/animation_frame_3/duration = 1.0
-0:0/animation_frame_4/duration = 1.0
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_ufdml"]
-sources/2 = SubResource("TileSetAtlasSource_8w07x")
-sources/3 = SubResource("TileSetAtlasSource_cr70t")
-sources/6 = SubResource("TileSetAtlasSource_ufdml")
-sources/7 = SubResource("TileSetAtlasSource_pdtrq")
-sources/8 = SubResource("TileSetAtlasSource_ey4qm")
-sources/9 = SubResource("TileSetAtlasSource_24rjt")
-sources/10 = SubResource("TileSetAtlasSource_swajw")
-sources/11 = SubResource("TileSetAtlasSource_dtu0v")
+[sub_resource type="TileSet" id="TileSet_ix470"]
+sources/0 = SubResource("TileSetAtlasSource_cr70t")
 
 [node name="River" type="Node2D" unique_id=347155084]
 
@@ -517,7 +190,7 @@ tile_map_data = PackedByteArray("AADY/8v/AAAXAAAAAADY/8z/AAATAAIAAADY/83/AAATAAE
 tile_set = ExtResource("3_qnkgf")
 
 [node name="GrassCliffWater" type="TileMapLayer" parent="." unique_id=420021733]
-tile_map_data = PackedByteArray("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")
+tile_map_data = PackedByteArray("AADI/+j/AAALAAIAAADI/+n/AAALAAMAAADH/+n/AAAJAAMAAADG/+n/AAAGAAIAAADG/+r/AAALAAIAAADG/+v/AAALAAMAAADF/+v/AAAJAAMAAADE/+v/AAAJAAMAAADI/8r/BwAAAAEAAADI/8v/BwAAAAIAAADI/8n/BwAEAAIAAADJ/8n/BwAJAAMAAADK/8n/BwALAAMAAADK/8j/BwALAAIAAADK/8f/BwAGAAIAAADL/8f/BwAJAAMAAADM/8f/BwAMAAAAAADN/8f/BwAJAAMAAADO/8f/BwALAAMAAADM/8j/BwANAAEAAADJ/8r/BwAAAAIAAADO/8b/BwAGAAIAAADT/8b/BwAFAAIAAADT/8f/BwAIAAMAAADU/8f/BwAJAAMAAADV/8f/BwAJAAMAAADW/8f/BwAFAAIAAADW/8j/BwAIAAEAAADW/8n/BwAIAAEAAADW/8r/BwAIAAMAAADX/8r/BwALAAMAAADX/8n/BwALAAIAAADX/8j/BwAGAAIAAADI/8z/BwABAAQAAADJ/8v/BwACAAUAAADK/8r/BwACAAUAAADL/8j/BwABAAUAAADN/8j/BwABAAUAAADO/8j/BwACAAUAAADT/8j/BwAAAAUAAADU/8j/BwABAAUAAADV/8j/BwABAAUAAADW/8v/BwAAAAUAAADX/8v/BwACAAUAAADD/+v/AAAJAAMAAADC/+v/AAAGAAIAAADC/+z/AAALAAMAAADB/+z/AAAKAAMAAADB/+3/AAAAAAIAAADA/+z/AAAJAAMAAAC//+z/AAAGAAIAAAC//+3/AAALAAIAAAC//+7/AAALAAMAAAC+/+7/AAAJAAMAAAC9/+7/AAAJAAMAAAC8/+7/AAAGAAIAAAC8/+//AAALAAMAAAC7/+//AAAGAAIAAAC7//D/AAALAAMAAAC6//D/AAAJAAMAAAC5//D/AAAJAAMAAAC4//D/AAAJAAMAAAC3//D/AAAGAAIAAADK/+f/AAALAAMAAADJ/+f/AAAJAAMAAADI/+f/AAAGAAIAAADP/8b/BwAJAAMAAADQ/8b/BwAJAAMAAADR/8b/BwAJAAMAAADS/8b/BwAJAAMAAADP/8f/BwABAAUAAADQ/8f/BwABAAUAAADR/8f/BwABAAUAAADS/8f/BwABAAUAAADO/93/BwAIAAMAAADP/93/BwAJAAMAAADQ/93/BwAKAAMAAADQ/97/BwAAAAIAAADR/93/BwAJAAMAAADO/97/BwAIAAQAAADP/97/BwAJAAQAAADQ/9//BwABAAQAAADR/97/BwABAAUAAADR/9z/BwAJAAIAAADQ/9z/BwAJAAIAAADP/9z/BwAJAAIAAADS/9v/AAALAAAAAADR/9v/AAAKAAAAAADQ/9v/AAAKAAAAAADP/9v/AAAGAAEAAADV/9v/AAAIAAAAAADW/9z/AAAJAAIAAADX/9z/AAAJAAIAAADW/93/BwAJAAMAAADX/93/BwAJAAMAAADY/93/BwALAAMAAADW/97/BwABAAUAAADX/97/BwABAAUAAADY/97/BwACAAUAAADV/+P/AAAIAAMAAADV/+L/AAAIAAEAAADV/+H/AAAIAAAAAADW/+H/AAAKAAAAAADX/+H/AAAKAAAAAADY/+H/AAAFAAEAAADY/+D/AAAIAAEAAADZ/97/AAAFAAIAAADY/9//AAAIAAAAAADZ/9//AAAFAAEAAADP/9r/AAALAAEAAADQ/9r/AAADAAMAAADP/9n/AAALAAAAAADW/9r/AAAFAAIAAADW/9v/AAAFAAEAAADV/9r/AAAIAAMAAADV/9n/AAAIAAAAAAC3//H/AAALAAMAAAC2//H/AAAJAAMAAAC1//H/AAAJAAMAAAC0//H/AAAIAAMAAAC0//D/AAAFAAIAAACz//D/AAAJAAMAAACy//D/AAAIAAMAAACy/+//AAAFAAIAAACx/+//AAAIAAMAAADS/+b/AAAIAAEAAADS/+f/AAAIAAEAAADS/+j/AAAFAAEAAADK/+b/AAALAAEAAADK/+X/AAAGAAIAAADN/97/AAAGAAIAAADN/9//AAALAAIAAADN/+D/AAAGAAEAAADO/+D/AAAKAAAAAADP/+D/AAALAAAAAADP/+H/AAALAAIAAADP/+L/AAALAAIAAADP/+P/AAALAAMAAADO/+P/AAAJAAMAAADN/+P/AAAJAAMAAADM/+P/AAAJAAMAAAA=")
 tile_set = ExtResource("4_mvt44")
 
 [node name="Waterfall" type="TileMapLayer" parent="." unique_id=1211762678]
@@ -526,8 +199,8 @@ tile_set = ExtResource("5_u5joh")
 
 [node name="RiverProps" type="TileMapLayer" parent="." unique_id=2014609879]
 z_index = -1
-tile_map_data = PackedByteArray("AADW/+D/AgAHAAAAAADX/+D/AgAIAAAAAADM/8n/BwAAAAAAAADN/8n/BwAAAAAAAADU/9n/AgAJAAAAAADQ/9n/AgAHAAQAAADR/9r/AgAGAAQAAADN/9H/AwAAAAAAAADN/9L/AwAAAAEAAADO/9H/AwABAAAAAADO/9L/AwABAAEAAADX/8z/AgAAAAQAAADL/8z/AgAGAAAAAADO/9//AgAJAAAAAADP/9//AgAGAAQAAADU/+P/AgAGAAQAAADR/+b/AgAJAAAAAADN/+T/AwAAAAAAAADN/+X/AwAAAAEAAADO/+T/AwABAAAAAADO/+X/AwABAAEAAADV/8j/CAAJAAAAAADU/8j/CAAIAAAAAADV/8n/CAAJAAEAAADU/8n/CAAIAAEAAADM/8v/CgAAAAAAAADS/8r/CQAAAAAAAADT/8n/AgAHAAQAAADK/+7/CwAAAAAAAADJ/+7/AgAGAAQAAADL/+3/AgAHAAQAAADI/+r/AgAHAAAAAADJ/+r/AgAIAAAAAADQ/+f/AgAHAAQAAADX/9//AgAGAAQAAADA/+3/AgAGAAQAAADC/+3/AgAHAAQAAADD/+z/AgAHAAQAAADH/+r/AgAHAAQAAADJ/+n/AgAHAAQAAADN/+r/AgAGAAQAAADH/+//AgAHAAQAAADL/+X/AgAGAAQAAADM/+X/AgAHAAQAAADN/+P/AgAGAAQAAADO/+P/AgAGAAQAAADQ/+D/AgAHAAQAAAC9//P/AgAGAAQAAAC+//P/AgAGAAQAAAC///L/AgAGAAQAAAC+//L/AgAHAAQAAAC///H/AgAHAAQAAADU/+L/AgAHAAQAAAA=")
-tile_set = SubResource("TileSet_ufdml")
+tile_map_data = PackedByteArray("AADW/+D/AgAHAAAAAADX/+D/AgAIAAAAAADM/8n/BwAAAAAAAADN/8n/BwAAAAAAAADU/9n/AgAJAAAAAADQ/9n/AgAHAAQAAADR/9r/AgAGAAQAAADN/9H/AwAAAAAAAADN/9L/AwAAAAEAAADO/9H/AwABAAAAAADO/9L/AwABAAEAAADX/8z/AgAAAAQAAADL/8z/AgAGAAAAAADO/9//AgAJAAAAAADP/9//AgAGAAQAAADU/+P/AgAGAAQAAADN/+T/AwAAAAAAAADN/+X/AwAAAAEAAADO/+T/AwABAAAAAADO/+X/AwABAAEAAADV/8j/CAAJAAAAAADU/8j/CAAIAAAAAADV/8n/CAAJAAEAAADU/8n/CAAIAAEAAADM/8v/CgAAAAAAAADS/8r/CQAAAAAAAADT/8n/AgAHAAQAAADK/+7/CwAAAAAAAADJ/+7/AgAGAAQAAADL/+3/AgAHAAQAAADI/+r/AgAHAAAAAADJ/+r/AgAIAAAAAADQ/+f/AgAHAAQAAADX/9//AgAGAAQAAADA/+3/AgAGAAQAAADC/+3/AgAHAAQAAADD/+z/AgAHAAQAAADH/+r/AgAHAAQAAADJ/+n/AgAHAAQAAADN/+r/AgAGAAQAAADH/+//AgAHAAQAAADL/+X/AgAGAAQAAADM/+X/AgAHAAQAAADN/+P/AgAGAAQAAADO/+P/AgAGAAQAAADQ/+D/AgAHAAQAAAC9//P/AgAGAAQAAAC+//P/AgAGAAQAAAC///L/AgAGAAQAAAC+//L/AgAHAAQAAAC///H/AgAHAAQAAADU/+L/AgAHAAQAAAA=")
+tile_set = ExtResource("6_ufdml")
 
 [node name="GroundProps" type="TileMapLayer" parent="." unique_id=1376577042]
 tile_map_data = PackedByteArray("AADX/9D/BAAAAAAAAADX/9H/BAAAAAEAAADY/9D/BAABAAAAAADY/9H/BAABAAEAAADP/9v/AAABAAEAAAA=")
@@ -538,3 +211,57 @@ modulate = Color(0.75325847, 0.8191811, 1, 0.54901963)
 z_index = -1
 tile_map_data = PackedByteArray("AACy//L/AQAMAAwAAACx//L/AQAMAAwAAACw//L/AQAMAAwAAACw//P/AQAMAAwAAACx//P/AQAMAAwAAACx//T/AQAMAAwAAACy//T/AQAMAAwAAACy//P/AQAMAAwAAACv//b/AQAMAAwAAACu//b/AQAMAAwAAACu//X/AAALAAMAAACv//X/AQAMAAwAAACv//T/AQAMAAwAAACw//T/AQAMAAwAAACv//P/AQAMAAwAAACz//P/AQAMAAwAAACz//L/AQAMAAwAAAC0//L/AQAMAAwAAACt//b/AQAMAAwAAAC0//P/AAAIAAAAAACy//X/AQAMAAwAAACv//f/AQAMAAwAAACu//f/AQAMAAwAAACt//f/AAALAAAAAACt//j/AAAGAAEAAACs//f/AAAGAAEAAACs//b/AAALAAIAAACs//X/AAAGAAIAAACt//X/AAAJAAMAAACu//T/AAALAAIAAACu//P/AAALAAIAAACu//L/AAAGAAIAAACv//L/AAALAAMAAACv//H/AAAGAAIAAACw//H/AAAJAAMAAACx//H/AAALAAMAAACw//X/AQAMAAwAAACx//X/AQAMAAwAAAC1//H/AQAMAAwAAACx//D/AAALAAAAAACw//D/AAAGAAEAAACw/+//AAALAAIAAACx/+//AQAMAAwAAACy/+//AQAMAAwAAACy//D/AQAMAAwAAACz//D/AQAMAAwAAAC0//D/AQAMAAwAAAC0//H/AQAMAAwAAACy//H/AQAMAAwAAACz//H/AQAMAAwAAAC1//L/AAAIAAAAAAC2//L/AAAKAAAAAAC3//L/AAAFAAEAAAC2//H/AQAMAAwAAAC3//H/AAAFAAIAAACz//X/AAAIAAAAAAC0//T/AAAIAAEAAACz//T/AQAMAAwAAAC1//T/AAAJAAIAAAC1//P/AAAFAAEAAACy//b/AAAKAAAAAACz//b/AAAFAAEAAAC0//X/AAAFAAEAAACu//j/AAAKAAAAAACv//j/AAAKAAAAAACw//j/AAAFAAEAAACx//b/AAAIAAAAAACw//b/AQAMAAwAAACx//f/AAAFAAEAAACw//f/AAAIAAAAAAA=")
 tile_set = ExtResource("17_sihb4")
+
+[node name="Bridge" type="TileMapLayer" parent="." unique_id=710396006]
+
+[node name="BridgeTopRail" type="TileMapLayer" parent="Bridge" unique_id=921827935]
+z_index = 4
+tile_map_data = PackedByteArray("AADN/+P/AwACAAgAAADO/+P/AwACAAgAAADP/+P/AwACAAgAAADQ/+P/AwACAAgAAADR/+P/AwACAAgAAADM/+P/AwACAAgAAADK/+P/AwAAAAgAAADL/+P/AwABAAgAAADS/+P/AwACAAgAAADT/+P/AwACAAgAAADL/+T/AwABAAkAAADM/+T/AwABAAkAAADN/+T/AwABAAkAAADO/+T/AwABAAkAAADP/+T/AwABAAkAAADQ/+T/AwABAAkAAADR/+T/AwABAAkAAADS/+T/AwABAAkAAADT/+T/AwABAAkAAADU/+T/AwABAAkAAADV/+T/AwADAAkAAADK/+T/AwAAAAkAAADU/+P/AwACAAgAAADV/+P/AwADAAgAAADW/+P/AwAEAAgAAADW/+T/AwAEAAkAAAA=")
+tile_set = ExtResource("16_ixy7d")
+
+[node name="CollisionTop" type="StaticBody2D" parent="Bridge" unique_id=1945021080]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge/CollisionTop" unique_id=1365693106]
+position = Vector2(-760.5, -455.25)
+shape = SubResource("RectangleShape2D_ufdml")
+
+[node name="BridgeLandProps" type="TileMapLayer" parent="Bridge" unique_id=2080917906]
+tile_set = SubResource("TileSet_ix470")
+
+[node name="PropsLayer1" type="TileMapLayer" parent="Bridge/BridgeLandProps" unique_id=1251104534]
+z_index = 4
+position = Vector2(0, 4)
+tile_map_data = PackedByteArray("AADK/+b/AAAKAAEAAADU/+T/AAAEAAUAAADV/+T/AAADAAUAAADK/+T/AAADAAUAAAA=")
+tile_set = ExtResource("11_8w07x")
+
+[node name="PropsLayer2" type="TileMapLayer" parent="Bridge/BridgeLandProps" unique_id=438006288]
+z_index = 7
+position = Vector2(0, 6)
+tile_map_data = PackedByteArray("AADK/+X/AAANAAIAAAA=")
+tile_set = ExtResource("11_8w07x")
+
+[node name="BridgeBottomRail" type="TileMapLayer" parent="Bridge" unique_id=757415352]
+tile_map_data = PackedByteArray("AADN/+X/AwACAAoAAADO/+X/AwACAAoAAADP/+X/AwACAAoAAADQ/+X/AwACAAoAAADR/+X/AwACAAoAAADM/+X/AwACAAoAAADK/+X/AwAAAAoAAADL/+X/AwABAAoAAADS/+X/AwACAAoAAADT/+X/AwACAAoAAADT/+b/AwADAAsAAADU/+X/AwACAAoAAADU/+b/AwADAAsAAADV/+X/AwADAAoAAADV/+b/AwADAAsAAADK/+b/AwAAAAsAAADS/+b/AwADAAsAAADR/+b/AwABAAsAAADQ/+b/AwABAAsAAADP/+b/AwABAAsAAADO/+b/AwABAAsAAADN/+b/AwABAAsAAADM/+b/AwABAAsAAADL/+b/AwABAAsAAADW/+X/AwAEAAoAAADW/+b/AwAEAAsAAAA=")
+tile_set = ExtResource("16_ixy7d")
+
+[node name="CollisionBottom" type="StaticBody2D" parent="Bridge" unique_id=451252622]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge/CollisionBottom" unique_id=1647134534]
+position = Vector2(-760, -419)
+shape = SubResource("RectangleShape2D_ufdml")
+
+[node name="BottomVerticalPosts" type="TileMapLayer" parent="Bridge" unique_id=281815613]
+visible = false
+z_index = 6
+tile_map_data = PackedByteArray("AADK/+X/AwAAAAgAAADL/+X/AwABAAgAAADM/+X/AwACAAgAAADN/+X/AwACAAgAAADO/+X/AwACAAgAAADP/+X/AwACAAgAAADQ/+X/AwACAAgAAADR/+X/AwACAAgAAADS/+X/AwACAAgAAADT/+X/AwACAAgAAADU/+X/AwACAAgAAADV/+X/AwADAAgAAADW/+X/AwAEAAgAAAA=")
+tile_set = ExtResource("16_ixy7d")
+
+[node name="BridgeSupports" type="TileMapLayer" parent="Bridge" unique_id=35190160]
+z_index = -1
+tile_map_data = PackedByteArray("AADQ/+b/AQABAAMAAADR/+b/AQACAAMAAADP/+b/AQAFAAYAAADS/+b/AQAFAAYAAADO/+b/AQAFAAYAAADN/+b/AQABAAMAAADM/+b/AQAAAAMAAADL/+b/AQAFAAYAAAA=")
+tile_set = ExtResource("16_ixy7d")
+
+[node name="BridgeWaterProps" type="TileMapLayer" parent="Bridge" unique_id=1997268551]
+z_index = 6
+tile_map_data = PackedByteArray("AADN/+b/AgAHAAQAAADL/+b/AgAGAAQAAADM/+b/AgAHAAQAAADR/+b/AgAHAAQAAAA=")
+tile_set = ExtResource("6_ufdml")

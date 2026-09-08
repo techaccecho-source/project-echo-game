@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://dugw7qjqmfrdc"]
+
+[ext_resource type="Texture2D" uid="uid://bfy0m0eo3uwok" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Farm and Tileset/Tree/Common/Shadow/Mahogany Tree Animation.png" id="1_ol3v5"]
+[ext_resource type="Script" uid="uid://bu6jokeakgh4b" path="res://objects/mahogany_tree_unhittable_dark.gd" id="2_tree"]
+[ext_resource type="PackedScene" uid="uid://bwscujgphetvn" path="res://components/hurt_component.tscn" id="3_ya6sj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vevwo"]
+atlas = ExtResource("1_ol3v5")
+region = Rect2(0, 192, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya6sj"]
+atlas = ExtResource("1_ol3v5")
+region = Rect2(64, 192, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1sej"]
+atlas = ExtResource("1_ol3v5")
+region = Rect2(96, 192, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rxk8x"]
+animations = [{
+"frames": [{
+"duration": 2.5,
+"texture": SubResource("AtlasTexture_vevwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya6sj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1sej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vevwo")
+}],
+"loop": false,
+"name": &"shake",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vk50o"]
+size = Vector2(13.5, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1sej"]
+size = Vector2(10, 12.5)
+
+[node name="TreeUnhittable" type="AnimatedSprite2D" unique_id=46041949]
+sprite_frames = SubResource("SpriteFrames_rxk8x")
+animation = &"shake"
+offset = Vector2(0, -11)
+script = ExtResource("2_tree")
+
+[node name="TreeCollision" type="StaticBody2D" parent="." unique_id=1372797949]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeCollision" unique_id=1386720175]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_vk50o")
+
+[node name="HurtComponent" parent="." unique_id=862619382 instance=ExtResource("3_ya6sj")]
+
+[node name="HurtComponentCollisionShape2D" type="CollisionShape2D" parent="HurtComponent" unique_id=622686293]
+position = Vector2(0, 3.25)
+shape = SubResource("RectangleShape2D_e1sej")
+debug_color = Color(0.81310123, 0.32689402, 0.6372331, 0.41960785)
