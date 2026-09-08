@@ -1,9 +1,16 @@
 [gd_resource type="Resource" script_class="Fragment" format=3 uid="uid://bqechofrag02x"]
 
 [ext_resource type="Script" path="res://core/fragment.gd" id="1_frag"]
+[ext_resource type="Texture2D" uid="uid://7g7rmeqwftkm" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Icons/Weapons/Books and Potions/Books.png" id="2_icon"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_page"]
+atlas = ExtResource("2_icon")
+region = Rect2(0, 48, 16, 16)
 
 [resource]
 script = ExtResource("1_frag")
+name = "a torn page"
+texture = SubResource("AtlasTexture_page")
 id = "f02_the_ledge_gives"
 title = "the ledge gives"
 entry_label = "ENTRY 14"

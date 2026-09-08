@@ -4,13 +4,12 @@ extends Node2D
 ## Point it at a Fragment resource and drop it into a level — it removes itself
 ## if that fragment is already recovered, so re-entering a level never offers
 ## the same page twice.
+##
+## Picking one up puts it in the player's inventory; reading it happens there
+## (click the page in the bag) or with [J]. EchoLog handles both.
 
 ## The page this pickup hands over.
 @export var fragment: Fragment
-## Open the journal on the new entry the moment it is picked up. The pickup is
-## also how the player learns the journal exists, so leave this on for the first
-## fragment in the game at least.
-@export var read_immediately: bool = true
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var glow: Sprite2D = $Glow
@@ -57,8 +56,4 @@ func _on_interact() -> void:
 	await t.finished
 
 	EchoLog.collect(fragment)
-	# Deferred: InteractionManager re-enables itself the moment this callable
-	# returns, which would undo the journal's own input lock.
-	if read_immediately:
-		EchoLog.open_journal.call_deferred(fragment.id)
 	queue_free()

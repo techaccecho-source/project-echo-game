@@ -2,13 +2,18 @@ extends Node
 ## Autoload "EchoLog" — the ARG collectible record.
 ##
 ## Holds which of Cedric's blog fragments the player has recovered, persists
-## that to user:// so it survives quitting, and owns the journal UI. Levels only
-## ever talk to this: `EchoLog.collect(fragment)` and `EchoLog.open_journal()`.
+## that to user:// so it survives quitting, puts each recovered page into the
+## player's inventory, and owns the journal UI. Levels only ever talk to this:
+## `EchoLog.collect(fragment)` and `EchoLog.open_journal()`.
 
 signal collected(fragment: Fragment)
 signal changed
 
 const SAVE_PATH := "user://echo_log.cfg"
+
+## Fallback used before the player node exists — the same cached resource the
+## player's `inv` export points at, so writing to it here is writing to theirs.
+const PLAYER_INV := preload("res://inventory/player_inv.tres")
 
 ## Every fragment in the game, in reading order. Paths that do not exist yet are
 ## skipped silently, so Levels 1/3/4 can add theirs without touching anything
@@ -29,6 +34,9 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_load_manifest()
 	_load_save()
+	# The inventory does not persist, but the log does — so a player returning to
+	# a level they already looted still has the page on them to re-read.
+	_restore_inventory()
 	_journal = JournalUI.new()
 	add_child(_journal)
 
@@ -68,6 +76,7 @@ func collect(fragment: Fragment) -> bool:
 	if _found.has(fragment.id):
 		return false
 	_found[fragment.id] = true
+	_give(fragment)
 	_save()
 	changed.emit()
 	collected.emit(fragment)
@@ -86,6 +95,30 @@ func close_journal() -> void:
 
 func journal_is_open() -> bool:
 	return _journal != null and _journal.is_open
+
+
+# --- inventory ---------------------------------------------------------------
+
+## The live player's inventory if there is one, otherwise the shared resource.
+func _inventory() -> Inv:
+	var p := get_tree().get_first_node_in_group("player")
+	if p != null and "inv" in p and p.inv != null:
+		return p.inv
+	return PLAYER_INV
+
+
+## Put a page in the player's bag. Every route into the inventory goes through
+## here, so a page can never be added twice.
+func _give(fragment: Fragment) -> void:
+	var inv := _inventory()
+	if inv != null and not inv.has(fragment):
+		inv.insert(fragment)
+
+
+func _restore_inventory() -> void:
+	for f in fragments:
+		if _found.has(f.id):
+			_give(f)
 
 
 ## Wipe progress. Handy while building levels; not wired to any UI.

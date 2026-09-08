@@ -1,11 +1,17 @@
-extends Resource
+extends InvItem
 class_name Fragment
 ## One recovered page of Cedric Spooks Queen's blog.
 ##
-## Fragments are the game's collectible spine — one in Level 1, one in Level 2,
-## three in Level 3, one in Level 4. They are plain resources so writing a new
-## one is a content job, not a code job: duplicate a .tres, change the text,
-## add its path to EchoLog.MANIFEST, and point a fragment_pickup at it.
+## A Fragment is an inventory item as well as a journal entry: the player picks
+## the page up, carries it, and clicks it in the inventory to read it. That is
+## why this extends InvItem rather than plain Resource — one resource per page,
+## no parallel "item that points at a fragment" bookkeeping.
+##
+## Writing a new one is a content job, not a code job: duplicate a .tres, change
+## the text, add its path to EchoLog.MANIFEST, and point a fragment_pickup at it.
+##
+## Inherited from InvItem: `name` (label in the inventory) and `texture` (its
+## icon there).
 
 ## Stable key. Never reuse or renumber one — saves are keyed on it.
 @export var id: String = ""

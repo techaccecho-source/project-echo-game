@@ -130,4 +130,4 @@ shape = SubResource("RectangleShape2D_portal")
 position = Vector2(-1000, -812)
 
 [node name="GameLevel2" parent="." unique_id=773361100 instance=ExtResource("16_h77br")]
-position = Vector2(5, -1019)
+position = Vector2(0, -986)
