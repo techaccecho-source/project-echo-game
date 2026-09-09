@@ -6,6 +6,8 @@ extends Node2D
 ##   • completion of any incoming transition (placing the player at the spawn
 ##     the SceneManager asked for, e.g. when returning from Level 2).
 
+const CLIFF_CUTSCENE := preload("res://cutscenes/hollow_to_cliff.tscn")
+
 @onready var portal: InteractionArea = $Portal
 
 func _ready() -> void:
@@ -14,4 +16,5 @@ func _ready() -> void:
 	SceneManager.on_standalone_ready()
 
 func _on_portal() -> void:
+	await SceneManager.play_cutscene(CLIFF_CUTSCENE)
 	SceneManager.enter_shell("res://world/game_level_2.tscn", "Entrance")

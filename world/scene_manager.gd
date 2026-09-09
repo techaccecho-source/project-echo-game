@@ -52,6 +52,26 @@ func _fade_to(alpha: float) -> void:
 	await t.finished
 
 
+# --- Cutscenes --------------------------------------------------------------
+
+## Play a cutscene and return once it is done. The cutscene lives on this
+## autoload, not in the outgoing level, so it survives the scene change that
+## normally follows it.
+##
+## It leaves the screen black: this takes the blackout over on the fade overlay
+## before freeing the cutscene, otherwise the old level would flash back for a
+## frame between the two.
+func play_cutscene(scene: PackedScene) -> void:
+	if scene == null:
+		return
+	var cs := scene.instantiate()
+	add_child(cs)
+	if cs.has_method("play"):
+		await cs.play()
+	_fade.color.a = 1.0
+	cs.queue_free()
+
+
 # --- Entering / leaving the persistent shell -------------------------------
 
 ## Enter the shell from a standalone scene, loading `level_path` and placing the
