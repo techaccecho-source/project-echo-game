@@ -1,7 +1,8 @@
 [gd_scene format=4 uid="uid://d4i77i7kr7twl"]
 
+[ext_resource type="Script" path="res://world/game_world.gd" id="gw_script"]
 [ext_resource type="PackedScene" uid="uid://dqp5std4t6fek" path="res://world/base_grass_level_1.tscn" id="2_1i7os"]
-[ext_resource type="PackedScene" uid="uid://bey33j4ma35bh" path="res://world/blacksmith_front_yard.tscn" id="4_4054t"]
+[ext_resource type="PackedScene" path="res://world/blacksmith_front_yard.tscn" id="4_4054t"]
 [ext_resource type="PackedScene" uid="uid://bl8bydys1a8qm" path="res://base_terrain/scenes/river.tscn" id="9_druaq"]
 [ext_resource type="PackedScene" path="res://base_terrain/scenes/level_1_forest.tscn" id="10_4054t"]
 [ext_resource type="TileSet" uid="uid://bu48edd5oif51" path="res://tilesets/rock_flower_tree_grass.tres" id="10_ccgqp"]
@@ -15,14 +16,13 @@
 [ext_resource type="PackedScene" uid="uid://yayo4t5ledsq" path="res://objects/pine_tree_large.tscn" id="22_q8vt7"]
 [ext_resource type="PackedScene" uid="uid://c22k3vhlkopgk" path="res://structures/houses/blacksmith/workshop.tscn" id="24_6rc46"]
 [ext_resource type="PackedScene" uid="uid://ccxk7nsx3r1g3" path="res://objects/anvil_white_gray.tscn" id="30_65dot"]
-[ext_resource type="Script" path="res://world/game_world.gd" id="gw_script"]
-[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="portal_area"]
-[ext_resource type="PackedScene" uid="uid://blvlaud102ec" path="res://objects/level_audio.tscn" id="lvlaudio"]
 [ext_resource type="PackedScene" uid="uid://c8q2fr5t7wjm4" path="res://interaction/fishing_spot/fishing_spot.tscn" id="40_fshsp"]
 [ext_resource type="Script" uid="uid://by0khe2xbsbyd" path="res://inventory/inventory_item.gd" id="41_invitem"]
 [ext_resource type="Resource" uid="uid://cq7fj2h8b3xk1" path="res://inventory/items/fish_carp.tres" id="42_carp"]
 [ext_resource type="Resource" uid="uid://dqk3xyram7wl2" path="res://inventory/items/fish_perch.tres" id="43_perch"]
 [ext_resource type="Resource" uid="uid://bx8h5n2p4qty3" path="res://inventory/items/fish_sunfish.tres" id="44_sunfish"]
+[ext_resource type="PackedScene" path="res://objects/level_audio.tscn" id="lvlaudio"]
+[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="portal_area"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_portal"]
 size = Vector2(28, 18)
@@ -158,7 +158,7 @@ polygon = PackedVector2Array(-14, 0, -7, -9, 7, -9, 14, 0, 7, 9, -7, 9)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" unique_id=102852437]
 shape = SubResource("RectangleShape2D_portal")
 
-[node name="LevelAudio" parent="." instance=ExtResource("lvlaudio")]
+[node name="LevelAudio" parent="." unique_id=1546250428 instance=ExtResource("lvlaudio")]
 music = "res://audio/music/hearth_hollow_bed.wav"
 music_volume_db = -5.0
 ambience = {
