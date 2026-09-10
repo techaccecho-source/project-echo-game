@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="echo-game-world"
-run/main_scene="uid://d4i77i7kr7twl"
+run/main_scene="uid://cma1nm3nuech"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

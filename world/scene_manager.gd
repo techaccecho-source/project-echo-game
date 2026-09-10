@@ -72,6 +72,26 @@ func play_cutscene(scene: PackedScene) -> void:
 	cs.queue_free()
 
 
+# --- Starting a run ---------------------------------------------------------
+
+## Begin a new game from the main menu.
+##
+## Deliberately leaves `incoming` false: the level's authored player position is
+## where the game starts, and letting on_standalone_ready() run would move the
+## player onto the first "player_spawn" marker instead — which in Level 1 is
+## ReturnSpawn, the marker for coming *back* from Level 2.
+func start_game(level_path: String) -> void:
+	incoming = false
+	_next_spawn = ""
+	await _fade_to(1.0)
+	get_tree().change_scene_to_file(level_path)
+	# change_scene_to_file is deferred; wait for the new root to exist so the
+	# fade lifts on the level rather than on one last frame of the menu.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await _fade_to(0.0)
+
+
 # --- Entering / leaving the persistent shell -------------------------------
 
 ## Enter the shell from a standalone scene, loading `level_path` and placing the
