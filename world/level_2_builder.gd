@@ -214,6 +214,12 @@ var _bot: PackedInt32Array
 var _features: Dictionary = {}
 var _face_tiles: Dictionary = {}      ## (x,y) -> tile, shelves and the cave
 var _face_green: Array[Vector3i] = [] ## (x, y, index into BUSHES/TUFTS+8)
+## Footprints of things the player should bump into, as (x, y, w, h) in tiles.
+## Tracked here because the scatter tileset only carries collision polygons on
+## Stones Summer and the pines — the boulders (source 4) have none — so the
+## layer's own collision would make some rocks solid and others not.
+var _rock_bodies: Array[Rect2i] = []
+var _fence_bars: Array[Rect2i] = []   ## (x0, y, span, 1)
 
 
 func _resolve_profile() -> void:
@@ -347,7 +353,7 @@ func _clear() -> void:
 			l.clear()
 	var parent := get_parent()
 	if parent:
-		for holder_name in ["TerrainCollision", "Props"]:
+		for holder_name in ["TerrainCollision", "PropCollision", "Props"]:
 			var holder := parent.get_node_or_null(holder_name)
 			if holder == null:
 				continue
@@ -375,6 +381,8 @@ func _build() -> void:
 
 	_build_features()
 	_build_face_dressing()
+	_rock_bodies.clear()
+	_fence_bars.clear()
 	# Sea under the left margin as well as the level itself.
 	for x in range(-left_margin, 0):
 		for y in level_height:
@@ -405,6 +413,10 @@ func _build() -> void:
 	if build_cave:
 		_build_cave(cliffs)
 	var reserved := _build_path(_layer("Path"))
+	# Keep rocks off the spawn, or the player wakes up inside one.
+	for sy in range(10, 13):
+		reserved[Vector2i(0, sy)] = true
+		reserved[Vector2i(1, sy)] = true
 	# Keep scatter and fencing off the slabs.
 	for cx in range(crossing_columns.x - 1, crossing_columns.y + 2):
 		for cy in range(crossing_rows.x - 1, crossing_rows.y + 2):
@@ -423,6 +435,7 @@ func _build() -> void:
 	var used := _build_scatter(_layer("Scatter"), reserved)
 	_stamp_face_green(_layer("Scatter"))
 	_build_fences(_layer("Fences"), reserved, used)
+	_build_prop_collision(parent)
 
 	_build_collision(parent)
 	if place_props:
@@ -718,6 +731,31 @@ func _rnd(a: int, b: int) -> float:
 ## Rocks, boulders and greenery. Runs with collision disabled on the layer --
 ## the Stones Summer tiles carry collision polygons, and 150-odd solid cells on
 ## a ledge this narrow would need playtesting before anyone turns them on.
+## Rocks block at their base, not their full height: the player should pass
+## behind the top of a boulder, which is the usual top-down read and matches
+## how the rubble wall and cave entrance are built.
+func _build_prop_collision(parent: Node) -> void:
+	var body := parent.get_node_or_null("PropCollision") as StaticBody2D
+	if body == null:
+		push_warning("level_2_builder: no PropCollision StaticBody2D found.")
+		return
+	var owner_node := get_tree().edited_scene_root if Engine.is_editor_hint() else parent
+	var i := 0
+	for r in _rock_bodies:
+		var w: float = r.size.x * 16 - 4
+		var h: float = 10.0 if r.size.y == 1 else 14.0
+		_add_rect(body, owner_node, "rock_%d" % i, w, h,
+			r.position.x * 16 + r.size.x * 8,
+			(r.position.y + r.size.y) * 16 - h / 2.0 - 1)
+		i += 1
+	i = 0
+	for f in _fence_bars:
+		var fw: float = f.size.x * 16
+		_add_rect(body, owner_node, "fence_%d" % i, fw, 8.0,
+			f.position.x * 16 + fw / 2.0, f.position.y * 16 + 10)
+		i += 1
+
+
 func _build_scatter(scatter: TileMapLayer, reserved: Dictionary) -> Dictionary:
 	var used := {}
 	if scatter == null:
@@ -761,6 +799,7 @@ func _scatter_group(scatter: TileMapLayer, reserved: Dictionary, used: Dictionar
 				var c := Vector2i(x + dx, y + dy)
 				scatter.set_cell(c, int(t[0]), Vector2i(int(t[1]), int(t[2])))
 				used[c] = true
+		_rock_bodies.append(Rect2i(x, y, (stamp[0] as Array).size(), stamp.size()))
 
 
 func _stamp_fits(x: int, y: int, stamp: Array, reserved: Dictionary, used: Dictionary) -> bool:
@@ -804,6 +843,9 @@ func _build_fences(fences: TileMapLayer, reserved: Dictionary, used: Dictionary)
 			var span := 5 + int(_rnd(seg[i], 7) * 7)
 			var run: Array = seg.slice(i, min(i + span, seg.size()))
 			if run.size() >= 3:
+				var bar_x := -1
+				var bar_y := -1
+				var bar_n := 0
 				for j in run.size():
 					var c: int = run[j]
 					var t := FENCE_L if j == 0 else (FENCE_R if j == run.size() - 1 else FENCE_M)
@@ -811,6 +853,17 @@ func _build_fences(fences: TileMapLayer, reserved: Dictionary, used: Dictionary)
 					# a fence wins the cell over whatever scatter landed there
 					if sc and used.has(Vector2i(c, _bot[c])):
 						sc.erase_cell(Vector2i(c, _bot[c]))
+					# one collision bar per stretch that stays on the same row
+					if bar_n > 0 and c == bar_x + bar_n and _bot[c] == bar_y:
+						bar_n += 1
+					else:
+						if bar_n > 0:
+							_fence_bars.append(Rect2i(bar_x, bar_y, bar_n, 1))
+						bar_x = c
+						bar_y = _bot[c]
+						bar_n = 1
+				if bar_n > 0:
+					_fence_bars.append(Rect2i(bar_x, bar_y, bar_n, 1))
 			i += span + 3 + int(_rnd(seg[i], 13) * 5)
 
 
