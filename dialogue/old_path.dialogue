@@ -1,0 +1,15 @@
+~ sign
+do disable_movement()
+The board is old. The lettering has been cut in, not painted, and then gone over again later by a steadier hand.
+Sign: OLD RIDGE ROAD — CLOSED
+Sign: NO WAY THROUGH. DO NOT CLEAR IT.
+Someone has scratched three short notches under the last line, one below the other.
+do enable_movement()
+=> END
+
+~ barricade
+do disable_movement()
+Rails across the road, lashed at the posts. Not thrown together in a hurry — whoever did this meant it to last.
+Beyond it the trees close up completely. Whatever the road went to, it doesn't go there now.
+do enable_movement()
+=> END
