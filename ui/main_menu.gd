@@ -19,6 +19,10 @@ const NEW_GAME := "res://world/game_world.tscn"
 ## so the menu bed carries straight through into the game without restarting.
 const MENU_MUSIC := "res://audio/music/hearth_hollow_bed.wav"
 const SIGN := preload("res://art/branding/echo_logo.svg")
+## Plays over the black between the menu and Level 1. The menu owns this rather
+## than the SceneManager for the same reason game_world.gd owns the cliff one:
+## which story card runs is a property of the journey, not of the transition.
+const INTRO := preload("res://cutscenes/hearth_hollow_intro.tscn")
 
 ## The wordmark, as it is carved on the sign.
 const TITLE := "ECHO"
@@ -286,7 +290,7 @@ func _on_start() -> void:
 		return
 	_starting = true
 	_hint.text = ""
-	SceneManager.start_game(NEW_GAME)
+	SceneManager.start_game(NEW_GAME, INTRO)
 
 
 func _on_unbuilt(what: String) -> void:

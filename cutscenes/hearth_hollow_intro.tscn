@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1ntr0h34rth2"]
+
+[ext_resource type="PackedScene" uid="uid://bcutsc3n3bse" path="res://objects/cutscene.tscn" id="1_base"]
+
+[node name="HearthHollowIntro" instance=ExtResource("1_base")]
+beats = Array[String](["You have heard about these woods your whole life. Nobody you know has ever seen them.", "Three days on the road, and every one has taken you further from anywhere with a name.", "The last of them is Hearth Hollow: a handful of roofs, a forge, and the forest standing over all of it.", "The people here keep to its edge. The one road that goes further was closed years ago.", "Nobody will say by whom, or why. You did not walk this far to turn back at a fence."])
+title = "CASE 01"
+subtitle = "HEARTH HOLLOW"
+stop_music = false

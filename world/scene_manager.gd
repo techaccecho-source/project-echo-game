@@ -74,16 +74,21 @@ func play_cutscene(scene: PackedScene) -> void:
 
 # --- Starting a run ---------------------------------------------------------
 
-## Begin a new game from the main menu.
+## Begin a new game from the main menu, optionally opening on a cutscene.
 ##
 ## Deliberately leaves `incoming` false: the level's authored player position is
 ## where the game starts, and letting on_standalone_ready() run would move the
 ## player onto the first "player_spawn" marker instead — which in Level 1 is
 ## ReturnSpawn, the marker for coming *back* from Level 2.
-func start_game(level_path: String) -> void:
+##
+## The intro plays over the black the menu just faded to, and play_cutscene()
+## leaves the screen black afterwards, so the level swap is never seen.
+func start_game(level_path: String, intro: PackedScene = null) -> void:
 	incoming = false
 	_next_spawn = ""
 	await _fade_to(1.0)
+	if intro != null:
+		await play_cutscene(intro)
 	get_tree().change_scene_to_file(level_path)
 	# change_scene_to_file is deferred; wait for the new root to exist so the
 	# fade lifts on the level rather than on one last frame of the menu.
