@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://bs3agu11echo"]
+
+[ext_resource type="Script" path="res://objects/seagull.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bo8thahh0g242" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Forest Animals/Beach/seagull.png" id="1_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly0"]
+atlas = ExtResource("1_tex")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly1"]
+atlas = ExtResource("1_tex")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly2"]
+atlas = ExtResource("1_tex")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly3"]
+atlas = ExtResource("1_tex")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_float0"]
+atlas = ExtResource("1_tex")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_float1"]
+atlas = ExtResource("1_tex")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_float2"]
+atlas = ExtResource("1_tex")
+region = Rect2(32, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_float3"]
+atlas = ExtResource("1_tex")
+region = Rect2(48, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flap0"]
+atlas = ExtResource("1_tex")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flap1"]
+atlas = ExtResource("1_tex")
+region = Rect2(16, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flap2"]
+atlas = ExtResource("1_tex")
+region = Rect2(32, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flap3"]
+atlas = ExtResource("1_tex")
+region = Rect2(48, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gull"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly3")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_float0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_float1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_float2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_float3")
+}],
+"loop": true,
+"name": &"float",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flap0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flap1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flap2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flap3")
+}],
+"loop": true,
+"name": &"flap",
+"speed": 5.0
+}]
+
+[node name="Seagull" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_gull")
+animation = &"float"
+script = ExtResource("1_script")

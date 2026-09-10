@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bc4n0e2echo1"]
+
+[ext_resource type="Script" path="res://objects/wood_canoe.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dtt5qvsu2pox" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Exterior/Beach/wood canoe.png" id="1_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0"]
+atlas = ExtResource("1_tex")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1"]
+atlas = ExtResource("1_tex")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2"]
+atlas = ExtResource("1_tex")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3"]
+atlas = ExtResource("1_tex")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_canoe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3")
+}],
+"loop": true,
+"name": &"moored",
+"speed": 4.0
+}]
+
+[node name="WoodCanoe" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_canoe")
+animation = &"moored"
+script = ExtResource("1_script")
