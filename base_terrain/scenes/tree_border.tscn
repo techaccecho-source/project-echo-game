@@ -546,6 +546,7 @@ position = Vector2(-652, -24)
 position = Vector2(-736, -17)
 
 [node name="Sprite2D83" parent="." unique_id=1511277667 instance=ExtResource("2_6jvlf")]
+visible = false
 position = Vector2(-839, -13)
 
 [node name="Sprite2D84" parent="." unique_id=651110844 instance=ExtResource("2_6jvlf")]
@@ -686,10 +687,12 @@ position = Vector2(-981, -26.833336)
 position = Vector2(-1065, -19.833336)
 
 [node name="Sprite2D119" parent="." unique_id=2015212422 instance=ExtResource("2_6jvlf")]
+visible = false
 position = Vector2(-860.00006, -15.833332)
 scale = Vector2(0.875, 0.875)
 
 [node name="Sprite2D120" parent="." unique_id=162638957 instance=ExtResource("2_6jvlf")]
+visible = false
 position = Vector2(-843, -14.833336)
 
 [node name="Sprite2D121" parent="." unique_id=860170140 instance=ExtResource("2_6jvlf")]
@@ -745,10 +748,12 @@ position = Vector2(-903, 1.7534676)
 scale = Vector2(0.87500024, 0.8923611)
 
 [node name="Sprite2D134" parent="." unique_id=665837471 instance=ExtResource("2_6jvlf")]
+visible = false
 position = Vector2(-870, 1.1666641)
 scale = Vector2(0.8125, 0.8333333)
 
 [node name="Sprite2D135" parent="." unique_id=402871327 instance=ExtResource("2_6jvlf")]
+visible = false
 position = Vector2(-832, 11.166664)
 scale = Vector2(0.96874905, 0.9340278)
 
@@ -877,7 +882,7 @@ position = Vector2(-783.0001, -43)
 scale = Vector2(0.74219006, 0.7054342)
 
 [node name="Sprite2D142" parent="." unique_id=1589373276 instance=ExtResource("2_6jvlf")]
-position = Vector2(-207, -33)
+position = Vector2(-207.00002, -33)
 scale = Vector2(1.15625, 1.125)
 
 [node name="Sprite2D162" parent="." unique_id=625355502 instance=ExtResource("2_6jvlf")]
@@ -928,10 +933,12 @@ position = Vector2(-798.99994, 6)
 scale = Vector2(0.6562502, 0.67180264)
 
 [node name="Sprite2D173" parent="." unique_id=378320927 instance=ExtResource("2_6jvlf")]
+visible = false
 position = Vector2(-886.99994, 9)
 scale = Vector2(0.6562502, 0.67180264)
 
 [node name="Sprite2D174" parent="." unique_id=459139059 instance=ExtResource("2_6jvlf")]
+visible = false
 position = Vector2(-858.99994, 7)
 scale = Vector2(0.6562502, 0.67180264)
 
@@ -998,340 +1005,341 @@ z_index = -2
 position = Vector2(-1244, -23)
 scale = Vector2(0.74999994, 0.75216997)
 
-[node name="TreeBorderCollision" type="StaticBody2D" parent="."]
+[node name="TreeBorderCollision" type="StaticBody2D" parent="." unique_id=418160613]
+visible = false
 
-[node name="tbc_0" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-30.0, -943.0)
+[node name="tbc_0" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1874884134]
+position = Vector2(-30, -943)
 shape = SubResource("TBC_0")
 
-[node name="tbc_1" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_1" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=2074809561]
 position = Vector2(-26.5, -930.5)
 shape = SubResource("TBC_1")
 
-[node name="tbc_2" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_2" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1211092023]
 position = Vector2(-20.5, -903.5)
 shape = SubResource("TBC_2")
 
-[node name="tbc_3" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-18.0, -873.0)
+[node name="tbc_3" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1987387391]
+position = Vector2(-18, -873)
 shape = SubResource("TBC_3")
 
-[node name="tbc_4" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-22.0, -864.0)
+[node name="tbc_4" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1340795874]
+position = Vector2(-22, -864)
 shape = SubResource("TBC_4")
 
-[node name="tbc_5" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-25.0, -852.0)
+[node name="tbc_5" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=225139349]
+position = Vector2(-25, -852)
 shape = SubResource("TBC_5")
 
-[node name="tbc_6" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-23.0, -842.5)
+[node name="tbc_6" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=318435063]
+position = Vector2(-23, -842.5)
 shape = SubResource("TBC_6")
 
-[node name="tbc_7" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-21.0, -822.5)
+[node name="tbc_7" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=629489415]
+position = Vector2(-21, -822.5)
 shape = SubResource("TBC_7")
 
-[node name="tbc_8" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_8" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=363936248]
 position = Vector2(-25.5, -795.5)
 shape = SubResource("TBC_8")
 
-[node name="tbc_9" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-31.0, -783.0)
+[node name="tbc_9" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1293520438]
+position = Vector2(-31, -783)
 shape = SubResource("TBC_9")
 
-[node name="tbc_10" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-38.0, -771.0)
+[node name="tbc_10" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1369186712]
+position = Vector2(-38, -771)
 shape = SubResource("TBC_10")
 
-[node name="tbc_11" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-33.0, -760.0)
+[node name="tbc_11" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1515472796]
+position = Vector2(-33, -760)
 shape = SubResource("TBC_11")
 
-[node name="tbc_12" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-30.5, -746.0)
+[node name="tbc_12" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1313277558]
+position = Vector2(-30.5, -746)
 shape = SubResource("TBC_12")
 
-[node name="tbc_13" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-31.0, -729.0)
+[node name="tbc_13" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=563225883]
+position = Vector2(-31, -729)
 shape = SubResource("TBC_13")
 
-[node name="tbc_14" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-26.5, -701.0)
+[node name="tbc_14" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1998267283]
+position = Vector2(-26.5, -701)
 shape = SubResource("TBC_14")
 
-[node name="tbc_15" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_15" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=9579406]
 position = Vector2(-24.5, -665.5)
 shape = SubResource("TBC_15")
 
-[node name="tbc_16" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-24.0, -647.5)
+[node name="tbc_16" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=794150914]
+position = Vector2(-24, -647.5)
 shape = SubResource("TBC_16")
 
-[node name="tbc_17" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_17" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=701635260]
 position = Vector2(-36.5, -639.5)
 shape = SubResource("TBC_17")
 
-[node name="tbc_18" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-37.5, -630.0)
+[node name="tbc_18" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=336573915]
+position = Vector2(-37.5, -630)
 shape = SubResource("TBC_18")
 
-[node name="tbc_19" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-31.5, -611.0)
+[node name="tbc_19" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=124581229]
+position = Vector2(-31.5, -611)
 shape = SubResource("TBC_19")
 
-[node name="tbc_20" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-32.0, -588.0)
+[node name="tbc_20" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1322016342]
+position = Vector2(-32, -588)
 shape = SubResource("TBC_20")
 
-[node name="tbc_21" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-50.0, -568.5)
+[node name="tbc_21" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=501856089]
+position = Vector2(-50, -568.5)
 shape = SubResource("TBC_21")
 
-[node name="tbc_22" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_22" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=504283001]
 position = Vector2(-45.5, -546.5)
 shape = SubResource("TBC_22")
 
-[node name="tbc_23" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-42.5, -526.0)
+[node name="tbc_23" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=748394982]
+position = Vector2(-42.5, -526)
 shape = SubResource("TBC_23")
 
-[node name="tbc_24" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-43.0, -510.0)
+[node name="tbc_24" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=121035319]
+position = Vector2(-43, -510)
 shape = SubResource("TBC_24")
 
-[node name="tbc_25" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-46.0, -486.0)
+[node name="tbc_25" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1683545188]
+position = Vector2(-46, -486)
 shape = SubResource("TBC_25")
 
-[node name="tbc_26" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-48.0, -459.5)
+[node name="tbc_26" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1739695872]
+position = Vector2(-48, -459.5)
 shape = SubResource("TBC_26")
 
-[node name="tbc_27" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_27" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=991097635]
 position = Vector2(-40.5, -447.5)
 shape = SubResource("TBC_27")
 
-[node name="tbc_28" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-39.5, -430.0)
+[node name="tbc_28" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1622204473]
+position = Vector2(-39.5, -430)
 shape = SubResource("TBC_28")
 
-[node name="tbc_29" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-32.0, -400.5)
+[node name="tbc_29" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=306832283]
+position = Vector2(-32, -400.5)
 shape = SubResource("TBC_29")
 
-[node name="tbc_30" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-31.0, -383.0)
+[node name="tbc_30" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=959048786]
+position = Vector2(-31, -383)
 shape = SubResource("TBC_30")
 
-[node name="tbc_31" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_31" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=720749495]
 position = Vector2(-27.5, -366.5)
 shape = SubResource("TBC_31")
 
-[node name="tbc_32" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-22.0, -343.0)
+[node name="tbc_32" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1941862147]
+position = Vector2(-22, -343)
 shape = SubResource("TBC_32")
 
-[node name="tbc_33" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_33" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1422882488]
 position = Vector2(-31.5, -326.5)
 shape = SubResource("TBC_33")
 
-[node name="tbc_34" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-36.0, -310.0)
+[node name="tbc_34" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=380987466]
+position = Vector2(-36, -310)
 shape = SubResource("TBC_34")
 
-[node name="tbc_35" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-26.0, -283.5)
+[node name="tbc_35" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1730250593]
+position = Vector2(-26, -283.5)
 shape = SubResource("TBC_35")
 
-[node name="tbc_36" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-23.5, -246.0)
+[node name="tbc_36" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=903132678]
+position = Vector2(-23.5, -246)
 shape = SubResource("TBC_36")
 
-[node name="tbc_37" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-32.0, -216.0)
+[node name="tbc_37" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=475460221]
+position = Vector2(-32, -216)
 shape = SubResource("TBC_37")
 
-[node name="tbc_38" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_38" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1064465264]
 position = Vector2(-30.5, -206.5)
 shape = SubResource("TBC_38")
 
-[node name="tbc_39" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-26.0, -195.5)
+[node name="tbc_39" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=721784669]
+position = Vector2(-26, -195.5)
 shape = SubResource("TBC_39")
 
-[node name="tbc_40" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-30.0, -164.5)
+[node name="tbc_40" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1384840899]
+position = Vector2(-30, -164.5)
 shape = SubResource("TBC_40")
 
-[node name="tbc_41" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-41.0, -142.5)
+[node name="tbc_41" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1647687503]
+position = Vector2(-41, -142.5)
 shape = SubResource("TBC_41")
 
-[node name="tbc_42" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-38.5, -139.0)
+[node name="tbc_42" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=766307659]
+position = Vector2(-38.5, -139)
 shape = SubResource("TBC_42")
 
-[node name="tbc_43" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-52.0, -129.0)
+[node name="tbc_43" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1372198562]
+position = Vector2(-52, -129)
 shape = SubResource("TBC_43")
 
-[node name="tbc_44" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-68.0, -113.0)
+[node name="tbc_44" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=468968839]
+position = Vector2(-68, -113)
 shape = SubResource("TBC_44")
 
-[node name="tbc_45" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-72.5, -88.0)
+[node name="tbc_45" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=943145908]
+position = Vector2(-72.5, -88)
 shape = SubResource("TBC_45")
 
-[node name="tbc_46" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_46" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=470641684]
 position = Vector2(-1100.5, -73.5)
 shape = SubResource("TBC_46")
 
-[node name="tbc_47" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-397.0, -61.5)
+[node name="tbc_47" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=333619218]
+position = Vector2(-397, -61.5)
 shape = SubResource("TBC_47")
 
-[node name="tbc_48" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-1124.5, -62.0)
+[node name="tbc_48" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1667003303]
+position = Vector2(-1124.5, -62)
 shape = SubResource("TBC_48")
 
-[node name="tbc_49" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-351.5, -58.0)
+[node name="tbc_49" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1870008694]
+position = Vector2(-351.5, -58)
 shape = SubResource("TBC_49")
 
-[node name="tbc_50" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-74.0, -64.0)
+[node name="tbc_50" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=787284996]
+position = Vector2(-74, -64)
 shape = SubResource("TBC_50")
 
-[node name="tbc_51" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_51" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1494662978]
 position = Vector2(-996.5, -63.5)
 shape = SubResource("TBC_51")
 
-[node name="tbc_52" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-1116.0, -57.0)
+[node name="tbc_52" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=116793067]
+position = Vector2(-1116, -57)
 shape = SubResource("TBC_52")
 
-[node name="tbc_53" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-722.0, -58.0)
+[node name="tbc_53" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1534448745]
+position = Vector2(-722, -58)
 shape = SubResource("TBC_53")
 
-[node name="tbc_54" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-393.5, -53.0)
+[node name="tbc_54" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=512468839]
+position = Vector2(-393.5, -53)
 shape = SubResource("TBC_54")
 
-[node name="tbc_55" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_55" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1305194394]
 position = Vector2(-1071.5, -52.5)
 shape = SubResource("TBC_55")
 
-[node name="tbc_56" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-598.0, -49.5)
+[node name="tbc_56" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1450122291]
+position = Vector2(-598, -49.5)
 shape = SubResource("TBC_56")
 
-[node name="tbc_57" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-76.0, -52.0)
+[node name="tbc_57" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=805096847]
+position = Vector2(-76, -52)
 shape = SubResource("TBC_57")
 
-[node name="tbc_58" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-752.0, -48.0)
+[node name="tbc_58" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=219200602]
+position = Vector2(-752, -48)
 shape = SubResource("TBC_58")
 
-[node name="tbc_59" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-1053.0, -45.5)
+[node name="tbc_59" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1839893804]
+position = Vector2(-1053, -45.5)
 shape = SubResource("TBC_59")
 
-[node name="tbc_60" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-1098.0, -40.5)
+[node name="tbc_60" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1617020861]
+position = Vector2(-1098, -40.5)
 shape = SubResource("TBC_60")
 
-[node name="tbc_61" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-452.0, -43.5)
+[node name="tbc_61" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1613426282]
+position = Vector2(-452, -43.5)
 shape = SubResource("TBC_61")
 
-[node name="tbc_62" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-742.5, -41.0)
+[node name="tbc_62" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=428930820]
+position = Vector2(-742.5, -41)
 shape = SubResource("TBC_62")
 
-[node name="tbc_63" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-112.0, -42.0)
+[node name="tbc_63" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=606668506]
+position = Vector2(-112, -42)
 shape = SubResource("TBC_63")
 
-[node name="tbc_64" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-542.0, -37.0)
+[node name="tbc_64" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=652107584]
+position = Vector2(-542, -37)
 shape = SubResource("TBC_64")
 
-[node name="tbc_65" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-1062.5, -37.0)
+[node name="tbc_65" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=868636843]
+position = Vector2(-1062.5, -37)
 shape = SubResource("TBC_65")
 
-[node name="tbc_66" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_66" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1929451578]
 position = Vector2(-396.5, -35.5)
 shape = SubResource("TBC_66")
 
-[node name="tbc_67" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-624.5, -34.0)
+[node name="tbc_67" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=593394520]
+position = Vector2(-624.5, -34)
 shape = SubResource("TBC_67")
 
-[node name="tbc_68" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-627.0, -24.5)
+[node name="tbc_68" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=538259750]
+position = Vector2(-627, -24.5)
 shape = SubResource("TBC_68")
 
-[node name="tbc_69" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-625.0, -14.5)
+[node name="tbc_69" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=988237585]
+position = Vector2(-625, -14.5)
 shape = SubResource("TBC_69")
 
-[node name="tbc_70" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-631.5, -5.5)
+[node name="tbc_70" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=54396349]
+position = Vector2(-632, -5)
 shape = SubResource("TBC_70")
 
-[node name="tbc_71" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-693.0, 3.5)
+[node name="tbc_71" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=256694211]
+position = Vector2(-693, 3.5)
 shape = SubResource("TBC_71")
 
-[node name="tbc_72" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-11.0, 4.0)
+[node name="tbc_72" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=2108573097]
+position = Vector2(-11, 4)
 shape = SubResource("TBC_72")
 
-[node name="tbc_73" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_73" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1726974581]
 position = Vector2(-977.5, 5.5)
 shape = SubResource("TBC_73")
 
-[node name="tbc_74" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-512.0, 5.5)
+[node name="tbc_74" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1527685840]
+position = Vector2(-512, 5.5)
 shape = SubResource("TBC_74")
 
-[node name="tbc_75" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_75" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1445232471]
 position = Vector2(-1123.5, 6.5)
 shape = SubResource("TBC_75")
 
-[node name="tbc_76" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_76" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=289924330]
 position = Vector2(-826.5, 6.5)
 shape = SubResource("TBC_76")
 
-[node name="tbc_77" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-508.0, 7.0)
+[node name="tbc_77" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=1334348556]
+position = Vector2(-508, 7)
 shape = SubResource("TBC_77")
 
-[node name="tbc_78" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-863.0, 7.5)
+[node name="tbc_78" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=877274605]
+position = Vector2(-863, 7.5)
 shape = SubResource("TBC_78")
 
-[node name="tbc_79" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-1066.0, 8.0)
+[node name="tbc_79" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=2093216935]
+position = Vector2(-1066, 8)
 shape = SubResource("TBC_79")
 
-[node name="tbc_80" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_80" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=2007580479]
 position = Vector2(-838.5, 8.5)
 shape = SubResource("TBC_80")
 
-[node name="tbc_81" type="CollisionShape2D" parent="TreeBorderCollision"]
+[node name="tbc_81" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=667862506]
 position = Vector2(-828.5, 11.5)
 shape = SubResource("TBC_81")
 
-[node name="tbc_82" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-803.5, 15.0)
+[node name="tbc_82" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=282566507]
+position = Vector2(-803.5, 15)
 shape = SubResource("TBC_82")
 
-[node name="tbc_83" type="CollisionShape2D" parent="TreeBorderCollision"]
-position = Vector2(-832.0, 17.5)
+[node name="tbc_83" type="CollisionShape2D" parent="TreeBorderCollision" unique_id=138735138]
+position = Vector2(-832, 17.5)
 shape = SubResource("TBC_83")

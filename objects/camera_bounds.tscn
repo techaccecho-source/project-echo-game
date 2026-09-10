@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ccamb0und5l2"]
+
+[ext_resource type="Script" path="res://objects/camera_bounds.gd" id="1_script"]
+
+[node name="CameraBounds" type="Node"]
+script = ExtResource("1_script")

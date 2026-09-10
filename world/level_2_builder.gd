@@ -30,6 +30,16 @@ const T_BR     := Vector2i(8, 3)
 const T_FACE   := Vector2i(9, 4)   ## rock wall body -- the ONLY plain rock
 ## tile in the whole sheet, verified by hashing every tile in the atlas.
 ## Two-wide blue alcoves. Both halves must be placed or you get a sliced grotto.
+## A shelf on a vertical face needs two rows to read: grass carrying the
+## shadow of the overhang above it, then grass sitting on a rock lip.
+const LEDGE_TOP := Vector2i(6, 0)
+const LEDGE_LIP := Vector2i(9, 3)
+## The only cave mouth in the sheet. (12,0)/(13,0) carry grass above the arch,
+## which is why a cave has to be set into the underside of a ledge — that grass
+## then belongs to the shelf instead of floating in the middle of a wall.
+const CAVE_ARCH: Array[Vector2i] = [Vector2i(12, 0), Vector2i(13, 0)]
+const CAVE_DARK := Vector2i(12, 1)
+
 const GROTTOS: Array[Vector2i] = [
 	Vector2i(12, 2), Vector2i(14, 2), Vector2i(16, 2), Vector2i(18, 2),
 ]
@@ -105,6 +115,15 @@ const FENCE_R := Vector2i(2, 2)
 ## Bite alcoves out of the base of the mountain so it doesn't meet the ledge
 ## along a ruler-straight line. Only ever carved upward.
 @export var carve_wall_alcoves: bool = true
+## Columns of solid cliff carried off the LEFT edge of the level. The player
+## spawns near column 2 and the camera shows ~40 tiles, so without this the
+## opening shot is half empty viewport.
+@export var left_margin: int = 10
+## Where the player arrives from: (leftmost column, arch row). Kept hard
+## against column 0 so the mouth opens straight onto the ledge — further left
+## and there is solid rock between the cave and the spawn, which makes nonsense
+## of having walked out of it. Two wide, two deep.
+@export var arrival_cave: Vector2i = Vector2i(-2, 10)
 ## Ledge profile control points: x = column, y = first grass row,
 ## z = last grass row. Values are interpolated between consecutive points, so
 ## two points one column apart give a hard step (that is how the collapsed
@@ -193,6 +212,14 @@ var _bot: PackedInt32Array
 # --- profile ---------------------------------------------------------------
 
 var _features: Dictionary = {}
+var _face_tiles: Dictionary = {}      ## (x,y) -> tile, shelves and the cave
+var _face_green: Array[Vector3i] = [] ## (x, y, index into BUSHES/TUFTS+8)
+## Footprints of things the player should bump into, as (x, y, w, h) in tiles.
+## Tracked here because the scatter tileset only carries collision polygons on
+## Stones Summer and the pines — the boulders (source 4) have none — so the
+## layer's own collision would make some rocks solid and others not.
+var _rock_bodies: Array[Rect2i] = []
+var _fence_bars: Array[Rect2i] = []   ## (x0, y, span, 1)
 
 
 func _resolve_profile() -> void:
@@ -326,7 +353,7 @@ func _clear() -> void:
 			l.clear()
 	var parent := get_parent()
 	if parent:
-		for holder_name in ["TerrainCollision", "Props"]:
+		for holder_name in ["TerrainCollision", "PropCollision", "Props"]:
 			var holder := parent.get_node_or_null(holder_name)
 			if holder == null:
 				continue
@@ -353,11 +380,19 @@ func _build() -> void:
 	_clear()
 
 	_build_features()
+	_build_face_dressing()
+	_rock_bodies.clear()
+	_fence_bars.clear()
+	# Sea under the left margin as well as the level itself.
+	for x in range(-left_margin, 0):
+		for y in level_height:
+			water.set_cell(Vector2i(x, y), SRC_WATER, T_WATER)
 	for x in level_width:
 		for y in level_height:
 			water.set_cell(Vector2i(x, y), SRC_WATER, T_WATER)
 		for y in range(0, _top[x]):
-			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, _features.get(Vector2i(x, y), T_FACE))
+			var mt: Vector2i = _features.get(Vector2i(x, y), T_FACE)
+			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, _face_tiles.get(Vector2i(x, y), mt))
 		var d := _drop_depth(x)
 		for i in d:
 			var y := _bot[x] + 1 + i
@@ -373,9 +408,15 @@ func _build() -> void:
 		for y in range(_top[x], _bot[x] + 1):
 			ground.set_cell(Vector2i(x, y), SRC_CLIFF, _grass_tile(x, y))
 
+	_build_left_margin(cliffs)
+
 	if build_cave:
 		_build_cave(cliffs)
 	var reserved := _build_path(_layer("Path"))
+	# Keep rocks off the spawn, or the player wakes up inside one.
+	for sy in range(10, 13):
+		reserved[Vector2i(0, sy)] = true
+		reserved[Vector2i(1, sy)] = true
 	# Keep scatter and fencing off the slabs.
 	for cx in range(crossing_columns.x - 1, crossing_columns.y + 2):
 		for cy in range(crossing_rows.x - 1, crossing_rows.y + 2):
@@ -392,7 +433,9 @@ func _build() -> void:
 			for oy in range(-1, 2):
 				reserved[kc + Vector2i(ox, oy)] = true
 	var used := _build_scatter(_layer("Scatter"), reserved)
+	_stamp_face_green(_layer("Scatter"))
 	_build_fences(_layer("Fences"), reserved, used)
+	_build_prop_collision(parent)
 
 	_build_collision(parent)
 	if place_props:
@@ -481,6 +524,98 @@ func _build_waterfall(fall: TileMapLayer) -> Dictionary:
 	return cells
 
 
+## Lowest row of wall at this column: the margin runs to the waterline, the
+## mountain stops where the ledge starts.
+func _wall_bottom(x: int) -> int:
+	return mini(level_height - 1, _bot[0] + _drop_depth(0)) if x < 0 else _top[x]
+
+
+func _add_ledge(x0: int, x1: int, y: int) -> void:
+	for c in range(x0, x1 + 1):
+		if y < 1 or y + 1 >= _wall_bottom(c):
+			continue
+		_face_tiles[Vector2i(c, y)] = LEDGE_TOP
+		_face_tiles[Vector2i(c, y + 1)] = LEDGE_LIP
+		var k := c + left_margin
+		if _rnd(k, y * 7 + 401) < 0.5:
+			var bush := _rnd(k, y + 402) < 0.35
+			var n := 8 if bush else 6
+			var i := int(_rnd(k, y + 403) * n) % n
+			_face_green.append(Vector3i(c, y, i if bush else i + 8))
+		if _rnd(k, y * 7 + 404) < 0.34 and y + 2 < _wall_bottom(c):
+			var j := int(_rnd(k, y + 405) * 6) % 6
+			_face_green.append(Vector3i(c, y + 2, j + 8))
+
+
+## Shelves, growth and the arrival cave, on both the margin and the mountain.
+func _build_face_dressing() -> void:
+	_face_tiles.clear()
+	_face_green.clear()
+	_add_ledge(arrival_cave.x - 3, arrival_cave.x + 4, arrival_cave.y - 1)
+	for i in 2:
+		_face_tiles[Vector2i(arrival_cave.x + i, arrival_cave.y)] = CAVE_ARCH[i]
+		for d in [1, 2]:
+			var c := Vector2i(arrival_cave.x + i, arrival_cave.y + d)
+			_face_tiles[c] = CAVE_DARK
+			for g in _face_green.duplicate():
+				if g.x == c.x and g.y == c.y:
+					_face_green.erase(g)
+	for lx in range(-left_margin + 1, level_width - 8, 7):
+		var k := lx + left_margin
+		if _rnd(k, 131) >= 0.55 or absi(lx - cave_column) < 4:
+			continue
+		var wide := 3 + int(_rnd(k, 132) * 4)
+		var lo := 9999
+		for c in range(lx, mini(level_width, lx + wide)):
+			lo = mini(lo, _wall_bottom(c))
+		if lo < 5:
+			continue
+		var ly := 1 + int(_rnd(k, 133) * (lo - 4))
+		var clash := false
+		for c in range(lx - 1, lx + wide + 1):
+			if _face_tiles.has(Vector2i(c, ly)) or _face_tiles.has(Vector2i(c, ly + 1)):
+				clash = true
+		if clash:
+			continue
+		_add_ledge(lx, lx + wide - 1, ly)
+
+
+func _stamp_face_green(scatter: TileMapLayer) -> void:
+	if scatter == null:
+		return
+	for g in _face_green:
+		# 0-7 are the bush row, 8-13 the tuft row, both on source 3.
+		var col: int = g.z if g.z < 8 else g.z - 8
+		var row: int = 0 if g.z < 8 else 5
+		scatter.set_cell(Vector2i(g.x, g.y), 3, Vector2i(col, row))
+
+
+## The cliff carries on past the left edge: no ledge out here, just wall from
+## the top of the map down to the waterline, so the level opens against solid
+## rock instead of grey. The shoreline is taken from column 0 so the two meet
+## without a step. Indices are shifted positive because the deterministic rng
+## is only ever fed non-negative x.
+func _build_left_margin(cliffs: TileMapLayer) -> void:
+	if cliffs == null or left_margin <= 0:
+		return
+	var edge_bottom: int = mini(level_height - 1, _bot[0] + _drop_depth(0))
+	var feats := {}
+	for x in range(-left_margin + 1, -2, 4):
+		var k := x + left_margin
+		if _rnd(k, 88) >= 0.45:
+			continue
+		var y := 2 + int(_rnd(k, 89) * (edge_bottom - 4))
+		var left := GROTTOS[int(_rnd(k, 90) * GROTTOS.size()) % GROTTOS.size()]
+		feats[Vector2i(x, y)] = left
+		feats[Vector2i(x + 1, y)] = left + Vector2i(1, 0)
+	for x in range(-left_margin, 0):
+		for y in edge_bottom:
+			var et: Vector2i = feats.get(Vector2i(x, y), T_FACE)
+			cliffs.set_cell(Vector2i(x, y), SRC_CLIFF, _face_tiles.get(Vector2i(x, y), et))
+		cliffs.set_cell(Vector2i(x, edge_bottom), SRC_CLIFF,
+				_pick(WATERLINE, x + left_margin, 0, 5))
+
+
 ## One rectangle per run of columns that share a height, for the mountain above
 ## the ledge and the drop below it.
 func _build_collision(parent: Node) -> void:
@@ -489,6 +624,13 @@ func _build_collision(parent: Node) -> void:
 		push_warning("level_2_builder: no TerrainCollision StaticBody2D found; skipping collision.")
 		return
 	var owner_node := get_tree().edited_scene_root if Engine.is_editor_hint() else parent
+
+	# One slab down the whole left margin. It fills the view and, just as
+	# importantly, stops the player walking off the end of the ledge at column 0.
+	if left_margin > 0:
+		_add_rect(body, owner_node, "edge_left",
+			left_margin * 16, level_height * 16,
+			-left_margin * 8, level_height * 8)
 
 	var x := 0
 	while x < level_width:
@@ -589,6 +731,31 @@ func _rnd(a: int, b: int) -> float:
 ## Rocks, boulders and greenery. Runs with collision disabled on the layer --
 ## the Stones Summer tiles carry collision polygons, and 150-odd solid cells on
 ## a ledge this narrow would need playtesting before anyone turns them on.
+## Rocks block at their base, not their full height: the player should pass
+## behind the top of a boulder, which is the usual top-down read and matches
+## how the rubble wall and cave entrance are built.
+func _build_prop_collision(parent: Node) -> void:
+	var body := parent.get_node_or_null("PropCollision") as StaticBody2D
+	if body == null:
+		push_warning("level_2_builder: no PropCollision StaticBody2D found.")
+		return
+	var owner_node := get_tree().edited_scene_root if Engine.is_editor_hint() else parent
+	var i := 0
+	for r in _rock_bodies:
+		var w: float = r.size.x * 16 - 4
+		var h: float = 10.0 if r.size.y == 1 else 14.0
+		_add_rect(body, owner_node, "rock_%d" % i, w, h,
+			r.position.x * 16 + r.size.x * 8,
+			(r.position.y + r.size.y) * 16 - h / 2.0 - 1)
+		i += 1
+	i = 0
+	for f in _fence_bars:
+		var fw: float = f.size.x * 16
+		_add_rect(body, owner_node, "fence_%d" % i, fw, 8.0,
+			f.position.x * 16 + fw / 2.0, f.position.y * 16 + 10)
+		i += 1
+
+
 func _build_scatter(scatter: TileMapLayer, reserved: Dictionary) -> Dictionary:
 	var used := {}
 	if scatter == null:
@@ -632,6 +799,7 @@ func _scatter_group(scatter: TileMapLayer, reserved: Dictionary, used: Dictionar
 				var c := Vector2i(x + dx, y + dy)
 				scatter.set_cell(c, int(t[0]), Vector2i(int(t[1]), int(t[2])))
 				used[c] = true
+		_rock_bodies.append(Rect2i(x, y, (stamp[0] as Array).size(), stamp.size()))
 
 
 func _stamp_fits(x: int, y: int, stamp: Array, reserved: Dictionary, used: Dictionary) -> bool:
@@ -675,6 +843,9 @@ func _build_fences(fences: TileMapLayer, reserved: Dictionary, used: Dictionary)
 			var span := 5 + int(_rnd(seg[i], 7) * 7)
 			var run: Array = seg.slice(i, min(i + span, seg.size()))
 			if run.size() >= 3:
+				var bar_x := -1
+				var bar_y := -1
+				var bar_n := 0
 				for j in run.size():
 					var c: int = run[j]
 					var t := FENCE_L if j == 0 else (FENCE_R if j == run.size() - 1 else FENCE_M)
@@ -682,6 +853,17 @@ func _build_fences(fences: TileMapLayer, reserved: Dictionary, used: Dictionary)
 					# a fence wins the cell over whatever scatter landed there
 					if sc and used.has(Vector2i(c, _bot[c])):
 						sc.erase_cell(Vector2i(c, _bot[c]))
+					# one collision bar per stretch that stays on the same row
+					if bar_n > 0 and c == bar_x + bar_n and _bot[c] == bar_y:
+						bar_n += 1
+					else:
+						if bar_n > 0:
+							_fence_bars.append(Rect2i(bar_x, bar_y, bar_n, 1))
+						bar_x = c
+						bar_y = _bot[c]
+						bar_n = 1
+				if bar_n > 0:
+					_fence_bars.append(Rect2i(bar_x, bar_y, bar_n, 1))
 			i += span + 3 + int(_rnd(seg[i], 13) * 5)
 
 
