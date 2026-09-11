@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dh0ll0w2cl1ff"]
+
+[ext_resource type="PackedScene" uid="uid://bcutsc3n3bse" path="res://objects/cutscene.tscn" id="1_base"]
+
+[node name="HollowToCliff" instance=ExtResource("1_base")]
+beats = Array[String](["Nobody in Hearth Hollow uses the old path any more.", "Past the last of the trees the ground begins to climb, and keeps climbing.", "The light goes flat. The wind gets up and does not put itself down again.", "You hear the sea a long while before you see it."])
+title = "CASE 02"
+subtitle = "THE CLIFFSIDE PATH"

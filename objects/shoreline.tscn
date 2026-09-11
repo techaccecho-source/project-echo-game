@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cshor3l1ne2x"]
+
+[ext_resource type="Script" path="res://objects/shoreline.gd" id="1_script"]
+
+[node name="Shoreline" type="Node2D"]
+z_index = -18
+script = ExtResource("1_script")

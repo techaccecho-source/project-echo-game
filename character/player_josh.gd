@@ -4,6 +4,15 @@ extends CharacterBody2D
 signal drowned
 
 const SPLASH := preload("res://objects/water_splash.tscn")
+const SPLASH_SFX := "res://audio/sfx/splash.wav"
+## Cycled at random so repeated steps do not sound stamped.
+const FOOTSTEPS := [
+	"res://audio/sfx/footstep_1.wav",
+	"res://audio/sfx/footstep_2.wav",
+	"res://audio/sfx/footstep_3.wav",
+	"res://audio/sfx/footstep_4.wav",
+	"res://audio/sfx/footstep_5.wav",
+]
 const FALL_TIME := 0.6
 const SINK_TIME := 0.5
 
@@ -11,6 +20,15 @@ const SINK_TIME := 0.5
 @export var walk_speed: float = 100
 @export var run_speed: float = 200
 @export var character_name: String = "Player"
+
+@export_group("Footsteps")
+## Pixels between footfalls. Distance rather than time, so running steps speed
+## up on their own instead of needing a second timer.
+@export var step_distance: float = 30.0
+## Quiet by default — footsteps are constant, so they should sit well under
+## everything else. Drop to -80 to silence them.
+@export var step_volume_db: float = -14.0
+@export_range(0.0, 0.5) var step_pitch_spread: float = 0.10
 @onready var hit_component_collision_shape: CollisionShape2D = $HitComponent/HitComponentCollisionShape2D
 
 @onready var animated_sprite = $Movement
@@ -21,6 +39,7 @@ var movement_enabled: bool = true
 
 var is_dying: bool = false
 var is_chopping: bool = true
+var _step_accum: float = 0.0
 
 func _ready() -> void:
 	hit_component_collision_shape.disabled = true
@@ -42,6 +61,14 @@ func _physics_process(_delta):
 	
 	if input_direction != Vector2.ZERO:
 		last_direction = input_direction
+		_step_accum += velocity.length() * _delta
+		if _step_accum >= step_distance:
+			_step_accum = 0.0
+			Audio.sfx(FOOTSTEPS[randi() % FOOTSTEPS.size()],
+					step_volume_db, step_pitch_spread)
+	else:
+		# Primed, so the first step after standing still lands immediately.
+		_step_accum = step_distance
 	
 	if Input.is_action_just_pressed("interact_alt"):
 		play_weapon_logic()
@@ -140,6 +167,7 @@ func fall_and_drown(water_y: float, respawn_scene: String, spawn: String) -> voi
 	var splash = SPLASH.instantiate()
 	get_parent().add_child(splash)
 	splash.global_position = Vector2(global_position.x, water_y)
+	Audio.sfx(SPLASH_SFX, -2.0, 0.06)
 
 	# Under.
 	var sink = create_tween()
@@ -160,6 +188,51 @@ func fall_and_drown(water_y: float, respawn_scene: String, spawn: String) -> voi
 	await SceneManager.change_level(respawn_scene, spawn, _revive)
 	# Cleared last, not in _revive: a fall zone re-instanced by the reload spends
 	# a frame settling, and this flag is what stops it firing a second time.
+	await get_tree().physics_frame
+	is_dying = false
+
+
+# The path gives way underfoot: drop through the hole rather than sliding across
+# the ledge that is drawn below. The player is hidden for the descent, so the
+# camera follows an empty fall down the cliff face to the splash at sea level —
+# which is the only way this reads right while the ledge is still drawn under
+# the hole.
+func fall_through_and_drown(sea_y: float, respawn_scene: String, spawn: String) -> void:
+	if is_dying:
+		return
+	is_dying = true
+	movement_enabled = false
+	velocity = Vector2.ZERO
+	$CollisionShape2D.set_deferred("disabled", true)
+	InteractionManager.can_interact = false
+	update_animation(Vector2.ZERO, false)
+
+	# Into the hole.
+	var down = create_tween()
+	down.set_parallel()
+	down.tween_property(self, "scale", Vector2(0.35, 0.35), 0.34) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	down.tween_property(self, "global_position:y", global_position.y + 7.0, 0.34)
+	down.tween_property(self, "modulate:a", 0.0, 0.30)
+	await down.finished
+
+	# Out of sight, down the cliff. The camera rides along.
+	var drop = create_tween()
+	drop.tween_property(self, "global_position:y", sea_y, 0.42) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await drop.finished
+
+	var splash = SPLASH.instantiate()
+	get_parent().add_child(splash)
+	splash.global_position = Vector2(global_position.x, sea_y)
+	Audio.sfx(SPLASH_SFX, -2.0, 0.06)
+	await get_tree().create_timer(0.45).timeout
+
+	drowned.emit()
+	if SceneManager.level_holder == null or respawn_scene == "":
+		get_tree().reload_current_scene()
+		return
+	await SceneManager.change_level(respawn_scene, spawn, _revive)
 	await get_tree().physics_frame
 	is_dying = false
 

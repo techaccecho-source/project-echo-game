@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://blvlaud102ec"]
+
+[ext_resource type="Script" path="res://objects/level_audio.gd" id="1_script"]
+
+[node name="LevelAudio" type="Node"]
+script = ExtResource("1_script")

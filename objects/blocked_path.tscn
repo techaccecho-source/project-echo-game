@@ -1,0 +1,97 @@
+[gd_scene format=4 uid="uid://bmu3ciwxqewdw"]
+
+[ext_resource type="Script" uid="uid://5iubb1y31njw" path="res://objects/blocked_path.gd" id="1_script"]
+[ext_resource type="TileSet" uid="uid://cok1cqxkvmqrh" path="res://tilesets/tilled_soil_wet_soil.tres" id="1_soil"]
+[ext_resource type="Texture2D" uid="uid://0qb6cppbvu2t" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Exterior/Fence and Bridge/Fence Wood.png" id="2_fence"]
+[ext_resource type="Texture2D" uid="uid://dwi860ru0j6jo" path="res://art/Farm RPG - Tiny Asset Pack - (All in One)/Exterior/Exterior.png" id="3_ext"]
+[ext_resource type="PackedScene" uid="uid://bibupx3yvo61" path="res://interaction/interaction_area/interaction_area.tscn" id="4_iarea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_block"]
+size = Vector2(76, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sign"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rail"]
+size = Vector2(76, 30)
+
+[node name="BlockedPath" type="Node2D" unique_id=1694233894]
+y_sort_enabled = true
+script = ExtResource("1_script")
+
+[node name="PathStrip" type="TileMapLayer" parent="." unique_id=1520426120]
+z_index = -2
+tile_map_data = PackedByteArray("AAD///j/BgAIAAAAAAAAAPj/BgAKAAAAAAABAPj/BgALAAAAAAD///n/BgAIAAEAAAAAAPn/BgAJAAIAAAABAPn/BgALAAIAAAD///r/BgAIAAEAAAAAAPr/BgAJAAIAAAABAPr/BgALAAIAAAD///v/BgAIAAEAAAAAAPv/BgAJAAIAAAABAPv/BgALAAIAAAD///z/BgAIAAEAAAAAAPz/BgAJAAIAAAABAPz/BgALAAIAAAD///3/BgAIAAEAAAAAAP3/BgAJAAIAAAABAP3/BgALAAIAAAD///7/BgAIAAEAAAAAAP7/BgAJAAIAAAABAP7/BgALAAIAAAD/////BgAIAAEAAAAAAP//BgAJAAIAAAABAP//BgALAAIAAAD//wAABgAIAAMAAAAAAAAABgAJAAMAAAABAAAABgALAAMAAAA=")
+tile_set = ExtResource("1_soil")
+
+[node name="Barricade" type="Node2D" parent="." unique_id=405658269]
+
+[node name="Rail0" type="Sprite2D" parent="Barricade" unique_id=1930202475]
+position = Vector2(-40, 2)
+texture = ExtResource("2_fence")
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 16)
+
+[node name="Rail6" type="Sprite2D" parent="Barricade" unique_id=2127815847]
+position = Vector2(-24, 2)
+texture = ExtResource("2_fence")
+region_enabled = true
+region_rect = Rect2(16, 32, 16, 16)
+
+[node name="Rail1" type="Sprite2D" parent="Barricade" unique_id=951097455]
+position = Vector2(-8, 2)
+texture = ExtResource("2_fence")
+region_enabled = true
+region_rect = Rect2(16, 32, 16, 16)
+
+[node name="Rail2" type="Sprite2D" parent="Barricade" unique_id=1032645267]
+position = Vector2(8, 2)
+texture = ExtResource("2_fence")
+region_enabled = true
+region_rect = Rect2(16, 32, 16, 16)
+
+[node name="Rail4" type="Sprite2D" parent="Barricade" unique_id=2045664148]
+position = Vector2(24, 2)
+texture = ExtResource("2_fence")
+region_enabled = true
+region_rect = Rect2(16, 32, 16, 16)
+
+[node name="Rail5" type="Sprite2D" parent="Barricade" unique_id=1097925397]
+position = Vector2(40, 2)
+texture = ExtResource("2_fence")
+region_enabled = true
+region_rect = Rect2(16, 32, 16, 16)
+
+[node name="Rail3" type="Sprite2D" parent="Barricade" unique_id=1299967106]
+position = Vector2(56, 2)
+texture = ExtResource("2_fence")
+region_enabled = true
+region_rect = Rect2(32, 32, 16, 16)
+
+[node name="SignPost" type="Sprite2D" parent="." unique_id=165116849]
+position = Vector2(32, -37)
+texture = ExtResource("3_ext")
+region_enabled = true
+region_rect = Rect2(208, 0, 16, 32)
+
+[node name="Body" type="StaticBody2D" parent="." unique_id=1727506686]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body" unique_id=1938330067]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_block")
+
+[node name="SignArea" parent="." unique_id=92178138 instance=ExtResource("4_iarea")]
+position = Vector2(32, -39)
+action_name = "read the sign"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SignArea" unique_id=193317146]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_sign")
+
+[node name="BarricadeArea" parent="." unique_id=855585058 instance=ExtResource("4_iarea")]
+position = Vector2(0, -8)
+action_name = "look at the barricade"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarricadeArea" unique_id=1971403439]
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_rail")

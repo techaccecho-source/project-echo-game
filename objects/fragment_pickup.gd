@@ -47,6 +47,7 @@ func _on_interact() -> void:
 	if _taken:
 		return
 	_taken = true
+	Audio.sfx("res://audio/sfx/page_pickup.wav", -4.0)
 	interaction_area.queue_free()
 
 	var t := create_tween().set_parallel()

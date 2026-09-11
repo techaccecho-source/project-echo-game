@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bcutsc3n3bse"]
+
+[ext_resource type="Script" path="res://objects/cutscene.gd" id="1_script"]
+
+[node name="Cutscene" type="CanvasLayer"]
+script = ExtResource("1_script")

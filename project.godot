@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="echo-game-world"
-run/main_scene="uid://d4i77i7kr7twl"
+run/main_scene="uid://cma1nm3nuech"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,7 @@ DialogueManager="*uid://c3rodes2l3gxb"
 SceneManager="*res://world/scene_manager.gd"
 EchoLog="*res://core/echo_log.gd"
 FishingMinigame="*uid://dw3n9q6r2xfk8"
+Audio="*res://core/audio.gd"
 
 [dialogue_manager]
 
@@ -92,7 +93,7 @@ interact_alt={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogue/greet.dialogue", "res://dialogue/forester.dialogue", "res://dialogue/rubble_wall.dialogue", "res://dialogue/cave_entrance.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogue/greet.dialogue", "res://dialogue/forester.dialogue", "res://dialogue/rubble_wall.dialogue", "res://dialogue/cave_entrance.dialogue", "res://dialogue/old_path.dialogue")
 
 [layer_names]
 

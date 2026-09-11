@@ -52,6 +52,51 @@ func _fade_to(alpha: float) -> void:
 	await t.finished
 
 
+# --- Cutscenes --------------------------------------------------------------
+
+## Play a cutscene and return once it is done. The cutscene lives on this
+## autoload, not in the outgoing level, so it survives the scene change that
+## normally follows it.
+##
+## It leaves the screen black: this takes the blackout over on the fade overlay
+## before freeing the cutscene, otherwise the old level would flash back for a
+## frame between the two.
+func play_cutscene(scene: PackedScene) -> void:
+	if scene == null:
+		return
+	var cs := scene.instantiate()
+	add_child(cs)
+	if cs.has_method("play"):
+		await cs.play()
+	_fade.color.a = 1.0
+	cs.queue_free()
+
+
+# --- Starting a run ---------------------------------------------------------
+
+## Begin a new game from the main menu, optionally opening on a cutscene.
+##
+## Deliberately leaves `incoming` false: the level's authored player position is
+## where the game starts, and letting on_standalone_ready() run would move the
+## player onto the first "player_spawn" marker instead — which in Level 1 is
+## ReturnSpawn, the marker for coming *back* from Level 2.
+##
+## The intro plays over the black the menu just faded to, and play_cutscene()
+## leaves the screen black afterwards, so the level swap is never seen.
+func start_game(level_path: String, intro: PackedScene = null) -> void:
+	incoming = false
+	_next_spawn = ""
+	await _fade_to(1.0)
+	if intro != null:
+		await play_cutscene(intro)
+	get_tree().change_scene_to_file(level_path)
+	# change_scene_to_file is deferred; wait for the new root to exist so the
+	# fade lifts on the level rather than on one last frame of the menu.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await _fade_to(0.0)
+
+
 # --- Entering / leaving the persistent shell -------------------------------
 
 ## Enter the shell from a standalone scene, loading `level_path` and placing the

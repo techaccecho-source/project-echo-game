@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bcrumbr1dge2x"]
+
+[ext_resource type="Script" path="res://objects/crumble_bridge.gd" id="1_script"]
+
+[node name="CrumbleBridge" type="Node2D"]
+script = ExtResource("1_script")
